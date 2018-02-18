@@ -3,9 +3,56 @@
   
     
     <entry>
+      <title><![CDATA[一个人的旅行(Dijkstra算法)]]></title>
+      <url>/2018/02/18/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%85%E8%A1%8C-%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstra%E7%AE%97%E6%B3%95/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2066" target="_blank" rel="noopener">hdu-2066</a></p>
+<blockquote>
+<p>&emsp;虽然草儿是个路痴（就是在杭电待了一年多，居然还会在校园里迷路的人，汗~),但是草儿仍然很喜欢旅行，因为在旅途中 会遇见很多人（白马王子，^0^），很多事，还能丰富自己的阅历，还可以看美丽的风景……草儿想去很多地方，她想要去东京铁塔看夜景，去威尼斯看电影，去阳明山上看海芋，去纽约纯粹看雪景，去巴黎喝咖啡写信，去北京探望孟姜女……眼看寒假就快到了，这么一大段时间，可不能浪费啊，一定要给自己好好的放个假，可是也不能荒废了训练啊，所以草儿决定在要在最短的时间去一个自己想去的地方！因为草儿的家在一个小镇上，没有火车经过，所以她只能去邻近的城市坐火车（好可怜啊~）。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>输入数据有多组，每组的第一行是三个整数T，S和D，表示有T条路，和草儿家相邻的城市的有S个，草儿想去的地方有D个；<br>接着有T行，每行有三个整数a，b，time,表示a,b城市之间的车程是time小时；(1=&lt;(a,b)&lt;=1000;a,b 之间可能有多条路)<br>接着的第T+1行有S个数，表示和草儿家相连的城市；<br>接着的第T+2行有D个数，表示草儿想去地方。</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>输出草儿能去某个喜欢的城市的最短时间。</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">6 2 3</span><br><span class="line">1 3 5</span><br><span class="line">1 4 7</span><br><span class="line">2 8 12</span><br><span class="line">3 8 4</span><br><span class="line">4 9 12</span><br><span class="line">9 10 2</span><br><span class="line">1 2</span><br><span class="line">8 9 10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>一读完题就开始敲Floyd，然后没有意外地T了。</li>
+<li><del>经过大佬的一番点拨，</del>我们把草儿家看成一个节点0，邻近的城市和草儿家的距离为0，这样就转换成了最单纯的单源最短路问题。</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 99999</span></span><br><span class="line"><span class="keyword">bool</span> visit[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> Distance[<span class="number">1005</span>],<span class="built_in">map</span>[<span class="number">1005</span>][<span class="number">1005</span>],want,m,n,MaxNode;<span class="comment">//	Distance:源点到点i的距离	MaxNode:最大的节点</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstar</span><span class="params">(<span class="keyword">int</span> v1)</span>	<span class="comment">//v1为源点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    CRL(visit);</span><br><span class="line">    visit[v1]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=MaxNode; i++)</span><br><span class="line">        Distance[i]=<span class="built_in">map</span>[v1][i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">1</span>,t=<span class="number">1</span>,v,w,Min;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开始主循环，每次求得V0到某个V顶点的最短路径</span></span><br><span class="line">    <span class="keyword">for</span>( v=<span class="number">1</span>; v&lt;=MaxNode; v++ )</span><br><span class="line">    &#123;</span><br><span class="line">        Min=MAX;</span><br><span class="line">        <span class="keyword">for</span>(w=<span class="number">1</span>; w&lt;=MaxNode; w++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visit[w]&amp;&amp;Distance[w]&lt;Min )</span><br><span class="line">            &#123;</span><br><span class="line">                k=w;</span><br><span class="line">                Min=Distance[w];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[k]=<span class="number">1</span>;	<span class="comment">// 将目前找到的最近的顶点置1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 修正当前最短路径及距离</span></span><br><span class="line">        <span class="keyword">for</span>(w=<span class="number">0</span>; w&lt;=MaxNode; w++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果经过v顶点的路径比现在这条路径的长度短就修正</span></span><br><span class="line">            <span class="keyword">if</span>( !visit[w] &amp;&amp; (Min+<span class="built_in">map</span>[k][w]&lt;Distance[w]) )</span><br><span class="line">                Distance[w]=Min+<span class="built_in">map</span>[k][w];	<span class="comment">// 修改当前路径长度</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">()</span>		<span class="comment">//建图</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y,way;</span><br><span class="line">    <span class="built_in">memset</span>(<span class="built_in">map</span>,<span class="number">1</span>,<span class="keyword">sizeof</span>(<span class="built_in">map</span>));	<span class="comment">//把map数组全部置为无穷大 </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;way);</span><br><span class="line">        MaxNode=MaxNode&gt;x?MaxNode:x;</span><br><span class="line">        MaxNode=MaxNode&gt;y?MaxNode:y;</span><br><span class="line">        <span class="keyword">if</span>(way&lt;<span class="built_in">map</span>[x][y])</span><br><span class="line">            <span class="built_in">map</span>[x][y]=<span class="built_in">map</span>[y][x]=way;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">        <span class="built_in">map</span>[<span class="number">0</span>][x]=<span class="built_in">map</span>[x][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T,ans=<span class="number">99999</span>,want;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n&gt;&gt;T)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=<span class="number">99999</span>;</span><br><span class="line">        create();</span><br><span class="line">        Dijkstar(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;T; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;want;</span><br><span class="line">            ans=min(ans,Distance[want]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 图论 </tag>
+            
+            <tag> 最短路 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[ACboy needs your help(分组背包)]]></title>
       <url>/2018/02/16/ACboy-needs-your-help-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
-      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1712" target="_blank" rel="noopener">hdu1712</a></p>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1712" target="_blank" rel="noopener">hdu-1712</a></p>
 <blockquote>
 <p>ACboy has N courses this term, and he plans to spend at most M days on study.Of course,the profit he will gain from different course depending on the days he spend on it.How to arrange the M days for the N courses to maximize the profit?</p>
 </blockquote>
@@ -41,9 +88,9 @@
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -93,9 +140,9 @@
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -148,9 +195,9 @@
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -209,9 +256,9 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -362,7 +409,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
 <hr>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="测试flash插件"><a href="#测试flash插件" class="headerlink" title="测试flash插件"></a>测试flash插件</h2><embed src="//music.163.com/style/swf/widget.swf?sid=5310505&type=2&auto=1&width=320&height=66" width="340" height="86" allownetworking="all">
 
-<h2 id="测试插入代码"><a href="#测试插入代码" class="headerlink" title="测试插入代码"></a>测试插入代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;   </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hello world!"</span>);<span class="comment">//测试注释</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试插入代码"><a href="#测试插入代码" class="headerlink" title="测试插入代码"></a>测试插入代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Hello world!"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//测试注释</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="测试链接"><a href="#测试链接" class="headerlink" title="测试链接"></a>测试链接</h2><p><a href="https://paste.ubuntu.com/" target="_blank" rel="noopener">分享代码</a></p>
 <h2 id="测试公式"><a href="#测试公式" class="headerlink" title="测试公式"></a>测试公式</h2><p>质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</p>
 <script type="math/tex; mode=display">\ sum_{i=1}^n a_i=0</script><script type="math/tex; mode=display">f (x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2</script><script type="math/tex; mode=display">\ sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k}</script><h2 id="测试表格"><a href="#测试表格" class="headerlink" title="测试表格"></a>测试表格</h2><div class="table-container">
