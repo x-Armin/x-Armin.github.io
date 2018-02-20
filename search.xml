@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[一个人的旅行(Dijkstra算法)]]></title>
-      <url>/2018/02/18/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%85%E8%A1%8C-%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstra%E7%AE%97%E6%B3%95/</url>
+      <url>/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%85%E8%A1%8C-%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstra%E7%AE%97%E6%B3%95/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2066" target="_blank" rel="noopener">hdu-2066</a></p>
 <blockquote>
 <p>&emsp;虽然草儿是个路痴（就是在杭电待了一年多，居然还会在校园里迷路的人，汗~),但是草儿仍然很喜欢旅行，因为在旅途中 会遇见很多人（白马王子，^0^），很多事，还能丰富自己的阅历，还可以看美丽的风景……草儿想去很多地方，她想要去东京铁塔看夜景，去威尼斯看电影，去阳明山上看海芋，去纽约纯粹看雪景，去巴黎喝咖啡写信，去北京探望孟姜女……眼看寒假就快到了，这么一大段时间，可不能浪费啊，一定要给自己好好的放个假，可是也不能荒废了训练啊，所以草儿决定在要在最短的时间去一个自己想去的地方！因为草儿的家在一个小镇上，没有火车经过，所以她只能去邻近的城市坐火车（好可怜啊~）。</p>
@@ -51,7 +51,7 @@
     
     <entry>
       <title><![CDATA[ACboy needs your help(分组背包)]]></title>
-      <url>/2018/02/16/ACboy-needs-your-help-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <url>/ACboy-needs-your-help-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1712" target="_blank" rel="noopener">hdu-1712</a></p>
 <blockquote>
 <p>ACboy has N courses this term, and he plans to spend at most M days on study.Of course,the profit he will gain from different course depending on the days he spend on it.How to arrange the M days for the N courses to maximize the profit?</p>
@@ -98,7 +98,7 @@
     
     <entry>
       <title><![CDATA[Cow Contest(floyd))]]></title>
-      <url>/2018/02/14/Cow-Contest-floyd/</url>
+      <url>/Cow-Contest-floyd/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://poj.org/problem?id=3660" target="_blank" rel="noopener">poj-3660</a></p>
 <blockquote>
 <p>N (1 ≤ N ≤ 100) cows, conveniently numbered 1..N, are participating in a programming contest. As we all know, some cows code better than others. Each cow has a certain constant skill rating that is unique among the competitors.</p>
@@ -149,7 +149,7 @@
     
     <entry>
       <title><![CDATA[多重背包问题]]></title>
-      <url>/2018/02/10/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <url>/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><blockquote>
 <p> 有n种物品和一个容积为V的背包，第i种物品有amount[i]个，体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。</p>
 </blockquote>
@@ -201,7 +201,7 @@
     
     <entry>
       <title><![CDATA[完全背包问题]]></title>
-      <url>/2018/02/08/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <url>/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><blockquote>
 <p> 有n种物品和一个容积为V的背包，每种物品i都有无限个，都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。</p>
 </blockquote>
@@ -256,7 +256,7 @@
     
     <entry>
       <title><![CDATA[01背包问题]]></title>
-      <url>/2018/02/06/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <url>/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><blockquote>
 <p> 有n个物品和一个容积为V的背包，每个物品i都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。</p>
 </blockquote>
@@ -317,7 +317,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
     
     <entry>
       <title><![CDATA[小牛vs小客(巴什博弈变形)]]></title>
-      <url>/2018/02/04/%E5%B0%8F%E7%89%9Bvs%E5%B0%8F%E5%AE%A2-%E5%B7%B4%E4%BB%80%E5%8D%9A%E5%BC%88%E5%8F%98%E5%BD%A2/</url>
+      <url>/%E5%B0%8F%E7%89%9Bvs%E5%B0%8F%E5%AE%A2-%E5%B7%B4%E4%BB%80%E5%8D%9A%E5%BC%88%E5%8F%98%E5%BD%A2/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><a href="https://www.nowcoder.net/acm/contest/75/D" target="_blank" rel="noopener">题目链接</a></p>
 <blockquote>
 <p>小牛和小客玩石子游戏，他们用n个石子围成一圈，小牛和小客分别从其中取石子，谁先取完谁胜，每次可以从一圈中取一个或者相邻两个，每次都是小牛先取，请输出胜利者的名字。（1 2 3 4 取走 2 13 不算相邻）</p>
@@ -362,7 +362,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
     
     <entry>
       <title><![CDATA[不凡的夫夫(斯特灵公式)]]></title>
-      <url>/2018/02/04/%E4%B8%8D%E5%87%A1%E7%9A%84%E5%A4%AB%E5%A4%AB-%E6%96%AF%E7%89%B9%E7%81%B5%E5%85%AC%E5%BC%8F/</url>
+      <url>/%E4%B8%8D%E5%87%A1%E7%9A%84%E5%A4%AB%E5%A4%AB-%E6%96%AF%E7%89%B9%E7%81%B5%E5%85%AC%E5%BC%8F/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><a href="https://www.nowcoder.net/acm/contest/75/A" target="_blank" rel="noopener">题目链接</a></p>
 <blockquote>
 <p>夫夫有一天对一个数有多少位数感兴趣，但是他又不想跟凡夫俗子一样，所以他想知道给一个整数n，求n！的在8进制下的位数是多少位。</p>
@@ -409,7 +409,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
     
     <entry>
       <title><![CDATA[2 5 11 13的倍数(容斥原理)]]></title>
-      <url>/2018/02/04/2-5-11-13%E7%9A%84%E5%80%8D%E6%95%B0-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</url>
+      <url>/2-5-11-13%E7%9A%84%E5%80%8D%E6%95%B0-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><a href="https://www.nowcoder.net/acm/contest/75/G" target="_blank" rel="noopener">题目链接</a></p>
 <blockquote>
 <p>给出一个数n，求1到n中，有多少个数不是2 5 11 13的倍数。</p>
@@ -455,7 +455,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
     
     <entry>
       <title><![CDATA[欢迎来到Armin的博客]]></title>
-      <url>/2018/02/03/Welcome/</url>
+      <url>/Welcome/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>欢迎来到Armin的博客，其他内容还在持续搭建（xjb摸索）中。<br><a id="more"></a></p>
 <hr>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="测试flash插件"><a href="#测试flash插件" class="headerlink" title="测试flash插件"></a>测试flash插件</h2><embed src="//music.163.com/style/swf/widget.swf?sid=5310505&type=2&auto=1&width=320&height=66" width="340" height="86" allownetworking="all">
