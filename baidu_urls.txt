@@ -1,0 +1,11 @@
+http://x-armin.com/LCP-Array-排列组合问题/
+http://x-armin.com/一个人的旅行-最短路Dijkstra算法/
+http://x-armin.com/ACboy-needs-your-help-分组背包问题/
+http://x-armin.com/Cow-Contest-floyd/
+http://x-armin.com/多重背包问题/
+http://x-armin.com/完全背包问题/
+http://x-armin.com/01背包问题/
+http://x-armin.com/小牛vs小客-巴什博弈变形/
+http://x-armin.com/不凡的夫夫-斯特灵公式/
+http://x-armin.com/2-5-11-13的倍数-容斥原理/
+http://x-armin.com/Welcome/
