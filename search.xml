@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[LCP Array(排列组合问题)]]></title>
-    <url>%2FLCP-Array-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[描述传送门：hdu-5635 Peter has a string $s=s_1s_2…s_n$, let $suff_i=s_is_{i+1}…s_n$ be the suffix start with $i^{th}$ character of $s$. Peter knows the lcp (longest common prefix) of each two adjacent suffixes which denotes as $a_i=lcp(suff_i,suff_{i+1})(1≤i&lt;n)$. Given the lcp array, Peter wants to know how many strings containing lowercase English letters only will satisfy the lcp array. The answer may be too large, just print it modulo $10^9+7$. Input There are multiple test cases. The first line of input contains an integer T indicating the number of test cases. For each test case: The first line contains an integer n ($2≤n≤10^5$) — the length of the string. The second line contains n−1 integers: $a_1,a_2,…,a_{n−1} (0≤a_i≤n)$. The sum of values of n in all test cases doesn’t exceed $10^6$. Output For each test case output one integer denoting the answer. The answer must be printed modulo $10^9+7$. Examples intput 1234567330 043 2 131 2 output 12316250260 思路 有解的条件：以样例2为例:$lcp_1$=$3 \Rightarrow s_1$=$s_2,s_2=s_3,s_3=s_4$,要有解显然$lcp_i=lcp_{i-1}$-1一定成立，而且$lcp_{n-1}$不可能大于1,也就是说如果$lcp_i$=n,那么$lcp_i$到$lcp_{i-n}$的值一定是n到1递减。 计算有解时的答案：显然当$lcp_i$=n(n&gt;0)时，$s_i$到$s_{i+n}$都为同一个字母，如果$lcp_i$=0,则$s_i$和$s_{i+1}$为不同字母，所以当前一种字母确定时，后一种字母就有25种可能。 所以如果有解，lcp数组中0的个数为n,答案就是$26 \times 25^n$。我也是在草稿本上先找到规律AC了才推出原理的 代码12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xfffffff#define M 100000typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;int main()&#123; int n,len,lcp[M],Flag=0; ll ans; cin&gt;&gt;n; while(n--) &#123; Flag=0; ans=26; cin&gt;&gt;len; for(int i=1; i&lt;len; i++) &#123; scanf("%d",&amp;lcp[i]); if(lcp[i]+1!=lcp[i-1]&amp;&amp;lcp[i-1]&gt;0) //如果不是前比后多一且前一个不为0 Flag=1; else if(lcp[i]==0) ans=(ans*25)%mod; &#125; if(Flag||lcp[len-1]&gt;1) //lcp数组末尾一定是0或1 cout&lt;&lt;0&lt;&lt;endl; else cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+    <title><![CDATA[xiaoxin juju needs help(排列组合+逆元)]]></title>
+    <url>%2Fxiaoxin-juju-needs-help-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88-%E9%80%86%E5%85%83%2F</url>
+    <content type="text"><![CDATA[描述传送门：hdu-5651 As we all known, xiaoxin is a brilliant coder. He knew palindromic strings when he was only a six grade student at elementry school. This summer he was working at Tencent as an intern. One day his leader came to ask xiaoxin for help. His leader gave him a string and he wanted xiaoxin to generate palindromic strings for him. Once xiaoxin generates a different palindromic string, his leader will give him a watermelon candy. The problem is how many candies xiaoxin’s leader needs to buy? Input This problem has multi test cases. First line contains a single integer T(T≤20) which represents the number of test cases.For each test case, there is a single line containing a string S(1≤length(S)≤1,000). Output For each test case, print an integer which is the number of watermelon candies xiaoxin’s leader needs to buy after mod 1,000,000,007. Examples intput 12343aaaabba output 123121 思路 其实这道题难点不是推出公式，而是求解公式(吐血.jpg)。 设字符串为s,字符串长度为Len,字母i出现次数的二分之一为c[i](取整); 如果有解，就要求出现次数是奇数的字母不超过1个(废话)，然后我们只需要考虑一边的所有情况，另一边跟它一样就能构成回文序列。只考虑一边时，共有Len/2个字符,根据高中学的排列组合可知，所有的排列情况是\frac{A_{Len/2}^{Len/2}}{A_{c[1]}^{c[1]}A_{c[2]}^{c[2]}...{A_{c[i]}^{c[i]}}} \Longrightarrow \frac{Len/2!}{c[1]!c[2]!...c[i]!} 关键就是如何求解这个公式了，由题目可知，Len/2最大是500，也就是要算500!，很明显要爆精度。因为答案对(1e9+7)取摸，这里引入一个转化：(a$ \times $b)%m $\rightarrow$ (a%m $ \times $ b%m )%m 显然正确,所以我们求阶乘的时候只要边乘边对(1e9+7)取模就不会爆精度。但是 (a $ \div $ b)%m $ \not= $ ((a%m) $ \div $ (b%m))%m,所以我们要用逆元变除法为乘法，就可以边乘边取模。 这道题我是用的拓展欧几里德算法求逆元，不知道的可以看我的另一篇博客数论笔记本 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xfffffff#define MAXN 6typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;ll fac(int n) //求阶乘 &#123; if(n==1||n==0) return 1; else &#123; ll ans=1; for(int i=2;i&lt;=n;i++) ans=(ans*i)%mod; //边乘边取模 return ans; &#125;&#125;int x,y;int exgcd(int a,int b) //拓展欧几里德算法，求出的x,即为a%b下a的逆元 &#123; if(b==0) &#123; x=1;y=0; return a; &#125; int r=exgcd(b,a%b); int c=x; x=y; y=c-a/b*y; return r;&#125;int main()&#123; ll ans; int book[26],n,Flag=0,Len; char s[1005]; cin&gt;&gt;n; while(n--) &#123; CRL(book); Flag=0; ans=0; scanf("%s",s); Len=strlen(s); for(int i=0; i&lt;Len; i++) book[s[i]-'a']++; for(int i=0; i&lt;26; i++) if(book[i]&amp;1) Flag++; if(Flag&gt;1) //如果出现次数为奇数的字母超过1,无解 ans=0; else &#123; ans=fac(Len/2); for(int i=0; i&lt;26; i++) if(book[i]&gt;1) &#123; exgcd(fac(book[i]/2),mod); x=x&lt;0? x+mod:x; //x小于0的话要转换成正数 ans=ans*x%mod; &#125; &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+        <tag>排列组合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LCP Array(排列组合)]]></title>
+    <url>%2FLCP-Array-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%2F</url>
+    <content type="text"><![CDATA[描述传送门：hdu-5635 Peter has a string $s=s_1s_2…s_n$, let $suff_i=s_is_{i+1}…s_n$ be the suffix start with $i^{th}$ character of $s$. Peter knows the lcp (longest common prefix) of each two adjacent suffixes which denotes as $a_i=lcp(suff_i,suff_{i+1})(1≤i&lt;n)$. Given the lcp array, Peter wants to know how many strings containing lowercase English letters only will satisfy the lcp array. The answer may be too large, just print it modulo $10^9+7$. Input There are multiple test cases. The first line of input contains an integer T indicating the number of test cases. For each test case: The first line contains an integer n ($2≤n≤10^5$) — the length of the string. The second line contains n−1 integers: $a_1,a_2,…,a_{n−1} (0≤a_i≤n)$. The sum of values of n in all test cases doesn’t exceed $10^6$. Output For each test case output one integer denoting the answer. The answer must be printed modulo $10^9+7$. Examples intput 1234567330 043 2 131 2 output 12316250260 思路 有解的条件：以样例2为例:$lcp_1=3 \Rightarrow s_1=s_2,s_2=s_3,s_3=s_4$,要有解显然$lcp_i=lcp_{i-1}-1$一定成立，而且$lcp_{n-1}$不可能大于1,也就是说如果$lcp_i$=n,那么$lcp_i$到$lcp_{i+n}$的值一定是n到1递减。 计算有解时的答案：显然当$lcp_i$=n(n&gt;0)时，$s_i$到$s_{i+n}$都为同一个字母，如果$lcp_i$=0,则$s_i$和$s_{i+1}$为不同字母，所以当前一种字母确定时，后一种字母就有25种可能。 所以如果有解，lcp数组中0的个数为n,答案就是$26 \times 25^n$。我也是在草稿本上先找到规律AC了才推出原理的 代码12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xfffffff#define M 100000typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;int main()&#123; int n,len,lcp[M],Flag=0; ll ans; cin&gt;&gt;n; while(n--) &#123; Flag=0; ans=26; cin&gt;&gt;len; for(int i=1; i&lt;len; i++) &#123; scanf("%d",&amp;lcp[i]); if(lcp[i]+1!=lcp[i-1]&amp;&amp;lcp[i-1]&gt;0) //如果不是前比后多一且前一个不为0 Flag=1; else if(lcp[i]==0) ans=(ans*25)%mod; &#125; if(Flag||lcp[len-1]&gt;1) //lcp数组末尾一定是0或1 cout&lt;&lt;0&lt;&lt;endl; else cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -44,6 +56,17 @@
       </categories>
       <tags>
         <tag>图论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数论笔记本]]></title>
+    <url>%2F%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0%E6%9C%AC%2F</url>
+    <content type="text"><![CDATA[]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>

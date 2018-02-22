@@ -1,7 +1,9 @@
-http://x-armin.com/LCP-Array-排列组合问题/
+http://x-armin.com/xiaoxin-juju-needs-help-排列组合-逆元/
+http://x-armin.com/LCP-Array-排列组合/
 http://x-armin.com/一个人的旅行-最短路Dijkstra算法/
 http://x-armin.com/ACboy-needs-your-help-分组背包问题/
 http://x-armin.com/Cow-Contest-floyd/
+http://x-armin.com/数论笔记本/
 http://x-armin.com/多重背包问题/
 http://x-armin.com/完全背包问题/
 http://x-armin.com/01背包问题/
