@@ -1,146 +1,645 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[xiaoxin juju needs help(排列组合+逆元)]]></title>
-    <url>%2Fxiaoxin-juju-needs-help-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88-%E9%80%86%E5%85%83%2F</url>
-    <content type="text"><![CDATA[描述传送门：hdu-5651 As we all known, xiaoxin is a brilliant coder. He knew palindromic strings when he was only a six grade student at elementry school. This summer he was working at Tencent as an intern. One day his leader came to ask xiaoxin for help. His leader gave him a string and he wanted xiaoxin to generate palindromic strings for him. Once xiaoxin generates a different palindromic string, his leader will give him a watermelon candy. The problem is how many candies xiaoxin’s leader needs to buy? Input This problem has multi test cases. First line contains a single integer T(T≤20) which represents the number of test cases.For each test case, there is a single line containing a string S(1≤length(S)≤1,000). Output For each test case, print an integer which is the number of watermelon candies xiaoxin’s leader needs to buy after mod 1,000,000,007. Examples intput 12343aaaabba output 123121 思路 其实这道题难点不是推出公式，而是求解公式(吐血.jpg)。 设字符串为s,字符串长度为Len,字母i出现次数的二分之一为c[i](取整); 如果有解，就要求出现次数是奇数的字母不超过1个(废话)，然后我们只需要考虑一边的所有情况，另一边跟它一样就能构成回文序列。只考虑一边时，共有Len/2个字符,根据高中学的排列组合可知，所有的排列情况是\frac{A_{Len/2}^{Len/2}}{A_{c[1]}^{c[1]}A_{c[2]}^{c[2]}...{A_{c[i]}^{c[i]}}} \Longrightarrow \frac{Len/2!}{c[1]!c[2]!...c[i]!} 关键就是如何求解这个公式了，由题目可知，Len/2最大是500，也就是要算500!，很明显要爆精度。因为答案对(1e9+7)取摸，这里引入一个转化：(a$ \times $b)%m $\rightarrow$ (a%m $ \times $ b%m )%m 显然正确,所以我们求阶乘的时候只要边乘边对(1e9+7)取模就不会爆精度。但是 (a $ \div $ b)%m $ \not= $ ((a%m) $ \div $ (b%m))%m,所以我们要用逆元变除法为乘法，就可以边乘边取模。 这道题我是用的拓展欧几里德算法求逆元，不知道的可以看我的另一篇博客数论笔记本 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xfffffff#define MAXN 6typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;ll fac(int n) //求阶乘 &#123; if(n==1||n==0) return 1; else &#123; ll ans=1; for(int i=2;i&lt;=n;i++) ans=(ans*i)%mod; //边乘边取模 return ans; &#125;&#125;int x,y;int exgcd(int a,int b) //拓展欧几里德算法，求出的x,即为a%b下a的逆元 &#123; if(b==0) &#123; x=1;y=0; return a; &#125; int r=exgcd(b,a%b); int c=x; x=y; y=c-a/b*y; return r;&#125;int main()&#123; ll ans; int book[26],n,Flag=0,Len; char s[1005]; cin&gt;&gt;n; while(n--) &#123; CRL(book); Flag=0; ans=0; scanf("%s",s); Len=strlen(s); for(int i=0; i&lt;Len; i++) book[s[i]-'a']++; for(int i=0; i&lt;26; i++) if(book[i]&amp;1) Flag++; if(Flag&gt;1) //如果出现次数为奇数的字母超过1,无解 ans=0; else &#123; ans=fac(Len/2); for(int i=0; i&lt;26; i++) if(book[i]&gt;1) &#123; exgcd(fac(book[i]/2),mod); x=x&lt;0? x+mod:x; //x小于0的话要转换成正数 ans=ans*x%mod; &#125; &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-        <tag>排列组合</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LCP Array(排列组合)]]></title>
-    <url>%2FLCP-Array-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%2F</url>
-    <content type="text"><![CDATA[描述传送门：hdu-5635 Peter has a string $s=s_1s_2…s_n$, let $suff_i=s_is_{i+1}…s_n$ be the suffix start with $i^{th}$ character of $s$. Peter knows the lcp (longest common prefix) of each two adjacent suffixes which denotes as $a_i=lcp(suff_i,suff_{i+1})(1≤i&lt;n)$. Given the lcp array, Peter wants to know how many strings containing lowercase English letters only will satisfy the lcp array. The answer may be too large, just print it modulo $10^9+7$. Input There are multiple test cases. The first line of input contains an integer T indicating the number of test cases. For each test case: The first line contains an integer n ($2≤n≤10^5$) — the length of the string. The second line contains n−1 integers: $a_1,a_2,…,a_{n−1} (0≤a_i≤n)$. The sum of values of n in all test cases doesn’t exceed $10^6$. Output For each test case output one integer denoting the answer. The answer must be printed modulo $10^9+7$. Examples intput 1234567330 043 2 131 2 output 12316250260 思路 有解的条件：以样例2为例:$lcp_1=3 \Rightarrow s_1=s_2,s_2=s_3,s_3=s_4$,要有解显然$lcp_i=lcp_{i-1}-1$一定成立，而且$lcp_{n-1}$不可能大于1,也就是说如果$lcp_i$=n,那么$lcp_i$到$lcp_{i+n}$的值一定是n到1递减。 计算有解时的答案：显然当$lcp_i$=n(n&gt;0)时，$s_i$到$s_{i+n}$都为同一个字母，如果$lcp_i$=0,则$s_i$和$s_{i+1}$为不同字母，所以当前一种字母确定时，后一种字母就有25种可能。 所以如果有解，lcp数组中0的个数为n,答案就是$26 \times 25^n$。我也是在草稿本上先找到规律AC了才推出原理的 代码12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xfffffff#define M 100000typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;int main()&#123; int n,len,lcp[M],Flag=0; ll ans; cin&gt;&gt;n; while(n--) &#123; Flag=0; ans=26; cin&gt;&gt;len; for(int i=1; i&lt;len; i++) &#123; scanf("%d",&amp;lcp[i]); if(lcp[i]+1!=lcp[i-1]&amp;&amp;lcp[i-1]&gt;0) //如果不是前比后多一且前一个不为0 Flag=1; else if(lcp[i]==0) ans=(ans*25)%mod; &#125; if(Flag||lcp[len-1]&gt;1) //lcp数组末尾一定是0或1 cout&lt;&lt;0&lt;&lt;endl; else cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>排列组合</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[一个人的旅行(Dijkstra算法)]]></title>
-    <url>%2F%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%85%E8%A1%8C-%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstra%E7%AE%97%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[描述传送门：hdu-2066 &emsp;虽然草儿是个路痴（就是在杭电待了一年多，居然还会在校园里迷路的人，汗~),但是草儿仍然很喜欢旅行，因为在旅途中 会遇见很多人（白马王子，^0^），很多事，还能丰富自己的阅历，还可以看美丽的风景……草儿想去很多地方，她想要去东京铁塔看夜景，去威尼斯看电影，去阳明山上看海芋，去纽约纯粹看雪景，去巴黎喝咖啡写信，去北京探望孟姜女……眼看寒假就快到了，这么一大段时间，可不能浪费啊，一定要给自己好好的放个假，可是也不能荒废了训练啊，所以草儿决定在要在最短的时间去一个自己想去的地方！因为草儿的家在一个小镇上，没有火车经过，所以她只能去邻近的城市坐火车（好可怜啊~）。 Input 输入数据有多组，每组的第一行是三个整数T，S和D，表示有T条路，和草儿家相邻的城市的有S个，草儿想去的地方有D个；接着有T行，每行有三个整数a，b，time,表示a,b城市之间的车程是time小时；(1=&lt;(a,b)&lt;=1000;a,b 之间可能有多条路)接着的第T+1行有S个数，表示和草儿家相连的城市；接着的第T+2行有D个数，表示草儿想去地方。 Output 输出草儿能去某个喜欢的城市的最短时间。 Examples intput 1234567896 2 31 3 51 4 72 8 123 8 44 9 129 10 21 28 9 10 output 19 思路 一读完题就开始敲Floyd，然后没有意外地T了。 经过大佬的一番点拨，我们把草儿家看成一个节点0，邻近的城市和草儿家的距离为0，这样就转换成了最单纯的单源最短路问题。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;#define MAX 99999bool visit[1005];int Distance[1005],map[1005][1005],m,n,MaxNode;// Distance:源点到点i的距离 MaxNode:最大的节点void Dijkstar(int v0) //v0为源点&#123; CRL(visit); visit[v1]=1; for(int i=1; i&lt;=MaxNode; i++) Distance[i]=map[v1][i]; int k=1,t=1,v,w,Min; // 开始主循环，每次求得V0到某个V顶点的最短路径 for( v=1; v&lt;=MaxNode; v++ ) &#123; Min=MAX; for(w=1; w&lt;=MaxNode; w++ ) &#123; if(!visit[w]&amp;&amp;Distance[w]&lt;Min ) &#123; k=w; Min=Distance[w]; &#125; &#125; visit[k]=1; // 将目前找到的最近的顶点置1 // 修正当前最短路径及距离 for(w=0; w&lt;=MaxNode; w++) &#123; // 如果经过v顶点的路径比现在这条路径的长度短就修正 if( !visit[w] &amp;&amp; (Min+map[k][w]&lt;Distance[w]) ) Distance[w]=Min+map[k][w]; // 修改当前路径长度 &#125; &#125;&#125;void create() //建图&#123; int x,y,way; memset(map,1,sizeof(map)); //把map数组全部置为无穷大，准确来说现在map中每个元素在内存中为00000001000000010000000100000001 for(int i=1; i&lt;=m; i++) &#123; scanf("%d%d%d",&amp;x,&amp;y,&amp;way); MaxNode=MaxNode&gt;x?MaxNode:x; MaxNode=MaxNode&gt;y?MaxNode:y; if(way&lt;map[x][y]) map[x][y]=map[y][x]=way; &#125; for(int i=0; i&lt;n; i++) &#123; cin&gt;&gt;x; map[0][x]=map[x][0]=0; &#125; return;&#125;int main()&#123; int T,ans=99999,want; while(cin&gt;&gt;m&gt;&gt;n&gt;&gt;T) &#123; ans=99999; create(); Dijkstra(0); for(int i=0; i&lt;T; i++) &#123; cin&gt;&gt;want; ans=min(ans,Distance[want]); &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>图论</tag>
-        <tag>最短路</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[ACboy needs your help(分组背包)]]></title>
-    <url>%2FACboy-needs-your-help-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[描述传送门：hdu-1712 ACboy has N courses this term, and he plans to spend at most M days on study.Of course,the profit he will gain from different course depending on the days he spend on it.How to arrange the M days for the N courses to maximize the profit? Input The input consists of multiple data sets. A data set starts with a line containing two positive integers N and M, N is the number of courses, M is the days ACboy has.Next follow a matrix A[i][j], (1&lt;=i&lt;=N&lt;=100,1&lt;=j&lt;=M&lt;=100).A[i][j] indicates if ACboy spend j days on ith course he will get profit of value A[i][j].N = 0 and M = 0 ends the input. Output For each data set, your program should output a line which contains the number of the max profit ACboy will gain. Examples intput 123456789102 21 21 32 22 12 12 33 2 13 2 10 0 output 123346 思路 这是一个典型的分组背包问题，我们可以转换成01背包求解。 核心代码 12345for(int i=1;i&lt;=n;i++) for(int j=V;j&gt;=0;j--) for(int k=0;k&lt;=V;k++) //转01背包，注意三重循环顺序 if(j&gt;=k) dp[j]=max(dp[j],dp[j-k]+map[i][k]);]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>背包问题</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Cow Contest(floyd))]]></title>
-    <url>%2FCow-Contest-floyd%2F</url>
-    <content type="text"><![CDATA[描述传送门：poj-3660 N (1 ≤ N ≤ 100) cows, conveniently numbered 1..N, are participating in a programming contest. As we all know, some cows code better than others. Each cow has a certain constant skill rating that is unique among the competitors. The contest is conducted in several head-to-head rounds, each between two cows. If cow A has a greater skill level than cow B (1 ≤ A ≤ N; 1 ≤ B ≤ N; A ≠ B), then cow A will always beat cow B. Farmer John is trying to rank the cows by skill level. Given a list the results of M (1 ≤ M ≤ 4,500) two-cow rounds, determine the number of cows whose ranks can be precisely determined from the results. It is guaranteed that the results of the rounds will not be contradictory. Input Line 1: Two space-separated integers: N and M Lines 2..M+1: Each line contains two space-separated integers that describe the competitors and results (the first integer, A, is the winner) of a single round of competition: A and B. Output Line 1: A single integer representing the number of cows whose ranks can be determined. Examples intput 1234565 54 34 23 21 22 5 output 12 思路 把比赛看成是一个有向图，问题其实就转化成求了求有多少个顶点和其他所有顶点都连通。 形象地说就是当一头牛胜负加起来为n-1时，也就是和其他的牛都比赛过(包括间接的)就能确定它的名次。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffftypedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;int map[105][105],win[105],defeat[105];int main()&#123; int n,w,a,b,ans; while(cin &gt;&gt; n &gt;&gt; w) &#123; ans=0; CRL(map); CRL(win); CRL(defeat); while(w--) &#123; cin&gt;&gt;a&gt;&gt;b; if(!map[a][b]) &#123; map[a][b]=1; win[a]++; defeat[b]++; &#125; &#125; for(int k=1; k&lt;=n; k++) for(int j=1; j&lt;=n; j++) for(int i=1; i&lt;=n; i++) if(map[j][k]&amp;&amp;map[k][i]&amp;&amp;!map[j][i]) &#123; map[j][i]=1; win[j]++; defeat[i]++; &#125; for(int i=1; i&lt;=n; i++) if(win[i]+defeat[i]+1==n) ans++; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>图论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[数论笔记本]]></title>
-    <url>%2F%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0%E6%9C%AC%2F</url>
-    <content type="text"><![CDATA[]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[多重背包问题]]></title>
-    <url>%2F%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[描述 有n种物品和一个容积为V的背包，第i种物品有amount[i]个，体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。 思路 跟完全背包问题类似，这里就直接给出基本算法的状态转移方程dp[i][j]=Max\{dp[i-1][j-k \times cost[i] + k \times valum[i]\}(0\leq k \leq amount[i] 且 0\leq k \times cost[i] \leq V) 时间复杂度:O($V \times {\sum_{i=1}^N{amount[i]}}$)，空间复杂度:O(NV)。 优化 amount[i]==1时，当01背包处理。 amount[i]$ \times $cost&gt;=V时，当完全背包处理。 amount[i]$ \geq $1时，采用二进制拆分，从而转换成01背包求解，具体如下：&emsp;在上面的状态转移方程中，我们让k从1$ \to $amount[i]来实现拿不同的个数，从而转换成01背包问题，但我们可以发现，我们只要将amount[i]拆分成几个数，就可以用他们组合成小于amount[i]的任何数。例如:amount[i]=11,11的二进制为1011，把11拆成100(4)、0010(2)、0001(1)、4(11-4-2-1),这样就可以用4、2、1、4来组合成11以内所有的整数，这样放第这种物品时本来放11次，现在只要放4次，虽然仍然有重复，但也实现了优化。 初始化 如果题目没有要求必须装满，那么我们只要将dp数组全部置为0即可。 如果必须装满，我们就将dp[0]初始化为0，其他初始化为$-\infty$。 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define M 100000000typedef unsigned long long LL;typedef long long ll;const int mod =1e9+7;int V,dp[120002];void ZeroOnePack(int cost,int valum) //01背包问题&#123; for(int i=V;i&gt;=cost;i--) dp[i]=max(dp[i],dp[i-cost]+valum); return; &#125;void CompletePack(int cost,int valum) //完全背包问题&#123; for(int i=cost;i&lt;=V;i++) dp[i]=max(dp[i],dp[i-cost]+valum); return;&#125;void MultiplePack(int cost,int valum,int amount) //多重背包问题&#123; if(cost*amount&gt;=V) CompletePack(cost,valum); else &#123; int k=1; while(k&lt;amount) &#123; ZeroOnePack(cost*k,valum*k); amount-=k; k=k&lt;&lt;1; //k*=2 &#125; ZeroOnePack(cost*amount,valum*amount); &#125; return; &#125;int main()&#123; int n,cost[1000],valum[1000],amount[1000]; while(cin&gt;&gt;n&gt;&gt;V) &#123; CRL(dp); for(int i=1;i&lt;=n;i++) cin&gt;&gt;cost[i]&gt;&gt;valum[i]&gt;&gt;amount[i]; for(int i=1;i&lt;=n;i++) MultiplePack(cost[i],valum[i],amount[i]); cout&lt;&lt;dp[V]&lt;&lt;endl; &#125; return 0;&#125; 例题 换一种问法而已：poj 1014 参考资料《背包九讲》]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>背包问题</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[完全背包问题]]></title>
-    <url>%2F%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[描述 有n种物品和一个容积为V的背包，每种物品i都有无限个，都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。 思路 完全背包和01背包很像，我们首先想到的应该是每种物品在拿0~n个中选max价值的，我们依旧用dp[i][j]来储存将前i种物品放入体积为j的背包中物品价值之和最大值，那么状态转移方程便是在放得下的情况下dp[i][j]=Max\{dp[i-1][j-k \times cost[i] + k \times valum[i]\}(0\leq k \times cost[i] \leq V) 这样最后求出来的dp[n][V]就是最后答案。 时间复杂度:O($V \times {\sum_{i=1}^N{V \over {c[i]}}}$)，空间复杂度:O(NV)。 优化 在01背包问题里面，我们逆序遍历V$(j:V \to 0)$是为了保证dp[j-cost[i]]始终是i-1物品推出的，从而保证每种物品只用一次。而完全背包问题里面我们就可以正序遍历，这样就可以在一次遍历dp[V]中考虑第i种物品的所有拿法。 核心代码如下: 123for(int i=1;i&lt;=n;i++) for(int j=Time[i];j&lt;=t;j++) dp[j]=max(dp[j],dp[j-Time[i]]+valum[i]); 优化后时间复杂度为O(NV)，空间复杂度为O(N)。 初始化 如果题目没有要求必须装满，那么我们只要将dp数组全部置为0即可。 如果必须装满，我们就将dp[0]初始化为0，其他初始化为$-\infty$。 例题 板子题：洛谷1616 换一种问法：poj 1014]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>背包问题</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[01背包问题]]></title>
-    <url>%2F01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[描述 有n个物品和一个容积为V的背包，每个物品i都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。 思路 01背包的特点就是每种物品都只有一个，所以每个物品只有拿和不拿两种状态。 我们用dp[i][j]来储存将前i件物品放入体积为j的背包中物品价值之和最大值，那么状态转移方程便是在放得下的情况下 dp[i][j]=Max \begin{cases} dp[i-1][j] &\mbox{不拿第i个，状态跟i-1一样}\\ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的物品拿走再放} \end{cases} (j:0 \to V,i:0 \to n) 这样最后求出来的dp[n][V]就是最后答案。 优化 上面的时间复杂度是O(NV)已经无法再优化了,而空间复杂度可以优化到O(N)：我们用二维数组无非是为了保证状态转移方程里的dp[i-1][j-cost[i]]是上一个物品推出来的，如果我们直接改成dp[j]=max(dp[j],dp[j-cost[i]]+valum[i])的话，在$(j:0 \to V)$过程进行到后面的时候,dp[j-cost]有可能是已经在前面就放了i物品的状态，此时再+valumi就不符合每种物品都只有一个的题意了。 实际上。如果我们在遍历j的时候，采用逆序，即$(j:V \to 0)$，就可以保证dp[j-cost[i]]始终是i-1物品推出的。 核心代码如下123for(int i=1;i&lt;=n;i++) for(int j=t;j&gt;=cost[i];j--) dp[j]=max(dp[j],dp[j-cost[i]]+valum[i]); 初始化 如果题目没有要求必须装满，那么我们只要将dp数组全部置为0即可。 如果必须装满，我们就将dp[0]初始化为0，其他初始化为$-\infty$，$(j:V \to 0)$时每次判断dp[j-cost]是否&gt;=0，是的话就进行状态转移。(自行体会，逃.jpg) 例题 板子题：洛谷1048 变式：洛谷1164 变式：2018年全国多校算法寒假训练营练习比赛(第二场) problem B（需要一个微妙的预处理）]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>背包问题</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[小牛vs小客(巴什博弈变形)]]></title>
-    <url>%2F%E5%B0%8F%E7%89%9Bvs%E5%B0%8F%E5%AE%A2-%E5%B7%B4%E4%BB%80%E5%8D%9A%E5%BC%88%E5%8F%98%E5%BD%A2%2F</url>
-    <content type="text"><![CDATA[描述题目链接 小牛和小客玩石子游戏，他们用n个石子围成一圈，小牛和小客分别从其中取石子，谁先取完谁胜，每次可以从一圈中取一个或者相邻两个，每次都是小牛先取，请输出胜利者的名字。（1 2 3 4 取走 2 13 不算相邻） Intput 输入包括多组测试数据每组测试数据一个n（1≤n≤10^9） Output 每组用一行输出胜利者的名字（小牛获胜输出XiaoNiu，小客获胜输出XiaoKe） Examples intput 1223 output 12XiaoNiuXiaoKe 思路 当n&lt;=2时，毫无疑问是先手获胜。 当n&gt;2时，先手拿了之后，石子形状就可以看成一条线，后手可以选择拿1个或2个，使得剩下的石子是对称的，然后无论先手怎样拿，后手总能在对称位置拿到石子，最后一定是后手赢。 代码1234567891011121314#include&lt;iostream&gt;using namespace std;int main()&#123; int x; while(cin&gt;&gt;x) &#123; if(x&lt;=2) cout&lt;&lt;"XiaoNiu\n"; else cout&lt;&lt;"XiaoKe\n"; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>博弈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[不凡的夫夫(斯特灵公式)]]></title>
-    <url>%2F%E4%B8%8D%E5%87%A1%E7%9A%84%E5%A4%AB%E5%A4%AB-%E6%96%AF%E7%89%B9%E7%81%B5%E5%85%AC%E5%BC%8F%2F</url>
-    <content type="text"><![CDATA[描述题目链接 夫夫有一天对一个数有多少位数感兴趣，但是他又不想跟凡夫俗子一样，所以他想知道给一个整数n，求n！的在8进制下的位数是多少位。 Input 第一行是一个整数t(0&lt;t&lt;=1000000)(表示t组数据)接下来t行，每一行有一个整数n(0&lt;=n&lt;=10000000) Output 输出n！在8进制下的位数。 Examples intput 12343425 output 123213 思路 看到n的值最大是1e7就知道不能暴力出奇迹，而求n!的位数，就很自然想到要用斯特林公式:$n!\approx\sqrt{2\pi n}(\frac{n}{e})^n$ 虽然斯特林公式只是求阶乘的近似值，但即使在n很小的时候，斯特林公式的取值已经十分准确。 再求以8为底近似值的对数 +1(求其他进制下的位数类似，修改底数即可)。 注意:C语言中不支持任意底数的求对数运算，我们小小的转换一下$\log_x y=\frac{lgy}{lgx}$ 代码12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;const double Pi = acos(-1);const double e = 2.718281828459;int main()&#123; int t,n; scanf("%d",&amp;t); while(t--) &#123; scanf("%d",&amp;n); if(n==0||n==1) //注意特判 printf("1\n"); else printf("%d\n",(int)((log(2.0*Pi*n)/(log(8))/2.0 + n*log(n/e)/log(8))+1)); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[2 5 11 13的倍数(容斥原理)]]></title>
-    <url>%2F2-5-11-13%E7%9A%84%E5%80%8D%E6%95%B0-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%2F</url>
-    <content type="text"><![CDATA[描述题目链接 给出一个数n，求1到n中，有多少个数不是2 5 11 13的倍数。 Intput 本题有多组输入每行一个数n，1&lt;=n&lt;=10^18. Output 每行输出输出不是2 5 11 13的倍数的数共有多少。 Examples intput 115 output 14 思路 遍历一遍感觉是很快了，时间复杂度O(n)，但还是会超时，其实这道题可以达到O(1)。 我们反过来思考，用总数减去倍数的个数，先不考虑公倍数的问题，再减去公倍数的个数。 假设有三个集合，那么 A∪B∪C = A+B+C - A∩B - B∩C - C∩A + A∩B∩C 代码12345678910111213141516#include&lt;stdio.h&gt;#include&lt;iostream&gt;using namespace std;#define LL long longint main()&#123; LL n,sum; while(scanf("%lld",&amp;n)!=EOF) &#123; sum=n/2+n/5+n/11+n/13; LL cnt=sum-n/10-n/22-n/26-n/55-n/65-n/143+n/110+n/130+n/286+n/715-n/1430; LL ans=n-cnt; printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[欢迎来到Armin的博客]]></title>
-    <url>%2FWelcome%2F</url>
-    <content type="text"><![CDATA[欢迎来到Armin的博客，其他内容还在持续搭建（xjb摸索）中。 测试测试flash插件 测试插入代码1234567#include&lt;iostream&gt;using namespace std;int main()&#123; cout&lt;&lt;"Hello world!"&lt;&lt;endl;//测试注释 return 0;&#125; 测试链接分享代码 测试公式质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。 \ sum_{i=1}^n a_i=0f (x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2\ sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k}测试表格 姓名 分数 蒟蒻 59 神犇 100]]></content>
-  </entry>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[xiaoxin juju needs help(排列组合+逆元)]]></title>
+      <url>/xiaoxin-juju-needs-help-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88-%E9%80%86%E5%85%83/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=5651" target="_blank" rel="noopener">hdu-5651</a></p>
+<blockquote>
+<p>As we all known, xiaoxin is a brilliant coder. He knew <strong>palindromic</strong> strings when he was only a six grade student at elementry school.</p>
+<p>This summer he was working at Tencent as an intern. One day his leader came to ask xiaoxin for help. His leader gave him a string and he wanted xiaoxin to generate palindromic strings for him. Once xiaoxin generates a different palindromic string, his leader will give him a watermelon candy. The problem is how many candies xiaoxin’s leader needs to buy?</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>This problem has multi test cases. First line contains a single integer T(T≤20) which represents the number of test cases.<br>For each test case, there is a single line containing a string S(1≤length(S)≤1,000).</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>For each test case, print an integer which is the number of watermelon candies xiaoxin’s leader needs to buy after mod 1,000,000,007.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">aa</span><br><span class="line">aabb</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>其实这道题难点不是推出公式，而是求解公式(吐血.jpg)。</li>
+<li>设字符串为s,字符串长度为Len,字母i出现次数的二分之一为c[i](取整);</li>
+<li>如果有解，就要求出现次数是奇数的字母不超过1个(废话)，然后我们只需要考虑一边的所有情况，另一边跟它一样就能构成回文序列。只考虑一边时，共有Len/2个字符,根据高中学的排列组合可知，所有的排列情况是<script type="math/tex; mode=display">\frac{A_{Len/2}^{Len/2}}{A_{c[1]}^{c[1]}A_{c[2]}^{c[2]}...{A_{c[i]}^{c[i]}}} \Longrightarrow \frac{Len/2!}{c[1]!c[2]!...c[i]!}</script></li>
+<li>关键就是如何求解这个公式了，由题目可知，Len/2最大是500，也就是要算500!，很明显要爆精度。因为答案对(1e9+7)取摸，这里引入一个转化：<br>(a$ \times $b)%m $\rightarrow$ (a%m $ \times $ b%m )%m  显然正确,所以我们求阶乘的时候只要边乘边对(1e9+7)取模就不会爆精度。<br>但是 (a $ \div $ b)%m $ \not= $ ((a%m) $ \div $ (b%m))%m,所以我们要用逆元变除法为乘法，就可以边乘边取模。</li>
+<li>这道题我是用的拓展欧几里德算法求逆元，不知道的可以看我的另一篇博客<a href="http://x-armin.com/数论笔记本/">数论笔记本</a></li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 0xfffffff</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 6</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ll  <span class="title">fac</span><span class="params">(<span class="keyword">int</span> n)</span>	<span class="comment">//求阶乘 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>||n==<span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		ll ans=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">            ans=(ans*i)%mod;		<span class="comment">//边乘边取模 </span></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x,y;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>		<span class="comment">//拓展欧几里德算法，求出的x,即为a%b下a的逆元 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=exgcd(b,a%b);</span><br><span class="line">    <span class="keyword">int</span> c=x;</span><br><span class="line">    x=y;</span><br><span class="line">    y=c-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll ans;</span><br><span class="line">    <span class="keyword">int</span> book[<span class="number">26</span>],n,Flag=<span class="number">0</span>,Len;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">1005</span>];</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        CRL(book);</span><br><span class="line">        Flag=<span class="number">0</span>;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">        Len=<span class="built_in">strlen</span>(s);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;Len; i++)</span><br><span class="line">            book[s[i]-<span class="string">'a'</span>]++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)</span><br><span class="line">            <span class="keyword">if</span>(book[i]&amp;<span class="number">1</span>)</span><br><span class="line">                Flag++;</span><br><span class="line">        <span class="keyword">if</span>(Flag&gt;<span class="number">1</span>)		<span class="comment">//如果出现次数为奇数的字母超过1,无解 </span></span><br><span class="line">            ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans=fac(Len/<span class="number">2</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">26</span>; i++)</span><br><span class="line">                <span class="keyword">if</span>(book[i]&gt;<span class="number">1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    exgcd(fac(book[i]/<span class="number">2</span>),mod);</span><br><span class="line">                    x=x&lt;<span class="number">0</span>? x+mod:x;			<span class="comment">//x小于0的话要转换成正数 </span></span><br><span class="line">                    ans=ans*x%mod;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数论 </tag>
+            
+            <tag> 排列组合 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[LCP Array(排列组合)]]></title>
+      <url>/LCP-Array-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=5635" target="_blank" rel="noopener">hdu-5635</a></p>
+<blockquote>
+<p>Peter has a string $s=s_1s_2…s_n$, let $suff_i=s_is_{i+1}…s_n$ be the suffix start with $i^{th}$ character of $s$. Peter knows the <strong>lcp</strong> (longest common prefix) of each two adjacent suffixes which denotes as $a_i=lcp(suff_i,suff_{i+1})(1≤i&lt;n)$.</p>
+<p>Given the lcp array, Peter wants to know how many strings containing lowercase English letters only will satisfy the lcp array. The answer may be too large, just print it modulo $10^9+7$.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>There are multiple test cases. The first line of input contains an integer T indicating the number of test cases. For each test case:</p>
+<p>The first line contains an integer n ($2≤n≤10^5$) — the length of the string. The second line contains n−1 integers: $a_1,a_2,…,a_{n−1} (0≤a_i≤n)$.</p>
+<p>The sum of values of n in all test cases doesn’t exceed $10^6$.</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>For each test case output one integer denoting the answer. The answer must be printed modulo $10^9+7$.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3</span><br><span class="line">0 0</span><br><span class="line">4</span><br><span class="line">3 2 1</span><br><span class="line">3</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">16250</span><br><span class="line">26</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li><strong>有解的条件</strong>：以样例2为例:$lcp_1=3 \Rightarrow s_1=s_2,s_2=s_3,s_3=s_4$,要有解显然$lcp_i=lcp_{i-1}-1$一定成立，而且$lcp_{n-1}$不可能大于1,也就是说如果$lcp_i$=n,那么$lcp_i$到$lcp_{i+n}$的值一定是n到1递减。</li>
+<li><strong>计算有解时的答案</strong>：显然当$lcp_i$=n(n&gt;0)时，$s_i$到$s_{i+n}$都为同一个字母，如果$lcp_i$=0,则$s_i$和$s_{i+1}$为不同字母，所以当前一种字母确定时，后一种字母就有25种可能。</li>
+<li>所以如果有解，lcp数组中0的个数为n,答案就是$26 \times 25^n$。<del>我也是在草稿本上先找到规律AC了才推出原理的</del></li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 0xfffffff</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 100000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,len,lcp[M],Flag=<span class="number">0</span>;</span><br><span class="line">    ll ans;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        Flag=<span class="number">0</span>;</span><br><span class="line">        ans=<span class="number">26</span>;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;len;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;lcp[i]);</span><br><span class="line">            <span class="keyword">if</span>(lcp[i]+<span class="number">1</span>!=lcp[i<span class="number">-1</span>]&amp;&amp;lcp[i<span class="number">-1</span>]&gt;<span class="number">0</span>)  <span class="comment">//如果不是前比后多一且前一个不为0</span></span><br><span class="line">                Flag=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(lcp[i]==<span class="number">0</span>)</span><br><span class="line">                ans=(ans*<span class="number">25</span>)%mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(Flag||lcp[len<span class="number">-1</span>]&gt;<span class="number">1</span>)  <span class="comment">//lcp数组末尾一定是0或1</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 排列组合 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[一个人的旅行(Dijkstra算法)]]></title>
+      <url>/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%85%E8%A1%8C-%E6%9C%80%E7%9F%AD%E8%B7%AFDijkstra%E7%AE%97%E6%B3%95/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2066" target="_blank" rel="noopener">hdu-2066</a></p>
+<blockquote>
+<p>&emsp;虽然草儿是个路痴（就是在杭电待了一年多，居然还会在校园里迷路的人，汗~),但是草儿仍然很喜欢旅行，因为在旅途中 会遇见很多人（白马王子，^0^），很多事，还能丰富自己的阅历，还可以看美丽的风景……草儿想去很多地方，她想要去东京铁塔看夜景，去威尼斯看电影，去阳明山上看海芋，去纽约纯粹看雪景，去巴黎喝咖啡写信，去北京探望孟姜女……眼看寒假就快到了，这么一大段时间，可不能浪费啊，一定要给自己好好的放个假，可是也不能荒废了训练啊，所以草儿决定在要在最短的时间去一个自己想去的地方！因为草儿的家在一个小镇上，没有火车经过，所以她只能去邻近的城市坐火车（好可怜啊~）。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>输入数据有多组，每组的第一行是三个整数T，S和D，表示有T条路，和草儿家相邻的城市的有S个，草儿想去的地方有D个；<br>接着有T行，每行有三个整数a，b，time,表示a,b城市之间的车程是time小时；(1=&lt;(a,b)&lt;=1000;a,b 之间可能有多条路)<br>接着的第T+1行有S个数，表示和草儿家相连的城市；<br>接着的第T+2行有D个数，表示草儿想去地方。</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>输出草儿能去某个喜欢的城市的最短时间。</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">6 2 3</span><br><span class="line">1 3 5</span><br><span class="line">1 4 7</span><br><span class="line">2 8 12</span><br><span class="line">3 8 4</span><br><span class="line">4 9 12</span><br><span class="line">9 10 2</span><br><span class="line">1 2</span><br><span class="line">8 9 10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>一读完题就开始敲Floyd，然后没有意外地T了。</li>
+<li><del>经过大佬的一番点拨，</del>我们把草儿家看成一个节点0，邻近的城市和草儿家的距离为0，这样就转换成了最单纯的单源最短路问题。</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 99999</span></span><br><span class="line"><span class="keyword">bool</span> visit[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> Distance[<span class="number">1005</span>],<span class="built_in">map</span>[<span class="number">1005</span>][<span class="number">1005</span>],m,n,MaxNode;<span class="comment">//	Distance:源点到点i的距离	MaxNode:最大的节点</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstar</span><span class="params">(<span class="keyword">int</span> v0)</span>	<span class="comment">//v0为源点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    CRL(visit);</span><br><span class="line">    visit[v1]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=MaxNode; i++)</span><br><span class="line">        Distance[i]=<span class="built_in">map</span>[v1][i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">1</span>,t=<span class="number">1</span>,v,w,Min;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开始主循环，每次求得V0到某个V顶点的最短路径</span></span><br><span class="line">    <span class="keyword">for</span>( v=<span class="number">1</span>; v&lt;=MaxNode; v++ )</span><br><span class="line">    &#123;</span><br><span class="line">        Min=MAX;</span><br><span class="line">        <span class="keyword">for</span>(w=<span class="number">1</span>; w&lt;=MaxNode; w++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visit[w]&amp;&amp;Distance[w]&lt;Min )</span><br><span class="line">            &#123;</span><br><span class="line">                k=w;</span><br><span class="line">                Min=Distance[w];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[k]=<span class="number">1</span>;	<span class="comment">// 将目前找到的最近的顶点置1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 修正当前最短路径及距离</span></span><br><span class="line">        <span class="keyword">for</span>(w=<span class="number">0</span>; w&lt;=MaxNode; w++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果经过v顶点的路径比现在这条路径的长度短就修正</span></span><br><span class="line">            <span class="keyword">if</span>( !visit[w] &amp;&amp; (Min+<span class="built_in">map</span>[k][w]&lt;Distance[w]) )</span><br><span class="line">                Distance[w]=Min+<span class="built_in">map</span>[k][w];	<span class="comment">// 修改当前路径长度</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">create</span><span class="params">()</span>		<span class="comment">//建图</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x,y,way;</span><br><span class="line">    <span class="built_in">memset</span>(<span class="built_in">map</span>,<span class="number">1</span>,<span class="keyword">sizeof</span>(<span class="built_in">map</span>));	</span><br><span class="line">    <span class="comment">//把map数组全部置为无穷大，准确来说现在map中每个元素在内存中为00000001000000010000000100000001 </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;way);</span><br><span class="line">        MaxNode=MaxNode&gt;x?MaxNode:x;</span><br><span class="line">        MaxNode=MaxNode&gt;y?MaxNode:y;</span><br><span class="line">        <span class="keyword">if</span>(way&lt;<span class="built_in">map</span>[x][y])</span><br><span class="line">            <span class="built_in">map</span>[x][y]=<span class="built_in">map</span>[y][x]=way;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">        <span class="built_in">map</span>[<span class="number">0</span>][x]=<span class="built_in">map</span>[x][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T,ans=<span class="number">99999</span>,want;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n&gt;&gt;T)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=<span class="number">99999</span>;</span><br><span class="line">        create();</span><br><span class="line">        Dijkstra(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;T; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;want;</span><br><span class="line">            ans=min(ans,Distance[want]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 图论 </tag>
+            
+            <tag> 最短路 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ACboy needs your help(分组背包)]]></title>
+      <url>/ACboy-needs-your-help-%E5%88%86%E7%BB%84%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1712" target="_blank" rel="noopener">hdu-1712</a></p>
+<blockquote>
+<p>ACboy has N courses this term, and he plans to spend at most M days on study.Of course,the profit he will gain from different course depending on the days he spend on it.How to arrange the M days for the N courses to maximize the profit?</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>The input consists of multiple data sets. A data set starts with a line containing two positive integers N and M, N is the number of courses, M is the days ACboy has.<br>Next follow a matrix A[i][j], (1&lt;=i&lt;=N&lt;=100,1&lt;=j&lt;=M&lt;=100).A[i][j] indicates if ACboy spend j days on ith course he will get profit of value A[i][j].<br>N = 0 and M = 0 ends the input.</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>For each data set, your program should output a line which contains the number of the max profit ACboy will gain.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">2 2</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">2 2</span><br><span class="line">2 1</span><br><span class="line">2 1</span><br><span class="line">2 3</span><br><span class="line">3 2 1</span><br><span class="line">3 2 1</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">4</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>这是一个典型的分组背包问题，我们可以转换成01背包求解。</li>
+<li>核心代码</li>
+</ul>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> j=V;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=V;k++)	<span class="comment">//转01背包，注意三重循环顺序</span></span><br><span class="line">       <span class="keyword">if</span>(j&gt;=k)</span><br><span class="line">        dp[j]=max(dp[j],dp[j-k]+<span class="built_in">map</span>[i][k]);</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Cow Contest(floyd))]]></title>
+      <url>/Cow-Contest-floyd/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://poj.org/problem?id=3660" target="_blank" rel="noopener">poj-3660</a></p>
+<blockquote>
+<p>N (1 ≤ N ≤ 100) cows, conveniently numbered 1..N, are participating in a programming contest. As we all know, some cows code better than others. Each cow has a certain constant skill rating that is unique among the competitors.</p>
+<p>The contest is conducted in several head-to-head rounds, each between two cows. If cow A has a greater skill level than cow B (1 ≤ A ≤ N; 1 ≤ B ≤ N; A ≠ B), then cow A will always beat cow B.</p>
+<p>Farmer John is trying to rank the cows by skill level. Given a list the results of M (1 ≤ M ≤ 4,500) two-cow rounds, determine the number of cows whose ranks can be precisely determined from the results. It is guaranteed that the results of the rounds will not be contradictory.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<ul>
+<li>Line 1: Two space-separated integers: N and M</li>
+<li>Lines 2..M+1: Each line contains two space-separated integers that describe the competitors and results (the first integer, A, is the winner) of a single round of competition: A and B.</li>
+</ul>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>Line 1: A single integer representing the number of cows whose ranks can be determined.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">5 5</span><br><span class="line">4 3</span><br><span class="line">4 2</span><br><span class="line">3 2</span><br><span class="line">1 2</span><br><span class="line">2 5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>把比赛看成是一个有向图，问题其实就转化成求了求有多少个顶点和其他所有顶点都连通。</li>
+<li>形象地说就是当一头牛胜负加起来为n-1时，也就是和其他的牛都比赛过(包括间接的)就能确定它的名次。</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 0xfffffff</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">map</span>[<span class="number">105</span>][<span class="number">105</span>],win[<span class="number">105</span>],defeat[<span class="number">105</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,w,a,b,ans;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; w)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        CRL(<span class="built_in">map</span>);</span><br><span class="line">        CRL(win);</span><br><span class="line">        CRL(defeat);</span><br><span class="line">        <span class="keyword">while</span>(w--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">map</span>[a][b])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">map</span>[a][b]=<span class="number">1</span>;</span><br><span class="line">                win[a]++;</span><br><span class="line">                defeat[b]++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>; k&lt;=n; k++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=n; j++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">                    <span class="keyword">if</span>(<span class="built_in">map</span>[j][k]&amp;&amp;<span class="built_in">map</span>[k][i]&amp;&amp;!<span class="built_in">map</span>[j][i])</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">map</span>[j][i]=<span class="number">1</span>;</span><br><span class="line">                        win[j]++;</span><br><span class="line">                        defeat[i]++;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">            <span class="keyword">if</span>(win[i]+defeat[i]+<span class="number">1</span>==n)</span><br><span class="line">                ans++;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 图论 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数论笔记本]]></title>
+      <url>/%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0%E6%9C%AC/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>数论是个好东西。</p>
+<a id="more"></a>
+<hr>
+<h1 id="欧几里德算法-gcd"><a href="#欧几里德算法-gcd" class="headerlink" title="欧几里德算法(gcd)"></a>欧几里德算法(gcd)</h1><blockquote>
+<ul>
+<li>欧几里德算法又称辗转相除法，用于计算两个正整数a，b的最大公约数。</li>
+</ul>
+</blockquote>
+<h2 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h2><blockquote>
+<p>$gcd(a,b)=gcd(b,a$  $mod$ $b)$<br>特别的：$gcd(a,0)=a$</p>
+</blockquote>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><h3 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h3><blockquote>
+<p>设c为a,b的公约数<br>$\because a|c,&emsp;b|c&emsp;&emsp;&emsp;$&emsp;（|：整除）<br>又$\because a=kb+(a$  $mod$ $b),$即$a$  $mod$ $b = a-kb$<br>$\therefore (a$  $mod$ $b) | c$</p>
+</blockquote>
+<h3 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h3><blockquote>
+<p>设c为b,a mod b的公约数<br>$\because b|c,&emsp;(a$  $mod$ $b)|c$<br>又$\because a=kb+(a$  $mod$ $b)$<br>$\therefore a|c$</p>
+</blockquote>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　　<span class="keyword">if</span>(b == <span class="number">0</span>)</span><br><span class="line">　　        <span class="keyword">return</span> a;</span><br><span class="line">       <span class="keyword">return</span> gcd(b, a % b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="拓展欧几里德算法"><a href="#拓展欧几里德算法" class="headerlink" title="拓展欧几里德算法"></a>拓展欧几里德算法</h1><blockquote>
+<ul>
+<li>扩展欧几里德算法是用来在已知a, b求解一组x，y，使它们满足等式：$ ax+by = gcd(a, b) =d $（解一定存在，根据数论中的相关定理）。扩展欧几里德常用在求解模线性方程及方程组中。</li>
+</ul>
+</blockquote>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>因为不好描述，所以先给出代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>		<span class="comment">//拓展欧几里德算法，求出的x,即为a%b下a的逆元 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=exgcd(b,a%b);</span><br><span class="line">    <span class="keyword">int</span> c=x;				<span class="comment">//c只是为了储存x的值</span></span><br><span class="line">    x=y;</span><br><span class="line">    y=c-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h2><blockquote>
+<p>递归之后，$ a’=b ,&emsp; b’=a \% b = a-a/b \times b $<br>（这里的/为计算机里的除法）<br>$a’x+b’y=gcd(a,b)$<br>代入化简$\Rightarrow ay+b(x-a/b \times y) = gcd(a,b) $<br>又$\because ax+by = gcd(a,b)$<br>$\therefore x=y ,&emsp;y=x-a/b \times y$<br>最后的x,y即为答案。</p>
+</blockquote>
+<h1 id="乘法逆元"><a href="#乘法逆元" class="headerlink" title="乘法逆元"></a>乘法逆元</h1><h2 id="什么是逆元"><a href="#什么是逆元" class="headerlink" title="什么是逆元"></a>什么是逆元</h2><blockquote>
+<p>* </p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> 学习笔记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[多重背包问题]]></title>
+      <url>/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><blockquote>
+<p> 有n种物品和一个容积为V的背包，第i种物品有amount[i]个，体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>跟完全背包问题类似，这里就直接给出基本算法的状态转移方程<script type="math/tex; mode=display">dp[i][j]=Max\{dp[i-1][j-k \times cost[i] + k \times  valum[i]\}</script><script type="math/tex; mode=display">(0\leq k \leq amount[i]  且  0\leq k \times cost[i] \leq V)</script></li>
+<li>时间复杂度:O($V \times {\sum_{i=1}^N{amount[i]}}$)，空间复杂度:O(NV)。</li>
+</ul>
+</blockquote>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><blockquote>
+<ul>
+<li>amount[i]==1时，当01背包处理。</li>
+<li>amount[i]$ \times $cost&gt;=V时，当完全背包处理。</li>
+<li>amount[i]$ \geq $1时，采用二进制拆分，从而转换成01背包求解，具体如下：<br>&emsp;在上面的状态转移方程中，我们让k从1$ \to $amount[i]来实现拿不同的个数，从而转换成01背包问题，但我们可以发现，我们只要将amount[i]拆分成几个数，就可以用他们组合成小于amount[i]的任何数。例如:amount[i]=11,11的二进制为1011，把11拆成100(4)、0010(2)、0001(1)、4(11-4-2-1),这样就可以用4、2、1、4来组合成11以内所有的整数，这样放第这种物品时本来放11次，现在只要放4次，虽然仍然有重复，但也实现了优化。</li>
+</ul>
+</blockquote>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><blockquote>
+<ul>
+<li>如果题目没有要求必须装满，那么我们只要将dp数组全部置为0即可。</li>
+<li>如果必须装满，我们就将dp[0]初始化为0，其他初始化为$-\infty$。</li>
+</ul>
+</blockquote>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;   </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 100000000</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> V,dp[<span class="number">120002</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ZeroOnePack</span><span class="params">(<span class="keyword">int</span> cost,<span class="keyword">int</span> valum)</span>		<span class="comment">//01背包问题</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=V;i&gt;=cost;i--)</span><br><span class="line">		dp[i]=max(dp[i],dp[i-cost]+valum);</span><br><span class="line">	<span class="keyword">return</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CompletePack</span><span class="params">(<span class="keyword">int</span> cost,<span class="keyword">int</span> valum)</span>		<span class="comment">//完全背包问题</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=cost;i&lt;=V;i++)</span><br><span class="line">		dp[i]=max(dp[i],dp[i-cost]+valum);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MultiplePack</span><span class="params">(<span class="keyword">int</span> cost,<span class="keyword">int</span> valum,<span class="keyword">int</span> amount)</span>	<span class="comment">//多重背包问题</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(cost*amount&gt;=V)</span><br><span class="line">		CompletePack(cost,valum);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(k&lt;amount)</span><br><span class="line">		&#123;</span><br><span class="line">			ZeroOnePack(cost*k,valum*k);</span><br><span class="line">			amount-=k;</span><br><span class="line">			k=k&lt;&lt;<span class="number">1</span>; 	<span class="comment">//k*=2</span></span><br><span class="line">		&#125;</span><br><span class="line">		ZeroOnePack(cost*amount,valum*amount);</span><br><span class="line">	 &#125;</span><br><span class="line">	<span class="keyword">return</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n,cost[<span class="number">1000</span>],valum[<span class="number">1000</span>],amount[<span class="number">1000</span>];</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;V)</span><br><span class="line">	&#123;</span><br><span class="line">		CRL(dp);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;cost[i]&gt;&gt;valum[i]&gt;&gt;amount[i];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">			MultiplePack(cost[i],valum[i],amount[i]);</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;dp[V]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><blockquote>
+<ul>
+<li>换一种问法而已：<a href="http://poj.org/problem?id=1014" target="_blank" rel="noopener">poj 1014</a></li>
+</ul>
+</blockquote>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《背包九讲》</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 学习笔记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[完全背包问题]]></title>
+      <url>/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><blockquote>
+<p> 有n种物品和一个容积为V的背包，每种物品i都有无限个，都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>完全背包和01背包很像，我们首先想到的应该是每种物品在拿0~n个中选max价值的，我们依旧用dp[i][j]来储存将前i种物品放入体积为j的背包中物品价值之和最大值，那么状态转移方程便是在放得下的情况下<script type="math/tex; mode=display">dp[i][j]=Max\{dp[i-1][j-k \times cost[i] + k \times  valum[i]\}</script><script type="math/tex; mode=display">(0\leq k \times cost[i] \leq V)</script></li>
+<li>这样最后求出来的dp[n][V]就是最后答案。</li>
+<li>时间复杂度:O($V \times {\sum_{i=1}^N{V \over {c[i]}}}$)，空间复杂度:O(NV)。</li>
+</ul>
+</blockquote>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><blockquote>
+<ul>
+<li>在01背包问题里面，我们逆序遍历V$(j:V \to 0)$是为了保证dp[j-cost[i]]始终是i-1物品推出的，从而保证每种物品只用一次。而完全背包问题里面我们就可以正序遍历，这样就可以在一次遍历dp[V]中考虑第i种物品的所有拿法。</li>
+<li><p>核心代码如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	  <span class="keyword">for</span>(<span class="keyword">int</span> j=Time[i];j&lt;=t;j++)</span><br><span class="line">	    dp[j]=max(dp[j],dp[j-Time[i]]+valum[i]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优化后时间复杂度为O(NV)，空间复杂度为O(N)。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><blockquote>
+<ul>
+<li>如果题目没有要求必须装满，那么我们只要将dp数组全部置为0即可。</li>
+<li>如果必须装满，我们就将dp[0]初始化为0，其他初始化为$-\infty$。</li>
+</ul>
+</blockquote>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><blockquote>
+<ul>
+<li>板子题：<a href="https://www.luogu.org/problemnew/show/P1616" target="_blank" rel="noopener">洛谷1616</a></li>
+<li>换一种问法：<a href="http://poj.org/problem?id=1014" target="_blank" rel="noopener">poj 1014</a></li>
+</ul>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> 学习笔记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[01背包问题]]></title>
+      <url>/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><blockquote>
+<p> 有n个物品和一个容积为V的背包，每个物品i都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>01背包的特点就是每种物品都只有一个，所以每个物品只有拿和不拿两种状态。</li>
+<li>我们用dp[i][j]来储存将前i件物品放入体积为j的背包中物品价值之和最大值，那么状态转移方程便是在放得下的情况下<script type="math/tex; mode=display">
+dp[i][j]=Max
+\begin{cases}
+dp[i-1][j] &\mbox{不拿第i个，状态跟i-1一样}\\
+dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的物品拿走再放}
+\end{cases}</script></li>
+</ul>
+<script type="math/tex; mode=display">(j:0 \to V,i:0 \to n)</script><ul>
+<li>这样最后求出来的dp[n][V]就是最后答案。</li>
+</ul>
+</blockquote>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><blockquote>
+<ul>
+<li>上面的时间复杂度是O(NV)已经无法再优化了,而空间复杂度可以优化到O(N)：我们用二维数组无非是为了保证状态转移方程里的dp[i-1][j-cost[i]]是上一个物品推出来的，如果我们直接改成dp[j]=max(dp[j],dp[j-cost[i]]+valum[i])的话，在$(j:0 \to V)$过程进行到后面的时候,dp[j-cost]有可能是已经在前面就放了i物品的状态，此时再+valum<a href="放i物品">i</a>就不符合每种物品都只有一个的题意了。</li>
+<li>实际上。如果我们在遍历j的时候，采用逆序，即$(j:V \to 0)$，就可以保证dp[j-cost[i]]始终是i-1物品推出的。</li>
+<li>核心代码如下<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	  <span class="keyword">for</span>(<span class="keyword">int</span> j=t;j&gt;=cost[i];j--)</span><br><span class="line">	    dp[j]=max(dp[j],dp[j-cost[i]]+valum[i]);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><blockquote>
+<ul>
+<li>如果题目没有要求必须装满，那么我们只要将dp数组全部置为0即可。</li>
+<li>如果必须装满，我们就将dp[0]初始化为0，其他初始化为$-\infty$，$(j:V \to 0)$时每次判断dp[j-cost]是否&gt;=0，是的话就进行状态转移。(自行体会，逃.jpg)</li>
+</ul>
+</blockquote>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><blockquote>
+<ul>
+<li>板子题：<a href="https://www.luogu.org/problemnew/show/P1048" target="_blank" rel="noopener">洛谷1048</a></li>
+<li>变式：<a href="https://www.luogu.org/problemnew/show/P1164" target="_blank" rel="noopener">洛谷1164</a></li>
+<li>变式：<a href="https://www.nowcoder.com/acm/contest/74/B" target="_blank" rel="noopener">2018年全国多校算法寒假训练营练习比赛(第二场) problem B</a>（需要一个微妙的预处理）</li>
+</ul>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> 学习笔记 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[小牛vs小客(巴什博弈变形)]]></title>
+      <url>/%E5%B0%8F%E7%89%9Bvs%E5%B0%8F%E5%AE%A2-%E5%B7%B4%E4%BB%80%E5%8D%9A%E5%BC%88%E5%8F%98%E5%BD%A2/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><a href="https://www.nowcoder.net/acm/contest/75/D" target="_blank" rel="noopener">题目链接</a></p>
+<blockquote>
+<p>小牛和小客玩石子游戏，他们用n个石子围成一圈，小牛和小客分别从其中取石子，谁先取完谁胜，每次可以从一圈中取一个或者相邻两个，每次都是小牛先取，请输出胜利者的名字。（1 2 3 4 取走 2 13 不算相邻）</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Intput"><a href="#Intput" class="headerlink" title="Intput"></a>Intput</h2><blockquote>
+<p>输入包括多组测试数据<br>每组测试数据一个n（1≤n≤10^9）</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>每组用一行输出胜利者的名字（小牛获胜输出XiaoNiu，小客获胜输出XiaoKe）</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XiaoNiu</span><br><span class="line">XiaoKe</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>当n&lt;=2时，毫无疑问是先手获胜。</li>
+<li>当n&gt;2时，先手拿了之后，石子形状就可以看成一条线，后手可以选择拿1个或2个，使得剩下的石子是对称的，然后无论先手怎样拿，后手总能在对称位置拿到石子，最后一定是后手赢。</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;x)</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;=<span class="number">2</span>)</span><br><span class="line">         <span class="built_in">cout</span>&lt;&lt;<span class="string">"XiaoNiu\n"</span>;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">         <span class="built_in">cout</span>&lt;&lt;<span class="string">"XiaoKe\n"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 博弈 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[不凡的夫夫(斯特灵公式)]]></title>
+      <url>/%E4%B8%8D%E5%87%A1%E7%9A%84%E5%A4%AB%E5%A4%AB-%E6%96%AF%E7%89%B9%E7%81%B5%E5%85%AC%E5%BC%8F/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><a href="https://www.nowcoder.net/acm/contest/75/A" target="_blank" rel="noopener">题目链接</a></p>
+<blockquote>
+<p>夫夫有一天对一个数有多少位数感兴趣，但是他又不想跟凡夫俗子一样，所以他想知道给一个整数n，求n！的在8进制下的位数是多少位。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>第一行是一个整数t(0&lt;t&lt;=1000000)(表示t组数据)<br>接下来t行，每一行有一个整数n(0&lt;=n&lt;=10000000)</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>输出n！在8进制下的位数。</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">4</span><br><span class="line">2</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">1</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>看到n的值最大是1e7就知道不能暴力出奇迹，而求n!的位数，就很自然想到要用斯特林公式:<br><font size="5">$n!\approx\sqrt{2\pi n}(\frac{n}{e})^n$</font></li>
+<li>虽然斯特林公式只是求阶乘的近似值，但即使在n很小的时候，斯特林公式的取值已经十分准确。</li>
+<li>再求以8为底近似值的对数 +1(求其他进制下的位数类似，修改底数即可)。</li>
+<li>注意:C语言中不支持任意底数的求对数运算，我们小小的转换一下$\log_x y=\frac{lgy}{lgx}$</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;   </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> e = <span class="number">2.718281828459</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);    </span><br><span class="line">	<span class="keyword">while</span>(t--)    </span><br><span class="line">	&#123;        </span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">		<span class="keyword">if</span>(n==<span class="number">0</span>||n==<span class="number">1</span>)	<span class="comment">//注意特判 </span></span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"1\n"</span>);</span><br><span class="line">		<span class="keyword">else</span>        </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,(<span class="keyword">int</span>)((<span class="built_in">log</span>(<span class="number">2.0</span>*Pi*n)/(<span class="built_in">log</span>(<span class="number">8</span>))/<span class="number">2.0</span> + n*<span class="built_in">log</span>(n/e)/<span class="built_in">log</span>(<span class="number">8</span>))+<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[2 5 11 13的倍数(容斥原理)]]></title>
+      <url>/2-5-11-13%E7%9A%84%E5%80%8D%E6%95%B0-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><a href="https://www.nowcoder.net/acm/contest/75/G" target="_blank" rel="noopener">题目链接</a></p>
+<blockquote>
+<p>给出一个数n，求1到n中，有多少个数不是2 5 11 13的倍数。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Intput"><a href="#Intput" class="headerlink" title="Intput"></a>Intput</h2><blockquote>
+<p>本题有多组输入<br>每行一个数n，1&lt;=n&lt;=10^18.</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>每行输出输出不是2 5 11 13的倍数的数共有多少。</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>遍历一遍感觉是很快了，时间复杂度O(n)，但还是会超时，其实这道题可以达到O(1)。</li>
+<li>我们反过来思考，用总数减去倍数的个数，先不考虑公倍数的问题，再减去公倍数的个数。</li>
+<li>假设有三个集合，那么<br> A∪B∪C = A+B+C - A∩B - B∩C - C∩A + A∩B∩C</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> LL n,sum;</span><br><span class="line"> <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n)!=EOF)</span><br><span class="line"> &#123;</span><br><span class="line">    sum=n/<span class="number">2</span>+n/<span class="number">5</span>+n/<span class="number">11</span>+n/<span class="number">13</span>;</span><br><span class="line">    LL cnt=sum-n/<span class="number">10</span>-n/<span class="number">22</span>-n/<span class="number">26</span>-n/<span class="number">55</span>-n/<span class="number">65</span>-n/<span class="number">143</span>+n/<span class="number">110</span>+n/<span class="number">130</span>+n/<span class="number">286</span>+n/<span class="number">715</span>-n/<span class="number">1430</span>;</span><br><span class="line">    LL ans=n-cnt;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数论 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[欢迎来到Armin的博客]]></title>
+      <url>/Welcome/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><p>欢迎来到Armin的博客，其他内容还在持续搭建（xjb摸索）中。<br><a id="more"></a></p>
+<hr>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="测试flash插件"><a href="#测试flash插件" class="headerlink" title="测试flash插件"></a>测试flash插件</h2><embed src="//music.163.com/style/swf/widget.swf?sid=5310505&type=2&auto=1&width=320&height=66" width="340" height="86" allownetworking="all">
+
+<h2 id="测试插入代码"><a href="#测试插入代码" class="headerlink" title="测试插入代码"></a>测试插入代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Hello world!"</span>&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//测试注释</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试链接"><a href="#测试链接" class="headerlink" title="测试链接"></a>测试链接</h2><p><a href="https://paste.ubuntu.com/" target="_blank" rel="noopener">分享代码</a></p>
+<h2 id="测试公式"><a href="#测试公式" class="headerlink" title="测试公式"></a>测试公式</h2><p>质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</p>
+<script type="math/tex; mode=display">\ sum_{i=1}^n a_i=0</script><script type="math/tex; mode=display">f (x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2</script><script type="math/tex; mode=display">\ sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k}</script><h2 id="测试表格"><a href="#测试表格" class="headerlink" title="测试表格"></a>测试表格</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>分数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>蒟蒻</td>
+<td>59</td>
+</tr>
+<tr>
+<td>神犇</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
 </search>
