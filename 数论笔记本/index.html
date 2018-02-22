@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="数论是个好东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-22T05:27:05.384Z">
+<meta property="og:updated_time" content="2018-02-22T08:22:02.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论笔记本">
 <meta name="twitter:description" content="数论是个好东西。">
@@ -393,27 +393,109 @@
 </ul>
 </blockquote>
 <h2 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h2><blockquote>
-<p>$gcd(a,b)=gcd(b,a$  $mod$ $b)$<br>特别的：$gcd(a,0)=a$</p>
+<ul>
+<li>$gcd(a,b)=gcd(b,a$  $mod$ $b)$ </li>
+<li>特别的：$gcd(a,0)=a$</li>
+</ul>
 </blockquote>
 <h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><h3 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h3><blockquote>
-<p>设c为a,b的公约数<br>$\because a|c,&emsp;b|c&emsp;&emsp;&emsp;$&emsp;（|：整除）<br>又$\because a=kb+(a$  $mod$ $b),$即$a$  $mod$ $b = a-kb$<br>$\therefore (a$  $mod$ $b) | c$</p>
+<p>设c为a,b的公约数<br>$\because a|c$，$b|c&emsp;&emsp;&emsp;$&emsp;（|：整除）<br>又$\because a=kb+(a$  $mod$ $b),$即$a$  $mod$ $b = a-kb$<br>$\therefore (a$  $mod$ $b) | c$</p>
 </blockquote>
 <h3 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h3><blockquote>
-<p>设c为b,a mod b的公约数<br>$\because b|c,&emsp;(a$  $mod$ $b)|c$<br>又$\because a=kb+(a$  $mod$ $b)$<br>$\therefore a|c$</p>
+<p>设$c$为$b$，$a$  $mod$ $b$的公约数<br>$\because b|c,&emsp;(a$  $mod$ $b)|c$<br>又$\because a=kb+(a$  $mod$ $b)$<br>$\therefore a|c$</p>
 </blockquote>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　　<span class="keyword">if</span>(b == <span class="number">0</span>)</span><br><span class="line">　　        <span class="keyword">return</span> a;</span><br><span class="line">       <span class="keyword">return</span> gcd(b, a % b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h1 id="拓展欧几里德算法"><a href="#拓展欧几里德算法" class="headerlink" title="拓展欧几里德算法"></a>拓展欧几里德算法</h1><blockquote>
+<h1 id="扩展欧几里德算法"><a href="#扩展欧几里德算法" class="headerlink" title="扩展欧几里德算法"></a>扩展欧几里德算法</h1><blockquote>
 <ul>
-<li>扩展欧几里德算法是用来在已知a, b求解一组x，y，使它们满足等式：$ ax+by = gcd(a, b) =d $（解一定存在，根据数论中的相关定理）。扩展欧几里德常用在求解模线性方程及方程组中。</li>
+<li>扩展欧几里德算法是用来在已知a, b求解一组x，y，使它们满足等式：$ ax+by = gcd(a, b)$（解一定存在，根据数论中的相关定理）。扩展欧几里德常用在求解模线性方程及方程组中。</li>
 </ul>
 </blockquote>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>因为不好描述，所以先给出代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>		<span class="comment">//拓展欧几里德算法，求出的x,即为a%b下a的逆元 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=exgcd(b,a%b);</span><br><span class="line">    <span class="keyword">int</span> c=x;				<span class="comment">//c只是为了储存x的值</span></span><br><span class="line">    x=y;</span><br><span class="line">    y=c-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h2><blockquote>
-<p>递归之后，$ a’=b ,&emsp; b’=a \% b = a-a/b \times b $<br>（这里的/为计算机里的除法）<br>$a’x+b’y=gcd(a,b)$<br>代入化简$\Rightarrow ay+b(x-a/b \times y) = gcd(a,b) $<br>又$\because ax+by = gcd(a,b)$<br>$\therefore x=y ,&emsp;y=x-a/b \times y$<br>最后的x,y即为答案。</p>
+<p>递归之后，$ a’=b ,&emsp; b’=a \% b = a-a/b \times b $ （这里的/为计算机里的除法）<br>$a’x+b’y=gcd(a,b)$<br>代入化简$\Rightarrow ay+b(x-a/b \times y) = gcd(a,b) $<br>又$\because ax+by = gcd(a,b)$<br>$\therefore x=y ,&emsp;y=x-a/b \times y$<br>最后的$x,y$即为答案。</p>
 </blockquote>
-<h1 id="乘法逆元"><a href="#乘法逆元" class="headerlink" title="乘法逆元"></a>乘法逆元</h1><h2 id="什么是逆元"><a href="#什么是逆元" class="headerlink" title="什么是逆元"></a>什么是逆元</h2><blockquote>
-<p>* </p>
+<hr>
+<h1 id="乘法逆元"><a href="#乘法逆元" class="headerlink" title="乘法逆元"></a>乘法逆元</h1><blockquote>
+<ul>
+<li>若$ ax \equiv 1$  $mod$ $m$, 则称a关于1模m的乘法逆元为x。也可表示为$ax \equiv 1(mod$ $m$)。</li>
+<li>如果$a,m$不互质，则无解。如果$m$为质数，则从1到$m-1$的任意数都与$m$互质，即在1到$m-1$之间都恰好有一个关于模$m$的乘法逆元。</li>
+</ul>
+</blockquote>
+<h2 id="求法"><a href="#求法" class="headerlink" title="求法"></a>求法</h2><h3 id="费马小定理求逆元。"><a href="#费马小定理求逆元。" class="headerlink" title="费马小定理求逆元。"></a>费马小定理求逆元。</h3><blockquote>
+<ul>
+<li>费马小定理：$a^{m-1} \equiv 1(mod$ $m$)  (m为素数)</li>
+<li>变形得: $a \cdot a^{m-2} \equiv 1(mod$ $m$)</li>
+<li>故$a^{m-2}$为a在模m下的逆元。($a^{m-2}$用快速幂求解即可)</li>
+<li><strong>注意</strong>：$m$必须是质数，且$a,m$互质。(ACM的题一般都是模($10^9+7$),所以基本上都能用)</li>
+</ul>
+</blockquote>
+<h3 id="扩展欧几里德算法求逆元"><a href="#扩展欧几里德算法求逆元" class="headerlink" title="扩展欧几里德算法求逆元"></a>扩展欧几里德算法求逆元</h3><blockquote>
+<ul>
+<li>扩展欧几里德算法:$ ax+by = gcd(a, b) $</li>
+<li>令$b=m$  ,由于$a,m$互质，所以$gcd(a,m)$=1，即$ ax+my = 1 $，两边同时模m，得$ax \equiv 1(mod$ $m$)</li>
+<li>这样解出来的$x$就是$a$在模$m$下的逆元。</li>
+<li>同样，也要求$m$必须是质数，且$a,m$互质。</li>
+</ul>
+</blockquote>
+<h3 id="欧拉定理求逆元"><a href="#欧拉定理求逆元" class="headerlink" title="欧拉定理求逆元"></a>欧拉定理求逆元</h3><blockquote>
+<ul>
+<li>欧拉定理：$a^{ \varphi (m)} \equiv 1(mod$ $m$)&emsp;&emsp;($\varphi (m)$是小于m且与m互质的数的个数。)</li>
+<li>变形得: $a \cdot a^{ \varphi (m)-1} \equiv 1(mod$ $m$)</li>
+<li>故$ a^{ \varphi (m)-1} $为a在模m下的逆元。($a^{ \varphi (m)-1}$用快速幂求解即可)</li>
+<li>欧拉定理实际上是费马小定理的推广。</li>
+</ul>
+</blockquote>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><blockquote>
+<ul>
+<li>有时候在求$({a \over b})\%m$时,可能由于b过大而丢失精度，这时就可以求出b的逆元来变除为乘，具体如下。</li>
+<li>设$x$为$b$模$m$的逆元。</li>
+<li>${({a \over b})\%m} \Rightarrow {({a \over b})\times 1 \times\%m} \Rightarrow {({a \over b})\times {b \cdot x} \times\%m} \Rightarrow a \cdot x\%m$</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h1><blockquote>
+<ul>
+<li>快速幂可以大大减少运算时循环的次数。</li>
+</ul>
+</blockquote>
+<h2 id="推导过程"><a href="#推导过程" class="headerlink" title="推导过程"></a>推导过程</h2><blockquote>
+<script type="math/tex; mode=display">
+a^n=
+\begin{cases}
+  ({a^2})^{n \over 2} &\mbox{n为偶数}\\
+  a \cdot ({a^2})^{n \over 2} &\mbox{n为奇数}
+  \end{cases}</script><ul>
+<li>上述变换显然正确。</li>
+</ul>
+</blockquote>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)        </span><br><span class="line">            ans*=x;  </span><br><span class="line">        x*=x;  </span><br><span class="line">        n/=<span class="number">2</span> ;      </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> ans;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果题目要求对m取模，则<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    a%=c;</span><br><span class="line">    <span class="keyword">while</span>(b&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*a)%c;</span><br><span class="line">        b/=<span class="number">2</span>;</span><br><span class="line">        a=(a*a)%c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="斯特林公式"><a href="#斯特林公式" class="headerlink" title="斯特林公式"></a>斯特林公式</h1><blockquote>
+<ul>
+<li>斯特林公式是一条用来取n的阶乘的近似值的数学公式。一般来说，当n很大的时候，n阶乘的计算量十分大，所以斯特林公式十分好用，而且，即使在n很小的时候，斯特林公式的取值已经十分准确。</li>
+</ul>
+</blockquote>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><blockquote>
+<font size="5">$$n!\approx\sqrt{2\pi n}(\frac{n}{e})^n$$</font>
+
+</blockquote>
+<h2 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h2><blockquote>
+<ul>
+<li>求$n!$在十进制下的位数，暴力肯定不行，我们直接用斯特林公式求出$n!$的近似值，再求以10为底近似值的对数 +1(求其他进制下的位数类似，修改底数即可)。</li>
+</ul>
+</blockquote>
+<h1 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h1><blockquote>
+<ul>
+<li>在计数时，必须注意没有重复，没有遗漏。为了使重叠部分不被重复计算，人们研究出一种新的计数方法，这种方法的基本思想是：先不考虑重叠的情况，把包含于某内容中的所有对象的数目先计算出来，然后再把计数时重复计算的数目排斥出去，使得计算的结果既无遗漏又无重复，这种计数的方法称为容斥原理。</li>
+</ul>
+</blockquote>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><blockquote>
+<ul>
+<li>如果被计数的事物有A、B、C三类，那么：<script type="math/tex; mode=display">A∪B∪C = A+B+C - A∩B - B∩C - C∩A + A∩B∩C</script></li>
+<li>例如求给出一个数n，求1到$n$中，有多少个数不是2，5，11，13的倍数。$A,B,C,D$分别是$n/2,n/5,n/11,n/13$。</li>
+</ul>
 </blockquote>
 
       
@@ -449,7 +531,7 @@
   <p><span>本文标题:</span><a href="/数论笔记本/">数论笔记本</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年02月12日 - 10:02</p>
-  <p><span>最后更新:</span>2018年02月22日 - 13:02</p>
+  <p><span>最后更新:</span>2018年02月22日 - 16:02</p>
   <p><span>原始链接:</span><a href="/数论笔记本/" title="数论笔记本">http://x-armin.com/数论笔记本/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/数论笔记本/"  aria-label="复制成功！"></i></span>
   </p>
@@ -696,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">拓展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是逆元"><span class="nav-number">3.1.</span> <span class="nav-text">什么是逆元</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">3.1.</span> <span class="nav-text">求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#费马小定理求逆元。"><span class="nav-number">3.1.1.</span> <span class="nav-text">费马小定理求逆元。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里德算法求逆元"><span class="nav-number">3.1.2.</span> <span class="nav-text">扩展欧几里德算法求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理求逆元"><span class="nav-number">3.1.3.</span> <span class="nav-text">欧拉定理求逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速幂"><span class="nav-number">4.</span> <span class="nav-text">快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推导过程"><span class="nav-number">4.1.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斯特林公式"><span class="nav-number">5.</span> <span class="nav-text">斯特林公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">5.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">5.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容斥原理"><span class="nav-number">6.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">6.1.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></div>
             
 
           </div>
