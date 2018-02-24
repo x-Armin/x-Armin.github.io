@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="数论是个好东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-22T14:19:00.405Z">
+<meta property="og:updated_time" content="2018-02-24T05:03:42.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论笔记本">
 <meta name="twitter:description" content="数论是个好东西。">
@@ -445,7 +445,7 @@
 <li>扩展欧几里德算法是用来在已知a, b求解一组x，y，使它们满足等式：$ ax+by = gcd(a, b)$（解一定存在，根据数论中的相关定理）。扩展欧几里德常用在求解模线性方程及方程组中。</li>
 </ul>
 </blockquote>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>因为不好描述，所以先给出代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>		<span class="comment">//拓展欧几里德算法，求出的x,即为a%b下a的逆元 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=exgcd(b,a%b);</span><br><span class="line">    <span class="keyword">int</span> c=x;				<span class="comment">//c只是为了储存x的值</span></span><br><span class="line">    x=y;</span><br><span class="line">    y=c-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>因为不好描述，所以先给出代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x,y;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>		<span class="comment">//拓展欧几里德算法，求出的x,即为a%b下a的逆元 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=exgcd(b,a%b);</span><br><span class="line">    <span class="keyword">int</span> c=x;				<span class="comment">//c只是为了储存x的值</span></span><br><span class="line">    x=y;</span><br><span class="line">    y=c-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h2><blockquote>
 <p>递归之后，$ a’=b ,&emsp; b’=a \% b = a-a/b \times b $ （这里的/为计算机里的除法）<br>$a’x+b’y=gcd(a,b)$<br>代入化简$\Rightarrow ay+b(x-a/b \times y) = gcd(a,b) $<br>又$\because ax+by = gcd(a,b)$<br>$\therefore x=y ,&emsp;y=x-a/b \times y$<br>最后的$x,y$即为答案。</p>
 </blockquote>
@@ -565,7 +565,7 @@ a^n=
   <p><span>本文标题:</span><a href="/数论笔记本/">数论笔记本</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年02月12日 - 10:02</p>
-  <p><span>最后更新:</span>2018年02月22日 - 22:02</p>
+  <p><span>最后更新:</span>2018年02月24日 - 13:02</p>
   <p><span>原始链接:</span><a href="/数论笔记本/" title="数论笔记本">http://x-armin.com/数论笔记本/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/数论笔记本/"  aria-label="复制成功！"></i></span>
   </p>
