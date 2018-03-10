@@ -1,3 +1,4 @@
+http://x-armin.com/How-Many-Tables-并查集入门/
 http://x-armin.com/求数列的逆序数/
 http://x-armin.com/FATE-二维费用背包问题/
 http://x-armin.com/xiaoxin-juju-needs-help-排列组合-逆元/
