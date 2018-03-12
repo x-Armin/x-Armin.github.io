@@ -104,7 +104,7 @@
 <meta property="og:description" content="描述传送门：poj-1308  &amp;emsp;A tree is a well-known data structure that is either empty (null, void, nothing) or is a set of one or more nodes connected by directed edges between nodes satisfying the followi">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://poj.org/images/1308_1.jpg">
-<meta property="og:updated_time" content="2018-03-12T01:40:03.458Z">
+<meta property="og:updated_time" content="2018-03-12T13:47:16.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Is It A Tree? (并查集入门)">
 <meta name="twitter:description" content="描述传送门：poj-1308  &amp;emsp;A tree is a well-known data structure that is either empty (null, void, nothing) or is a set of one or more nodes connected by directed edges between nodes satisfying the followi">
@@ -439,7 +439,7 @@
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
 <ul>
 <li>初始化每个点单独为一个集合，每次读入A,B就合并A,B所在的集合，每个集合都有一个<strong>代表元素</strong>，集合中的元素都指向代表元素并且只有代表元素指向自己，如果读入A,B的时候发现A,B的代表数组一样的话就说明有多个节点指向A或B,不是树。</li>
-<li>由于节点一定是从1开始的，如上图的第一个。所以我们用一个mark数组来标记一组数据中‘提到’节点，最后遍历一遍看连通分支数是否等于1。</li>
+<li>由于节点一定是从1开始的，如上图的第一个。所以我们用一个mark数组来标记一组数据中“提到”的节点，最后遍历一遍看连通分支数是否等于1。</li>
 <li>有一组神坑数据：<br>0 0<br>-1 -1</li>
 </ul>
 </blockquote>
@@ -478,7 +478,7 @@
   <p><span>本文标题:</span><a href="/Is-It-A-Tree-并查集入门/">Is It A Tree? (并查集入门)</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年03月12日 - 08:03</p>
-  <p><span>最后更新:</span>2018年03月12日 - 09:03</p>
+  <p><span>最后更新:</span>2018年03月12日 - 21:03</p>
   <p><span>原始链接:</span><a href="/Is-It-A-Tree-并查集入门/" title="Is It A Tree? (并查集入门)">http://x-armin.com/Is-It-A-Tree-并查集入门/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/Is-It-A-Tree-并查集入门/"  aria-label="复制成功！"></i></span>
   </p>
