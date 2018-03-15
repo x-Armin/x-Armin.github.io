@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://x-armin.com/about/index.html</loc>
+    
+    <lastmod>2018-03-15T07:31:19.549Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://x-armin.com/Is-It-A-Tree-%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%85%A5%E9%97%A8/</loc>
     
     <lastmod>2018-03-12T13:47:16.226Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>http://x-armin.com/categories/index.html</loc>
     
     <lastmod>2018-02-05T04:33:48.992Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://x-armin.com/about/index.html</loc>
-    
-    <lastmod>2018-02-05T04:33:08.461Z</lastmod>
     
   </url>
   
