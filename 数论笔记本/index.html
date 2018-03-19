@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="数论是个好东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-08T15:37:36.092Z">
+<meta property="og:updated_time" content="2018-03-19T00:24:47.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论笔记本">
 <meta name="twitter:description" content="数论是个好东西。">
@@ -530,6 +530,20 @@ a^n=
 </ul>
 </blockquote>
 <hr>
+<h1 id="Lucas定理"><a href="#Lucas定理" class="headerlink" title="Lucas定理"></a>Lucas定理</h1><blockquote>
+<p>Lucas定理是用来求 $C(n,m) mod $ $p$，$p$为素数的值。<br>适用领域范围：大组合数求模</p>
+</blockquote>
+<h2 id="公式-1"><a href="#公式-1" class="headerlink" title="公式"></a>公式</h2><blockquote>
+<p><font size="5"><script type="math/tex">C_n^m\%p=C_\frac{n}{p}^\frac{m}{p}C_{n\%p}^{m\%p}</script><font></font></font></p>
+<ul>
+<li>然后继续对$C_\frac{n}{p}^\frac{m}{p}$使用Lucas定理即可。</li>
+<li>最后用逆元求出最后的结果。</li>
+</ul>
+</blockquote>
+<h2 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h2><blockquote>
+<p>详见百度百科：<a href="https://baike.baidu.com/item/lucas/4326261?fr=aladdin" target="_blank" rel="noopener">虚空传送门</a></p>
+</blockquote>
+<hr>
 <p>未完待续…</p>
 
       
@@ -565,7 +579,7 @@ a^n=
   <p><span>本文标题:</span><a href="/数论笔记本/">数论笔记本</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年02月12日 - 10:02</p>
-  <p><span>最后更新:</span>2018年03月08日 - 23:03</p>
+  <p><span>最后更新:</span>2018年03月19日 - 08:03</p>
   <p><span>原始链接:</span><a href="/数论笔记本/" title="数论笔记本">http://x-armin.com/数论笔记本/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/数论笔记本/"  aria-label="复制成功！"></i></span>
   </p>
@@ -741,7 +755,7 @@ a^n=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -789,7 +803,7 @@ a^n=
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:1925959375@qq.com" target="_blank" title="E-Mail">
+                    <a href="mailto:x_armin@163.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -844,7 +858,7 @@ a^n=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">3.1.</span> <span class="nav-text">求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#费马小定理求逆元。"><span class="nav-number">3.1.1.</span> <span class="nav-text">费马小定理求逆元。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里德算法求逆元"><span class="nav-number">3.1.2.</span> <span class="nav-text">扩展欧几里德算法求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理求逆元"><span class="nav-number">3.1.3.</span> <span class="nav-text">欧拉定理求逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速幂"><span class="nav-number">4.</span> <span class="nav-text">快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推导过程"><span class="nav-number">4.1.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斯特林公式"><span class="nav-number">5.</span> <span class="nav-text">斯特林公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">5.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">5.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容斥原理"><span class="nav-number">6.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">6.1.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">3.1.</span> <span class="nav-text">求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#费马小定理求逆元。"><span class="nav-number">3.1.1.</span> <span class="nav-text">费马小定理求逆元。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里德算法求逆元"><span class="nav-number">3.1.2.</span> <span class="nav-text">扩展欧几里德算法求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理求逆元"><span class="nav-number">3.1.3.</span> <span class="nav-text">欧拉定理求逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速幂"><span class="nav-number">4.</span> <span class="nav-text">快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推导过程"><span class="nav-number">4.1.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斯特林公式"><span class="nav-number">5.</span> <span class="nav-text">斯特林公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">5.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">5.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容斥原理"><span class="nav-number">6.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">6.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lucas定理"><span class="nav-number">7.</span> <span class="nav-text">Lucas定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式-1"><span class="nav-number">7.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-2"><span class="nav-number">7.2.</span> <span class="nav-text">证明</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -1,3 +1,4 @@
+http://x-armin.com/高维正方体-找规律-逆元-Lucas定理/
 http://x-armin.com/Is-It-A-Tree-并查集入门/
 http://x-armin.com/How-Many-Tables-并查集入门/
 http://x-armin.com/求数列的逆序数/
