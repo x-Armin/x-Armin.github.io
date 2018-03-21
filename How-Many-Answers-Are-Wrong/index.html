@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="数论," />
+  <meta name="keywords" content="并查集," />
 
 
 
@@ -95,18 +95,20 @@
 
 
 
-<meta name="description" content="数论是个好东西。">
-<meta name="keywords" content="数论">
+<meta name="description" content="描述传送门：hdu-3038  TT and FF are … friends. Uh… very very good friends -____-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To begin with, TT">
+<meta name="keywords" content="并查集">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数论笔记本">
-<meta property="og:url" content="http://x-armin.com/数论笔记本/index.html">
+<meta property="og:title" content="How Many Answers Are Wrong(带权并查集)">
+<meta property="og:url" content="http://x-armin.com/How-Many-Answers-Are-Wrong/index.html">
 <meta property="og:site_name" content="Armin&#39;s Blog">
-<meta property="og:description" content="数论是个好东西。">
+<meta property="og:description" content="描述传送门：hdu-3038  TT and FF are … friends. Uh… very very good friends -____-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To begin with, TT">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-21T08:46:10.258Z">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/005ZgyPegy1fpkv45fw23j30cb06pglj.jpg">
+<meta property="og:updated_time" content="2018-03-21T23:47:32.475Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数论笔记本">
-<meta name="twitter:description" content="数论是个好东西。">
+<meta name="twitter:title" content="How Many Answers Are Wrong(带权并查集)">
+<meta name="twitter:description" content="描述传送门：hdu-3038  TT and FF are … friends. Uh… very very good friends -____-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To begin with, TT">
+<meta name="twitter:image" content="http://wx2.sinaimg.cn/mw690/005ZgyPegy1fpkv45fw23j30cb06pglj.jpg">
 
 
 
@@ -136,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://x-armin.com/数论笔记本/"/>
+  <link rel="canonical" href="http://x-armin.com/How-Many-Answers-Are-Wrong/"/>
 
 
 
 
 
-  <title>数论笔记本 | Armin's Blog</title>
+  <title>How Many Answers Are Wrong(带权并查集) | Armin's Blog</title>
   
 
 
@@ -316,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://x-armin.com/数论笔记本/">
+    <link itemprop="mainEntityOfPage" href="http://x-armin.com/How-Many-Answers-Are-Wrong/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Armin">
@@ -333,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数论笔记本</h1>
+          <h1 class="post-title" itemprop="name headline">How Many Answers Are Wrong(带权并查集)</h1>
         
 
         <div class="post-meta">
@@ -345,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T10:33:08+08:00">
-                2018-02-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-21T18:34:33+08:00">
+                2018-03-21
               </time>
             
 
@@ -368,8 +370,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
                   </a>
                 </span>
 
@@ -385,7 +387,7 @@
 
           
           
-             <span id="/数论笔记本/" class="leancloud_visitors" data-flag-title="数论笔记本">
+             <span id="/How-Many-Answers-Are-Wrong/" class="leancloud_visitors" data-flag-title="How Many Answers Are Wrong(带权并查集)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -416,134 +418,50 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><p>数论是个好东西。</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=3038" target="_blank" rel="noopener">hdu-3038</a></p>
+<blockquote>
+<p>TT and FF are … friends. Uh… very very good friends -<strong>____</strong>-b</p>
+<p>FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To begin with, TT should write down a sequence of integers-_-!!(bored).</p>
+<p>Then, FF can choose a continuous subsequence from it(for example the subsequence from the third to the fifth integer inclusively). After that, FF will ask TT what the sum of the subsequence he chose is. The next, TT will answer FF’s question. Then, FF can redo this process. In the end, FF must work out the entire sequence of integers.</p>
+</blockquote>
 <a id="more"></a>
-<hr>
-<h1 id="欧几里德算法-gcd"><a href="#欧几里德算法-gcd" class="headerlink" title="欧几里德算法(gcd)"></a>欧几里德算法(gcd)</h1><blockquote>
+<blockquote>
+<p>Boring<del>Boring</del>a very very boring game!!! TT doesn’t want to play with FF at all. To punish FF, she often tells FF the wrong answers on purpose.</p>
+<p>The bad boy is not a fool man. FF detects some answers are incompatible. Of course, these contradictions make it difficult to calculate the sequence.</p>
+<p>However, TT is a nice and lovely girl. She doesn’t have the heart to be hard on FF. To save time, she guarantees that the answers are all right if there is no logical mistakes indeed.</p>
+<p>What’s more, if FF finds an answer to be wrong, he will ignore it when judging next answers.</p>
+<p>But there will be so many questions that poor FF can’t make sure whether the current answer is right or wrong in a moment. So he decides to write a program to help him with this matter. The program will receive a series of questions from FF together with the answers FF has received from TT. The aim of this program is to find how many answers are wrong. Only by ignoring the wrong answers can FF work out the entire sequence of integers. Poor FF has no time to do this job. And now he is asking for your help~(Why asking trouble for himself~~Bad boy)</p>
+</blockquote>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>Line 1: Two integers, N and M (1 &lt;= N &lt;= 200000, 1 &lt;= M &lt;= 40000). Means TT wrote N integers and FF asked her M questions.</p>
+<p>Line 2..M+1: Line i+1 contains three integer: Ai, Bi and Si. Means TT answered FF that the sum from Ai to Bi is Si. It’s guaranteed that 0 &lt; Ai &lt;= Bi &lt;= N.</p>
+<p>You can assume that any sum of subsequence is fit in 32-bit integer.</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>A single line with a integer denotes how many answers are wrong.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">10 5</span><br><span class="line">1 10 100</span><br><span class="line">7 10 28</span><br><span class="line">1 3 32</span><br><span class="line">4 6 41</span><br><span class="line">6 6 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><blockquote>
+<p>有一个数列，给你几条语句，每条都是a,b,s形式，代表这个数列从a到b的和为s，求这些语句有几条是跟<strong>它之前</strong>的语句矛盾的。</p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
 <ul>
-<li>欧几里德算法又称辗转相除法，用于计算两个正整数a，b的最大公约数。</li>
+<li>这是一道裸的带权并查集，种类并查集就是比普通并查集多维护一个权值数组valum[]。<del>其实和种类并查集很像，种类并查集就是权值都为1的带权并查集再膜一下种类数。</del></li>
+<li>这道题valum[i]表示i到fa[i]的总和。如何来维护valum数组呢，我们需要修改一下Union函数和Find函数。</li>
+<li><p>Union函数稍有变化,加了一句：<br><code>valum[fa]=s+valum[b]-valum[a];</code>画个图出来就很容易理解<br><center><img src="http://wx2.sinaimg.cn/mw690/005ZgyPegy1fpkv45fw23j30cb06pglj.jpg" alt="图"></center></p>
+</li>
+<li><p>Find函数的<code>valum[x]+=valum[tem];</code>也是同理，画个图就好理解了。</p>
+</li>
 </ul>
 </blockquote>
-<h2 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h2><blockquote>
-<ul>
-<li>$gcd(a,b)=gcd(b,a$  $mod$ $b)$ </li>
-<li>特别的：$gcd(a,0)=a$</li>
-</ul>
-</blockquote>
-<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><h3 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h3><blockquote>
-<p>设c为a,b的公约数<br>$\because a|c$，$b|c&emsp;&emsp;&emsp;$&emsp;（|：整除）<br>又$\because a=kb+(a$  $mod$ $b),$即$a$  $mod$ $b = a-kb$<br>$\therefore (a$  $mod$ $b) | c$</p>
-</blockquote>
-<h3 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h3><blockquote>
-<p>设$c$为$b$，$a$  $mod$ $b$的公约数<br>$\because b|c,&emsp;(a$  $mod$ $b)|c$<br>又$\because a=kb+(a$  $mod$ $b)$<br>$\therefore a|c$</p>
-</blockquote>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　　<span class="keyword">if</span>(b == <span class="number">0</span>)</span><br><span class="line">　　        <span class="keyword">return</span> a;</span><br><span class="line">       <span class="keyword">return</span> gcd(b, a % b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="扩展欧几里德算法"><a href="#扩展欧几里德算法" class="headerlink" title="扩展欧几里德算法"></a>扩展欧几里德算法</h1><blockquote>
-<ul>
-<li>扩展欧几里德算法是用来在已知a, b求解一组x，y，使它们满足等式：$ ax+by = gcd(a, b)$（解一定存在，根据数论中的相关定理）。扩展欧几里德常用在求解模线性方程及方程组中。</li>
-</ul>
-</blockquote>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>因为不好描述，所以先给出代码。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x,y;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>		<span class="comment">//拓展欧几里德算法，求出的x,即为a%b下a的逆元 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=exgcd(b,a%b);</span><br><span class="line">    <span class="keyword">int</span> c=x;				<span class="comment">//c只是为了储存x的值</span></span><br><span class="line">    x=y;</span><br><span class="line">    y=c-a/b*y;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h2><blockquote>
-<p>递归之后，$ a’=b ,&emsp; b’=a \% b = a-a/b \times b $ （这里的/为计算机里的除法）<br>$a’x+b’y=gcd(a,b)$<br>代入化简$\Rightarrow ay+b(x-a/b \times y) = gcd(a,b) $<br>又$\because ax+by = gcd(a,b)$<br>$\therefore x=y ,&emsp;y=x-a/b \times y$<br>最后的$x,y$即为答案。<br>假设d=gcd(a,b),则x，y所有解：<br>$ x=x+(b/d)t$，$y=y-(a/d)t$;&emsp;其中t为任意常整数</p>
-</blockquote>
-<hr>
-<h1 id="乘法逆元"><a href="#乘法逆元" class="headerlink" title="乘法逆元"></a>乘法逆元</h1><blockquote>
-<ul>
-<li>若$ ax \equiv 1$  $mod$ $m$, 则称a关于1模m的乘法逆元为x。也可表示为$ax \equiv 1(mod$ $m$)。</li>
-<li>如果$a,m$不互质，则无解。如果$m$为质数，则从1到$m-1$的任意数都与$m$互质，即在1到$m-1$之间都恰好有一个关于模$m$的乘法逆元。</li>
-</ul>
-</blockquote>
-<h2 id="求法"><a href="#求法" class="headerlink" title="求法"></a>求法</h2><h3 id="费马小定理求逆元。"><a href="#费马小定理求逆元。" class="headerlink" title="费马小定理求逆元。"></a>费马小定理求逆元。</h3><blockquote>
-<ul>
-<li>费马小定理：$a^{m-1} \equiv 1(mod$ $m$)  (m为素数)</li>
-<li>变形得: $a \cdot a^{m-2} \equiv 1(mod$ $m$)</li>
-<li>故$a^{m-2}$为a在模m下的逆元。($a^{m-2}$用快速幂求解即可)</li>
-<li><strong>注意</strong>：$m$必须是质数，且$a,m$互质。(ACM的题一般都是模($10^9+7$),所以基本上都能用)</li>
-</ul>
-</blockquote>
-<h3 id="扩展欧几里德算法求逆元"><a href="#扩展欧几里德算法求逆元" class="headerlink" title="扩展欧几里德算法求逆元"></a>扩展欧几里德算法求逆元</h3><blockquote>
-<ul>
-<li>扩展欧几里德算法:$ ax+by = gcd(a, b) $</li>
-<li>令$b=m$  ,由于$a,m$互质，所以$gcd(a,m)$=1，即$ ax+my = 1 $，两边同时模m，得$ax \equiv 1(mod$ $m$)</li>
-<li>这样解出来的$x$就是$a$在模$m$下的逆元。</li>
-<li>同样，也要求$m$必须是质数，且$a,m$互质。</li>
-</ul>
-</blockquote>
-<h3 id="欧拉定理求逆元"><a href="#欧拉定理求逆元" class="headerlink" title="欧拉定理求逆元"></a>欧拉定理求逆元</h3><blockquote>
-<ul>
-<li>欧拉定理：$a^{ \varphi (m)} \equiv 1(mod$ $m$)&emsp;&emsp;($\varphi (m)$是小于m且与m互质的数的个数。)</li>
-<li>变形得: $a \cdot a^{ \varphi (m)-1} \equiv 1(mod$ $m$)</li>
-<li>故$ a^{ \varphi (m)-1} $为a在模m下的逆元。($a^{ \varphi (m)-1}$用快速幂求解即可)</li>
-<li>欧拉定理实际上是费马小定理的推广。</li>
-</ul>
-</blockquote>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><blockquote>
-<ul>
-<li>有时候在求$({a \over b})\%m$时,可能由于b过大而丢失精度，这时就可以求出b的逆元来变除为乘，具体如下。</li>
-<li>设$x$为$b$模$m$的逆元。</li>
-<li>${({a \over b})\%m} \Rightarrow {({a \over b})\times 1 \times\%m} \Rightarrow {({a \over b})\times {b \cdot x} \times\%m} \Rightarrow a \cdot x\%m$</li>
-</ul>
-</blockquote>
-<hr>
-<h1 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h1><blockquote>
-<ul>
-<li>快速幂可以大大减少运算时循环的次数。</li>
-</ul>
-</blockquote>
-<h2 id="推导过程"><a href="#推导过程" class="headerlink" title="推导过程"></a>推导过程</h2><blockquote>
-<script type="math/tex; mode=display">
-a^n=
-\begin{cases}
-  ({a^2})^{n \over 2} &\mbox{n为偶数}\\
-  a \cdot ({a^2})^{n \over 2} &\mbox{n为奇数}
-  \end{cases}</script><ul>
-<li>上述变换显然正确。</li>
-</ul>
-</blockquote>
-<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> n)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;  </span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span>(n&amp;<span class="number">1</span>)        </span><br><span class="line">            ans*=x;  </span><br><span class="line">        x*=x;  </span><br><span class="line">        n/=<span class="number">2</span> ;      </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> ans;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果题目要求对m取模，则<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QuickPow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">1</span>;</span><br><span class="line">    a%=m;</span><br><span class="line">    <span class="keyword">while</span>(b&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(b&amp;<span class="number">1</span>)</span><br><span class="line">            ans=(ans*a)%m;</span><br><span class="line">        b/=<span class="number">2</span>;</span><br><span class="line">        a=(a*a)%m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="斯特林公式"><a href="#斯特林公式" class="headerlink" title="斯特林公式"></a>斯特林公式</h1><blockquote>
-<ul>
-<li>斯特林公式是一条用来取n的阶乘的近似值的数学公式。一般来说，当n很大的时候，n阶乘的计算量十分大，所以斯特林公式十分好用，而且，即使在n很小的时候，斯特林公式的取值已经十分准确。</li>
-</ul>
-</blockquote>
-<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><blockquote>
-<font size="5">$$n!\approx\sqrt{2\pi n}(\frac{n}{e})^n$$</font>
-
-</blockquote>
-<h2 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h2><blockquote>
-<ul>
-<li>求$n!$在十进制下的位数，暴力肯定不行，我们直接用斯特林公式求出$n!$的近似值，再求以10为底近似值的对数 +1(求其他进制下的位数类似，修改底数即可)。</li>
-</ul>
-</blockquote>
-<h1 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h1><blockquote>
-<ul>
-<li>在计数时，必须注意没有重复，没有遗漏。为了使重叠部分不被重复计算，人们研究出一种新的计数方法，这种方法的基本思想是：先不考虑重叠的情况，把包含于某内容中的所有对象的数目先计算出来，然后再把计数时重复计算的数目排斥出去，使得计算的结果既无遗漏又无重复，这种计数的方法称为容斥原理。</li>
-</ul>
-</blockquote>
-<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><blockquote>
-<ul>
-<li>如果被计数的事物有A、B、C三类，那么：<script type="math/tex; mode=display">A∪B∪C = A+B+C - A∩B - B∩C - C∩A + A∩B∩C</script></li>
-<li>例如求给出一个数n，求1到$n$中，有多少个数不是2，5，11，13的倍数。$A,B,C,D$分别是$n/2,n/5,n/11,n/13$。</li>
-</ul>
-</blockquote>
-<hr>
-<h1 id="Lucas定理"><a href="#Lucas定理" class="headerlink" title="Lucas定理"></a>Lucas定理</h1><blockquote>
-<p>Lucas定理是用来求 $C(n,m) mod $ $p$，$p$为素数的值。<br>适用领域范围：大组合数求模,n,m&gt;p</p>
-</blockquote>
-<h2 id="公式-1"><a href="#公式-1" class="headerlink" title="公式"></a>公式</h2><blockquote>
-<p><center><font size="5"><script type="math/tex">C_n^m\%p=(C_\frac{n}{p}^\frac{m}{p}C_{n\%p}^{m\%p})\%p</script><font></font></font></center></p>
-<ul>
-<li>然后继续对$C_\frac{n}{p}^\frac{m}{p}$使用Lucas定理，用逆元求出$C_{n\%p}^{m\%p}$。</li>
-</ul>
-</blockquote>
-<h2 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h2><blockquote>
-<p>详见百度百科：<a href="https://baike.baidu.com/item/lucas/4326261?fr=aladdin" target="_blank" rel="noopener">虚空传送门</a></p>
-</blockquote>
-<hr>
-<p>未完待续…</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include&lt;bits/stdc++.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 0xfffffff</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> e = <span class="built_in">exp</span>(<span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> valum[<span class="number">200005</span>],Fa[<span class="number">200005</span>],n,time,ans=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=n; i++)</span><br><span class="line">        Fa[i]=i;</span><br><span class="line">    CRL(valum);</span><br><span class="line">    ans=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Fa[x]!=x)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tem=Fa[x];</span><br><span class="line">        Fa[x]=Find(Fa[x]);</span><br><span class="line">        valum[x]+=valum[tem];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Fa[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> fa=Find(a);</span><br><span class="line">    <span class="keyword">int</span> fb=Find(b);</span><br><span class="line">    <span class="keyword">if</span>(fa!=fb)</span><br><span class="line">    &#123;</span><br><span class="line">        Fa[fa]=fb;</span><br><span class="line">        valum[fa]=s+valum[b]-valum[a];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(valum[a]!=s+valum[b])</span><br><span class="line">        ans++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);   <span class="comment">//加速cin,cout</span></span><br><span class="line">    <span class="keyword">int</span> a,b,s;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;time)</span><br><span class="line">    &#123;</span><br><span class="line">        init(n);</span><br><span class="line">        <span class="keyword">while</span>(time--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;s;</span><br><span class="line">            Union(--a,b,s);   <span class="comment">//因为元素是离散的，要--a,这样valum[b]-valum[a]；才是我们想要的区间和</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -575,12 +493,12 @@ a^n=
   <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-  <p><span>本文标题:</span><a href="/数论笔记本/">数论笔记本</a></p>
+  <p><span>本文标题:</span><a href="/How-Many-Answers-Are-Wrong/">How Many Answers Are Wrong(带权并查集)</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
-  <p><span>发布时间:</span>2018年02月12日 - 10:02</p>
-  <p><span>最后更新:</span>2018年03月21日 - 16:03</p>
-  <p><span>原始链接:</span><a href="/数论笔记本/" title="数论笔记本">http://x-armin.com/数论笔记本/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/数论笔记本/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年03月21日 - 18:03</p>
+  <p><span>最后更新:</span>2018年03月22日 - 07:03</p>
+  <p><span>原始链接:</span><a href="/How-Many-Answers-Are-Wrong/" title="How Many Answers Are Wrong(带权并查集)">http://x-armin.com/How-Many-Answers-Are-Wrong/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/How-Many-Answers-Are-Wrong/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -643,7 +561,7 @@ a^n=
       
         <div class="post-tags">
           
-            <a href="/tags/数论/" rel="tag"><i class="fa fa-tag"></i> 数论</a>
+            <a href="/tags/并查集/" rel="tag"><i class="fa fa-tag"></i> 并查集</a>
           
         </div>
       
@@ -656,8 +574,8 @@ a^n=
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/多重背包问题/" rel="next" title="多重背包问题">
-                <i class="fa fa-chevron-left"></i> 多重背包问题
+              <a href="/Find-them-Catch-them/" rel="next" title="Find them,Catch them(种类并查集)">
+                <i class="fa fa-chevron-left"></i> Find them,Catch them(种类并查集)
               </a>
             
           </div>
@@ -665,10 +583,6 @@ a^n=
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/Cow-Contest-floyd/" rel="prev" title="Cow Contest(floyd))">
-                Cow Contest(floyd)) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -861,7 +775,7 @@ a^n=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">3.1.</span> <span class="nav-text">求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#费马小定理求逆元。"><span class="nav-number">3.1.1.</span> <span class="nav-text">费马小定理求逆元。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里德算法求逆元"><span class="nav-number">3.1.2.</span> <span class="nav-text">扩展欧几里德算法求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理求逆元"><span class="nav-number">3.1.3.</span> <span class="nav-text">欧拉定理求逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速幂"><span class="nav-number">4.</span> <span class="nav-text">快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推导过程"><span class="nav-number">4.1.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斯特林公式"><span class="nav-number">5.</span> <span class="nav-text">斯特林公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">5.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">5.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容斥原理"><span class="nav-number">6.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">6.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lucas定理"><span class="nav-number">7.</span> <span class="nav-text">Lucas定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式-1"><span class="nav-number">7.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-2"><span class="nav-number">7.2.</span> <span class="nav-text">证明</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#描述"><span class="nav-number">1.</span> <span class="nav-text">描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">1.1.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">1.2.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">1.3.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
