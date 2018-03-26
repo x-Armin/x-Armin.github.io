@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="描述  有n个物品和一个容积为V的背包，每个物品i都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-12T14:25:17.813Z">
+<meta property="og:updated_time" content="2018-03-26T00:10:49.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="01背包问题">
 <meta name="twitter:description" content="描述  有n个物品和一个容积为V的背包，每个物品i都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。">
@@ -438,7 +438,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
 <ul>
 <li>上面的时间复杂度是O(NV)已经无法再优化了,而空间复杂度可以优化到O(N)：我们用二维数组无非是为了保证状态转移方程里的dp[i-1][j-cost[i]]是上一个物品推出来的，如果我们直接改成dp[j]=max(dp[j],dp[j-cost[i]]+valum[i])的话，在$(j:0 \to V)$过程进行到后面的时候,dp[j-cost]有可能是已经在前面就放了i物品的状态，此时再+valum<a href="放i物品">i</a>就不符合每种物品都只有一个的题意了。</li>
 <li>实际上。如果我们在遍历j的时候，采用逆序，即$(j:V \to 0)$，就可以保证dp[j-cost[i]]始终是i-1物品推出的。</li>
-<li>核心代码如下<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	  <span class="keyword">for</span>(<span class="keyword">int</span> j=t;j&gt;=cost[i];j--)</span><br><span class="line">	    dp[j]=max(dp[j],dp[j-cost[i]]+valum[i]);</span><br></pre></td></tr></table></figure>
+<li>核心代码如下<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j=t;j&gt;=cost[i];j--)</span><br><span class="line">        dp[j]=max(dp[j],dp[j-cost[i]]+valum[i]);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </blockquote>
@@ -489,7 +489,7 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
   <p><span>本文标题:</span><a href="/01背包问题/">01背包问题</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年02月06日 - 13:02</p>
-  <p><span>最后更新:</span>2018年02月12日 - 22:02</p>
+  <p><span>最后更新:</span>2018年03月26日 - 08:03</p>
   <p><span>原始链接:</span><a href="/01背包问题/" title="01背包问题">http://x-armin.com/01背包问题/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/01背包问题/"  aria-label="复制成功！"></i></span>
   </p>
