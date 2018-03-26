@@ -84,7 +84,7 @@
 
 
 
-  <meta name="keywords" content="背包问题,动态规划," />
+  <meta name="keywords" content="动态规划,背包问题," />
 
 
 
@@ -96,14 +96,14 @@
 
 
 <meta name="description" content="描述  有n种物品和一个容积为V的背包，每种物品i都有无限个，都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。">
-<meta name="keywords" content="背包问题,动态规划">
+<meta name="keywords" content="动态规划,背包问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="完全背包问题">
 <meta property="og:url" content="http://x-armin.com/完全背包问题/index.html">
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="描述  有n种物品和一个容积为V的背包，每种物品i都有无限个，都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-12T14:25:21.188Z">
+<meta property="og:updated_time" content="2018-03-26T00:23:12.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="完全背包问题">
 <meta name="twitter:description" content="描述  有n种物品和一个容积为V的背包，每种物品i都有无限个，都有体积cost[i]和价值valum[i]，问如何选取物品使得放入背包的物品价值之和最大。">
@@ -431,7 +431,7 @@
 <ul>
 <li>在01背包问题里面，我们逆序遍历V$(j:V \to 0)$是为了保证dp[j-cost[i]]始终是i-1物品推出的，从而保证每种物品只用一次。而完全背包问题里面我们就可以正序遍历，这样就可以在一次遍历dp[V]中考虑第i种物品的所有拿法。</li>
 <li><p>核心代码如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	  <span class="keyword">for</span>(<span class="keyword">int</span> j=Time[i];j&lt;=t;j++)</span><br><span class="line">	    dp[j]=max(dp[j],dp[j-Time[i]]+valum[i]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	  <span class="keyword">for</span>(<span class="keyword">int</span> j=cost[i];j&lt;=V;j++)</span><br><span class="line">	    dp[j]=max(dp[j],dp[j-cost[i]]+valum[i]);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>优化后时间复杂度为O(NV)，空间复杂度为O(N)。</p>
 </li>
@@ -483,7 +483,7 @@
   <p><span>本文标题:</span><a href="/完全背包问题/">完全背包问题</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年02月08日 - 17:02</p>
-  <p><span>最后更新:</span>2018年02月12日 - 22:02</p>
+  <p><span>最后更新:</span>2018年03月26日 - 08:03</p>
   <p><span>原始链接:</span><a href="/完全背包问题/" title="完全背包问题">http://x-armin.com/完全背包问题/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/完全背包问题/"  aria-label="复制成功！"></i></span>
   </p>
@@ -548,9 +548,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/背包问题/" rel="tag"><i class="fa fa-tag"></i> 背包问题</a>
-          
             <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+          
+            <a href="/tags/背包问题/" rel="tag"><i class="fa fa-tag"></i> 背包问题</a>
           
         </div>
       
