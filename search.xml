@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[博弈笔记本]]></title>
+    <url>%2F%E5%8D%9A%E5%BC%88%E7%AC%94%E8%AE%B0%E6%9C%AC%2F</url>
+    <content type="text"><![CDATA[博弈好难啊啊啊啊啊啊… 斐波那契博弈描述 1个有n个石子的石堆,两人轮流取.先取者第1次可以取任意多个，但不能全部取完.以后每次取的石子数不能超过上次取子数的2倍，先取完者胜。 结论 如果n是一个斐波那契数，则后手赢，否则先手赢。 证明 首先我们要明确：取石子的时候一定不会取超过剩下的石子的一半，否则下一个人就直接能取完。 当n是一个斐波那契数时，后手赢。(数学归纳法，为方便表示，用$f(x)$来表示第$x$个斐波那契数) 当$n=2$时,显然后手赢，成立。 当$n=3$时,显然后手赢，成立。 假设：n是斐波那契数且$n&lt;=f(k)$时,后手赢。 当$n=f(k+1)$时，将$n$拆成$n=f(k-1)+f(k)$，先手先在$f(k-1)$中拿，且拿不完（拿完后手下次直接就拿完了），由假设可知，后手能拿到$f(k-1)$堆中的最后一个石子。&emsp;这里稍微分析一下：后手在$f(k-1)$中能拿到的最多的石子是当且仅当先手先拿$\frac {f(k-1)}3$时，后手拿$\frac{2f(k-1)}3$，易证$\frac{2f(k-1)}3&lt;\frac{f(k)}2$。此时先手再在$f(k)$堆中拿，且不能一次拿完，就转化成了假设的情况，所以后手赢。 假设正确。 当n不是一个斐波那契数时，先手赢。要借助齐肯多夫定理来证明。 将$n$分解成最大的不连续斐波那契数之和，即$n=f(a_m)+f(a_{m-1})+…+f(a_2)+f(a_1)$。 先手先取最少的一堆，即先取$f(a_1)$这堆，由于是不连续的斐波那契数列，所以$f(a_2)&gt;2f(a_1)$，所以后手只能从$f(a_2)$中拿，且拿不完，这样就转化成了$n$是斐波那契数的情况，所以后手必输。]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>博弈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[还是畅通工程(最小生成树入门-Kruskal)]]></title>
     <url>%2F%E8%BF%98%E6%98%AF%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[描述传送门：poj-1875 &emsp;某省调查乡村交通状况，得到的统计表中列出了任意两村庄间的距离。省政府“畅通工程”的目标是使全省任何两个村庄间都可以实现公路交通（但不一定有直接的公路相连，只要能间接通过公路可达即可），并要求铺设的公路总长度为最小。请计算最小的公路总长度。 Input 测试输入包含若干测试用例。每个测试用例的第1行给出村庄数目N ( &lt; 100 )；随后的N(N-1)/2行对应村庄间的距离，每行给出一对正整数，分别是两个村庄的编号，以及此两村庄间的距离。为简单起见，村庄从1到N编号。 当N为0时，输入结束，该用例不被处理。 Output 对每个测试用例，在1行里输出最小的公路总长度。 Examples intput 12345678910111231 2 11 3 22 3 441 2 11 3 41 4 12 3 32 4 23 4 50 output 1235 思路 这是一道简单的最小生成树。 Kruskal算法就是在点之间加边，每次在剩下的边中选一条最小边,用这条边将端点的两个点加入生成，并满足这条边的添加不会使生成树产生回路（这条边的两个端点不都在生成树里面）。 用并查集来维护节点是否加入了生成树。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869//#include&lt;bits/stdc++.h&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffftypedef unsigned long long LL;typedef long long ll;const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7;int Father[105];struct edge //存边&#123; int a,b,s;&#125; Edge[60000];int Find(int x) //找根节点&#123; return Father[x]==x? x:Father[x]=Find(Father[x]);&#125;void Union(int a,int b) //合并&#123; int fa=Find(a); int fb=Find(b); Father[fa]=fb;&#125;bool cmp(edge x,edge y)&#123; return x.s&lt;y.s;&#125;int main()&#123; ios::sync_with_stdio(false); //加速 int n=0,ans,add; while(cin&gt;&gt;n&amp;&amp;n) &#123; for(int i=0; i&lt;=n; i++) Father[i]=i; //初始化 ans=0; add=0; for(int i=0; i&lt;n*(n-1)/2; i++) cin&gt;&gt;Edge[i].a&gt;&gt;Edge[i].b&gt;&gt;Edge[i].s; sort(Edge,Edge+n*(n-1)/2,cmp); // 按边的权值有小到大排序 for(int i=0; i&lt;n*(n-1)/2&amp;&amp;add&lt;n-1; i++) if(Find(Edge[i].a)!=Find(Edge[i].b)) //依次添加 &#123; add++; ans+=Edge[i].s; Union(Edge[i].a,Edge[i].b); &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
@@ -62,8 +73,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>图论</tag>
         <tag>并查集</tag>
+        <tag>图论</tag>
       </tags>
   </entry>
   <entry>
@@ -85,8 +96,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -132,8 +143,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -166,8 +177,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -178,8 +189,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -190,8 +201,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
