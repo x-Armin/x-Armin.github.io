@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[One Person Game(拓展欧几里德算法)]]></title>
+    <url>%2FOne-Person-Game%2F</url>
+    <content type="text"><![CDATA[描述传送门：zoj-3593 &emsp;There is an interesting and simple one person game. Suppose there is a number axis under your feet. You are at point $A$ at first and your aim is point $B$. There are 6 kinds of operations you can perform in one step. That is to go left or right by $a,b$ and $c$, here $c$ always equals to $a+b$. You must arrive B as soon as possible. Please calculate the minimum number of steps. Input There are multiple test cases. The first line of input is an integer $T(0 &lt; T ≤ 1000) $indicates the number of test cases. Then T test cases follow. Each test case is represented by a line containing four integers 4 integers$ A, B, a\ $and $b$, separated by spaces. ($-2^{31} ≤ A, B &lt; 2^{31}, 0 &lt; a, b &lt; 2^{31}$) Output &emsp;For each test case, output the minimum number of steps. If it’s impossible to reach point B, output “-1” instead. Examples intput 12320 1 1 20 1 2 4 output 121-1 思路 一开始以为是道bfs，敲到一半看到数据范围就发现天真了。 题目其实就是求$|C_1a+C_2b+C_3c+C_4(-a)+C_5(-b)+C_6(-c)|=|A-B|$，化简之后就变成了$|C_1a+C_2b|=|A-B|$，还是不满足拓展欧几里德的形式。要变形一下就变成了\frac{C_1\cdot gcd(a,b)}{|A-B|}\cdot a+\frac{C_2\cdot gcd(a,b)}{|A-B|}\cdot b=gcd(a,b) 我们还知道拓展欧几里德的通解是$ x=x_0+(b/gcd)\cdot t$，$y=y_0-(a/gcd)\cdot t$，($y_0$和$x_0$为一组特解)。这时候我们带出$C_1,C_2$，画出$C_1,C_2$关于$t$的两条直线，显然当$x,y$异号的时候，$ans=|x+y|$，当$x,y$同号的时候，$ans=max(|a|,|y|)$,结合图像，显然交点为最优解。但交点对应的$t$不一定是整数点，所以我们在对$t$取整后还要比较$t$取$t+1$时的情况。 拓展欧几里德详见：数论笔记本 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffffff //MAX取足够大typedef unsigned long long LL;typedef long long ll;ll x,y;ll exgcd(int a,int b) //拓展欧几里得&#123; if(b==0) &#123; x=1; y=0; return a; &#125; int ans=exgcd(b,a%b); int t=x; x=y; y=t-a/b*y; return ans;&#125;int main()&#123; ll A,B,a,b,n,ans1,L,ans2; cin&gt;&gt;n; while(n--) &#123; ans1=MAX; //注意MAX要取足够大，要取超过 int的最大值（因为这个wa了无数发） cin&gt;&gt;A&gt;&gt;B&gt;&gt;a&gt;&gt;b; L=abs(A-B); ll gcd=exgcd(a,b); if(x&gt;y) //为下面x,y的表达式做的处理 &#123; swap(x, y); swap(a, b); &#125; x=x*L/gcd; y=y*L/gcd; ll t=(y-x)*gcd/(a+b); //t等于交点 a/=gcd; b/=gcd; for(ll i=t; i&lt;=t+1; i++) //在t和t+1中找最优解 &#123; if((x+b*i)*(y-a*i)&gt;0) ans2=max(x+b*i,y-a*i); else ans2=abs(x+b*i)+abs(y-a*i); ans1=min(ans1,ans2); &#125; if(L%gcd) //无解 cout&lt;&lt;-1&lt;&lt;endl; else cout&lt;&lt;ans1&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[博弈笔记本]]></title>
     <url>%2F%E5%8D%9A%E5%BC%88%E7%AC%94%E8%AE%B0%E6%9C%AC%2F</url>
     <content type="text"><![CDATA[博弈好难啊啊啊啊啊啊… 斐波那契博弈描述 1个有n个石子的石堆,两人轮流取.先取者第1次可以取任意多个，但不能全部取完.以后每次取的石子数不能超过上次取子数的2倍，先取完者胜。 结论 如果n是一个斐波那契数，则后手赢，否则先手赢。 证明 首先我们要明确：取石子的时候一定不会取超过剩下的石子的一半，否则下一个人就直接能取完。 当n是一个斐波那契数时，后手赢。(数学归纳法，为方便表示，用$f(x)$来表示第$x$个斐波那契数) 当$n=2$时,显然后手赢，成立。 当$n=3$时,显然后手赢，成立。 假设：n是斐波那契数且$n&lt;=f(k)$时,后手赢。 当$n=f(k+1)$时，将$n$拆成$n=f(k-1)+f(k)$，先手先在$f(k-1)$中拿，且拿不完（拿完后手下次直接就拿完了），由假设可知，后手能拿到$f(k-1)$堆中的最后一个石子。&emsp;这里稍微分析一下：后手在$f(k-1)$中能拿到的最多的石子是当且仅当先手先拿$\frac {f(k-1)}3$时，后手拿$\frac{2f(k-1)}3$，易证$\frac{2f(k-1)}3&lt;\frac{f(k)}2$。此时先手再在$f(k)$堆中拿，且不能一次拿完，就转化成了假设的情况，所以后手赢。 假设正确。 当n不是一个斐波那契数时，先手赢。要借助齐肯多夫定理来证明。 将$n$分解成最大的不连续斐波那契数之和，即$n=f(a_m)+f(a_{m-1})+…+f(a_2)+f(a_1)$。 先手先取最少的一堆，即先取$f(a_1)$这堆，由于是不连续的斐波那契数列，所以$f(a_2)&gt;2f(a_1)$，所以后手只能从$f(a_2)$中拿，且拿不完，这样就转化成了$n$是斐波那契数的情况，所以后手必输。]]></content>
@@ -73,8 +84,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>并查集</tag>
         <tag>图论</tag>
+        <tag>并查集</tag>
       </tags>
   </entry>
   <entry>
@@ -96,8 +107,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -143,8 +154,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -177,8 +188,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -189,8 +200,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -201,8 +212,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
