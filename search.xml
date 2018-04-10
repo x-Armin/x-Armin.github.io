@@ -3,6 +3,56 @@
   
     
     <entry>
+      <title><![CDATA[尔尔序的神奇计数问题(set容器)]]></title>
+      <url>/%E5%B0%94%E5%B0%94%E5%BA%8F%E7%9A%84%E7%A5%9E%E5%A5%87%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="https://www.oj.swust.edu.cn/problem/show/2612" target="_blank" rel="noopener">swustoj-2612</a></p>
+<blockquote>
+<p>&emsp; 现在有4个集合，分别为$A,B,C,D$，且每一个集合的大小都是n。尔尔序想求解一个问题，现在他把$A,B,C$的交集的大小、$A,B,D$的交集的大小，$A,C,D$的交集的大小，$B,C,D$的交集的大小之和记为$X$，同时把$A,B$的交集的大小、$A,C$的交集的大小、$A,D$的交集的大小、$B,C$的交集的大小、$B,D$的交集的大小之和记为Y，求解$|X−Y|$的值。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>第一行输入一个整数$n(1\leq n \leq5 \times 10^4)$代表这4个集合的大小。<br>第二行输入$n$整数$A_i\ (1\leq A_i \leq10^{18})$，代表集合$A$中的数。<br>第三行输入$n$整数$B_i\ (1\leq B_i \leq10^{18})$，代表集合$B$中的数。<br>第四行输入$n$整数$C_i\ (1\leq C_i \leq10^{18})$，代表集合$C$中的数。<br>第五行输入$n$整数$D_i\ (1\leq D_i \leq10^{18})$，代表集合$D$中的数。<br>  保证在同一集合内没有重复的数。</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>输出$|X−Y|$的值。</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">1 2 3 4</span><br><span class="line">2 3 4 5</span><br><span class="line">3 4 5 7</span><br><span class="line">7 6 3 1</span><br><span class="line">4</span><br><span class="line">1 2 3 4</span><br><span class="line">1 2 3 4</span><br><span class="line">1 2 3 5</span><br><span class="line">3 4 5 6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>其实就是set的直接应用，求：<script type="math/tex; mode=display">|A∩B∩C+A∩B∩D+A∩C∩D+B∩C∩D-A∩B-A∩D-B∩C-B∩D|</script></li>
+<li>也可以用<strong>容次原理</strong>转换成<script type="math/tex; mode=display">A∪B∪C∪D-(A+B+C+D)+A∩B∩C∩D+C∩D</script><del>但是莫名其妙要比直接的慢就没用这个</del></li>
+<li>x在set1中存在就是<code>set1.find(x)!=set1.end();</code></li>
+<li>然后暴力出奇迹即可，具体看代码。</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 0xfffffff</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> e = <span class="built_in">exp</span>(<span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod =<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> &lt;ll&gt; set1,set2,set3,set4;</span><br><span class="line">ll a[<span class="number">50005</span>],b[<span class="number">50005</span>],c[<span class="number">50005</span>],d[<span class="number">50005</span>],ans=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        set1.clear();		<span class="comment">//清空set</span></span><br><span class="line">        set2.clear();</span><br><span class="line">        set3.clear();</span><br><span class="line">        set4.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a[i]);</span><br><span class="line">            set1.insert(a[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;b[i]);</span><br><span class="line">            set2.insert(b[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;c[i]);</span><br><span class="line">            set3.insert(c[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;d[i]);</span><br><span class="line">            set4.insert(d[i]);</span><br><span class="line">            <span class="keyword">if</span>(set2.find(d[i])!=set2.end()&amp;&amp;set3.find(d[i])!=set3.end())</span><br><span class="line">                ans++;</span><br><span class="line">            <span class="keyword">if</span>(set1.find(d[i])!=set1.end()&amp;&amp;set3.find(d[i])!=set3.end())</span><br><span class="line">                ans++;</span><br><span class="line">            <span class="keyword">if</span>(set1.find(d[i])!=set1.end()&amp;&amp;set2.find(d[i])!=set2.end())</span><br><span class="line">                ans++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(set1.find(d[i])!=set1.end())</span><br><span class="line">                ans--;</span><br><span class="line">            <span class="keyword">if</span>(set2.find(d[i])!=set2.end())</span><br><span class="line">                ans--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(set1.find(c[i])!=set1.end()&amp;&amp;set2.find(c[i])!=set2.end())</span><br><span class="line">                ans++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(set1.find(b[i])!=set1.end())</span><br><span class="line">                ans--;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(set1.find(c[i])!=set1.end())</span><br><span class="line">                ans--;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(set2.find(c[i])!=set2.end())</span><br><span class="line">                ans--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">abs</span>(ans)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> STL </tag>
+            
+            <tag> set容器 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[邂逅明下(巴什博弈变形)]]></title>
       <url>/%E9%82%82%E9%80%85%E6%98%8E%E4%B8%8B/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2897" target="_blank" rel="noopener">hdu-2897</a></p>
@@ -470,9 +520,9 @@
         
         <tags>
             
-            <tag> 图论 </tag>
-            
             <tag> 并查集 </tag>
+            
+            <tag> 图论 </tag>
             
         </tags>
         
@@ -559,9 +609,9 @@
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -754,9 +804,9 @@
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -1005,9 +1055,9 @@ a^n=
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -1060,9 +1110,9 @@ a^n=
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -1121,9 +1171,9 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
