@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://x-armin.com/swust-oj-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%89%8D40/</loc>
+    <lastmod>2018-04-22T08:16:43.525Z</lastmod>
+    <data>
+        <display>
+        <title>swust oj(数据结构前40)</title>
+        <pubTime>2018-04-14T02:28:50.000Z</pubTime>
+        
+        <tag>数据结构</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/Billboard/</loc>
     <lastmod>2018-04-22T04:01:42.837Z</lastmod>
     <data>
@@ -29,26 +49,6 @@
         <tag>数论</tag>
          
         <tag>排列组合</tag>
-         
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/swust-oj-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%89%8D40/</loc>
-    <lastmod>2018-04-19T01:08:27.800Z</lastmod>
-    <data>
-        <display>
-        <title>swust oj(数据结构前40)</title>
-        <pubTime>2018-04-14T02:28:50.000Z</pubTime>
-        
-        <tag>数据结构</tag>
          
          
            
@@ -169,9 +169,9 @@
         <title>完全背包问题</title>
         <pubTime>2018-02-08T09:23:47.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -191,9 +191,9 @@
         <title>01背包问题</title>
         <pubTime>2018-02-06T05:38:19.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -351,9 +351,9 @@
         <title>FATE(二维费用背包问题)</title>
         <pubTime>2018-03-02T07:57:23.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -457,9 +457,9 @@
         <title>ACboy needs your help(分组背包)</title>
         <pubTime>2018-02-16T07:28:32.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -479,9 +479,9 @@
         <title>多重背包问题</title>
         <pubTime>2018-02-10T11:27:40.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
