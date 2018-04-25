@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Minimum Inversion Number(树状数组+离散化处理)]]></title>
+    <url>%2FMinimum-Inversion-Number%2F</url>
+    <content type="text"><![CDATA[描述传送门：hdu-1394 &emsp;The inversion number of a given number sequence $a_1, a_2, …, a_n$ is the number of pairs $(a_i, a_j)$ that satisfy i &lt; j and $a_i &gt; a_j$. For a given sequence of numbers a1, a2, …, an, if we move the first m &gt;= 0 numbers to the end of the seqence, we will obtain another sequence. There are totally n such sequences as the following: a1, a2, …, an-1, an (where m = 0 - the initial seqence)a2, a3, …, an, a1 (where m = 1)a3, a4, …, an, a1, a2 (where m = 2)…an, a1, a2, …, an-1 (where m = n-1) You are asked to write a program to find the minimum inversion number out of the above sequences. Input The input consists of a number of test cases. Each case consists of two lines: the first line contains a positive integer n (n &lt;= 5000); the next line contains a permutation of the n integers from 0 to n-1. Output For each case, output the minimum inversion number on a single line. Examples intput 12101 3 6 9 0 8 5 7 4 2 output 116 大致题意 给你一个长$n$的数列，每次把第一个数放到末尾，求这$n$种排列方式中的最小逆序数。 思路 求出原始数列的逆序数。 O(n)遍历，每次求出新的数列的逆序数，每次变化得到的新的逆序数为$tem+(n-2*b[i]+1)$，b[i]为数列第i个值。 求逆序数的方法有：暴力，归并排序，树状数组+离散化,这次我用的是树状数组。详见求数列的逆序数 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define lowbit(x) (x&amp;(-x))#define INF 0xfffffffftypedef long long ll;const int N=5e5+5;int tr[N],b[N],n;typedef pair &lt;int,int&gt; pp;pp a[N];void Update(int x)&#123;while(x&lt;=n)&#123;tr[x]++;x+=lowbit(x);&#125;&#125;int Query(int x)&#123;int sum=0;while(x&gt;0)&#123;sum+=tr[x];x-=lowbit(x);&#125;return sum;&#125;int main()&#123; while(cin&gt;&gt;n) &#123; CRL(tr); for(int i=1;i&lt;=n;i++) //离散化开始 &#123; cin&gt;&gt;a[i].first; a[i].second=i; &#125; sort(a+1,a+n+1); for(int i=1;i&lt;=n;i++) b[a[i].second]=i; //离散化结束 int ans=0; for(int i=1;i&lt;=n;i++) &#123; Update(b[i]); ans+=(i-Query(b[i])); &#125; int tem=ans; for(int i=1;i&lt;n;i++) &#123; tem=tem+(n-2*b[i]+1); ans=min(ans,tem); &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0; &#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Billboard（线段树）]]></title>
     <url>%2FBillboard%2F</url>
     <content type="text"><![CDATA[描述传送门：hdu-2795 &emsp;At the entrance to the university, there is a huge rectangular billboard of size h*w (h is its height and w is its width). The board is the place where all possible announcements are posted: nearest programming competitions, changes in the dining room menu, and other important information. On September 1, the billboard was empty. One by one, the announcements started being put on the billboard. Each announcement is a stripe of paper of unit height. More specifically, the i-th announcement is a rectangle of size 1 * wi. When someone puts a new announcement on the billboard, she would always choose the topmost possible position for the announcement. Among all possible topmost positions she would always choose the leftmost one. If there is no valid location for a new announcement, it is not put on the billboard (that’s why some programming contests have no participants from this university). Given the sizes of the billboard and the announcements, your task is to find the numbers of rows in which the announcements are placed. Input There are multiple cases (no more than 40 cases). The first line of the input file contains three integer numbers, h, w, and n (1 &lt;= h,w &lt;= $10^9$; 1 &lt;= n &lt;= 200,000) - the dimensions of the billboard and the number of announcements. Each of the next n lines contains an integer number wi (1 &lt;= wi &lt;=$ 10^9 $) - the width of i-th announcement. Output For each announcement (in the order they are given in the input file) output one number - the number of the row in which this announcement is placed. Rows are numbered from 1 to h, starting with the top row. If an announcement can’t be put on the billboard, output “-1” for this announcement. Examples intput 1234563 5 524333 output 123451213-1 思路 线段树，对每行建树，叶子节点为此行剩余的宽度，维护区间最大值。 单点修改，单点查询。 每次贴广告就更新一次，如果根节点左右都放不下就返回-1。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll;const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7;const int N=2*1e6+5;int tr[N&lt;&lt;2];void Built(int root,int l,int r,int c)&#123; if(l==r) tr[root]=c; else &#123; int mid=l+r&gt;&gt;1; Built(root&lt;&lt;1,l,mid,c); Built(root&lt;&lt;1|1,mid+1,r,c); tr[root]=max(tr[root&lt;&lt;1],tr[root&lt;&lt;1|1]); &#125;&#125;int Update(int root,int l,int r,int c)&#123; int tem; if(l==r) &#123; if(tr[root]&lt;c) return -1; tr[root]-=c; return l; &#125; else &#123; int mid=l+r&gt;&gt;1; if(tr[root&lt;&lt;1]&gt;=c) tem=Update(root&lt;&lt;1,l,mid,c); else if(tr[root&lt;&lt;1|1]&gt;=c) tem=Update(root&lt;&lt;1|1,mid+1,r,c); else return -1; tr[root]=max(tr[root&lt;&lt;1],tr[root&lt;&lt;1|1]); &#125; return tem;&#125;int main()&#123; int h,w,n,x; ios::sync_with_stdio(false); while(cin&gt;&gt;h&gt;&gt;w&gt;&gt;n) &#123; h= h&gt;n? n:h; Built(1,1,h,w); while(n--) &#123; cin&gt;&gt;x; cout&lt;&lt;Update(1,1,h,x)&lt;&lt;endl; &#125; &#125; return 0;&#125;]]></content>
@@ -136,7 +147,7 @@
   <entry>
     <title><![CDATA[求数列的逆序数]]></title>
     <url>%2F%E6%B1%82%E6%95%B0%E5%88%97%E7%9A%84%E9%80%86%E5%BA%8F%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[描述 &emsp;在一个排列中，如果一对数的前后位置与大小顺序相反，即前面的数大于后面的数，那么它们就称为一个逆序。一个排列中逆序的总数就称为这个排列的逆序数。 思路暴力出奇迹 对于每一个数都遍历一遍排在他前面的数，每有一个比他大的数就ans++，时间复杂度为$O(n^2)$，很明显这个算法只能应用于数很少的情况。 归并排序求逆序数 归并排序中，在每次合并的时候判断一下。 假设数列为9 1 0 5 4，先把它分成两个子序列，9 1 | 0 5 4，使左右分别有序，则有1 9 | 0 4 5，此时进行两个子序列合并。如果a[i]&lt;=a[j],则i++，继续比较，如果a[i]&gt;a[i],则说明a[i]到a[mid]的数都大于a[j],那么ans+=mid-i+1。 代码12345678910111213141516171819202122232425262728ll a[500005],tem[500005],ans; //a为要求的序列，tem是临时存放的数组void divide(int low,int high) //子序列&#123; if(high==low) //因为上面那种思路需要子序列有序，当子序列只有一个数时，即认为这个子序列有序 return; divide(low,(low+high)/2); //使左边有序 divide((low+high)/2+1,high); //使右边有序 int mid=(low+high)/2; int i=low,j=mid+1,k=low; while(i&lt;=mid&amp;&amp;j&lt;=high) //合并 &#123; if(a[i]&gt;a[j]) &#123; ans+=mid-i+1; tem[k++]=a[j++]; &#125; else tem[k++]=a[i++]; &#125; while(i&lt;=mid) tem[k++]=a[i++]; //将剩下的存入数组 while(j&lt;=high) tem[k++]=a[j++]; for(int t=low;t&lt;=high;t++) a[t]=tem[t]; //更新a数组 return;&#125; 用树状数组求逆序数 未完待续…]]></content>
+    <content type="text"><![CDATA[描述 &emsp;在一个排列中，如果一对数的前后位置与大小顺序相反，即前面的数大于后面的数，那么它们就称为一个逆序。一个排列中逆序的总数就称为这个排列的逆序数。 思路暴力出奇迹 对于每一个数都遍历一遍排在他前面的数，每有一个比他大的数就ans++，时间复杂度为$O(n^2)$，很明显这个算法只能应用于数很少的情况。 归并排序求逆序数 归并排序中，在每次合并的时候判断一下。 假设数列为9 1 0 5 4，先把它分成两个子序列，9 1 | 0 5 4，使左右分别有序，则有1 9 | 0 4 5，此时进行两个子序列合并。如果a[i]&lt;=a[j],则i++，继续比较，如果a[i]&gt;a[i],则说明a[i]到a[mid]的数都大于a[j],那么ans+=mid-i+1。 代码12345678910111213141516171819202122232425262728ll a[500005],tem[500005],ans; //a为要求的序列，tem是临时存放的数组void divide(int low,int high) //子序列&#123; if(high==low) //因为上面那种思路需要子序列有序，当子序列只有一个数时，即认为这个子序列有序 return; divide(low,(low+high)/2); //使左边有序 divide((low+high)/2+1,high); //使右边有序 int mid=(low+high)/2; int i=low,j=mid+1,k=low; while(i&lt;=mid&amp;&amp;j&lt;=high) //合并 &#123; if(a[i]&gt;a[j]) &#123; ans+=mid-i+1; tem[k++]=a[j++]; &#125; else tem[k++]=a[i++]; &#125; while(i&lt;=mid) tem[k++]=a[i++]; //将剩下的存入数组 while(j&lt;=high) tem[k++]=a[j++]; for(int t=low;t&lt;=high;t++) a[t]=tem[t]; //更新a数组 return;&#125; 用树状数组求逆序数 这个算法的思想就是依次插入序列的数，每插入一个就ans+=在这个数前面比它大的数的个数。最后的ans就是答案。 用一个数组tr[x],tr[x]=1代表x在序列中存在1个。一开始tr都为0，因为此时未插入任何数。 此时的树状数组tr[x]代表在x前lowbit(x)个数有多少个数比它小。 初始化tr数组为0，代表一开始所有数都没有插入。 每次插入一个数x就是tr[x]++,再更新一次树状数组，维护区间和。 离散化处理 根据上面的思路，我们很容易发现我们要开很大的数组。如果题目说长度为$5 \times 10^5$数列a中$a_i \leq 10^9$，这时候开$10^9$的数组就太浪费了，我们就可以离散化处理。 我们离散化的目的就是为了把$10^9$的数对应到$5 \times 10^5$中，举个例子： 原序列为： 999 23 0 98765 2 7 离散化后： 5 4 1 6 2 3 说白了就是用一个$1-n$的数列来代替原序列，而逆序数不变。 没看懂的可以跟着代码模拟一遍。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define lowbit(x) (x&amp;(-x))#define INF 0xfffffffftypedef long long ll;const int N=5e5+5;int tr[N],b[N],n;typedef pair &lt;ll,int&gt; pp;pp a[N];void Update(int x) //插入x&#123; while(x&lt;=n) &#123; tr[x]++; x+=lowbit(x); &#125;&#125;int Query(int x) //查询序列中比x小的有多少个&#123; int sum=0; while(x&gt;0) &#123; sum+=tr[x]; x-=lowbit(x); &#125; return sum;&#125;int main()&#123; ios::sync_with_stdio(false); while(cin&gt;&gt;n&amp;&amp;n) &#123; CRL(tr); for(int i=1;i&lt;=n;i++) //离散化开始 &#123; cin&gt;&gt;a[i].first; a[i].second=i; &#125; sort(a+1,a+n+1); for(int i=1;i&lt;=n;i++) b[a[i].second]=i; //离散化结束，b数组即是离散化后的数组 ll ans=0; for(int i=1;i&lt;=n;i++) &#123; Update(b[i]); //依次插入更新 ans+=(i-Query(b[i])); &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0; &#125; 题目 poj-2299 hdu-1394]]></content>
       <categories>
         <category>笔记</category>
       </categories>
@@ -152,8 +163,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -199,8 +210,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -233,8 +244,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -245,8 +256,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -257,8 +268,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
