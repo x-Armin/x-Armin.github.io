@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Who Gets the Most Candies?(线段树+约瑟夫环)]]></title>
+    <url>%2FWho-Gets-the-Most-Candies%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-2886 &emsp;N children are sitting in a circle to play a game. The children are numbered from 1 to N in clockwise order. Each of them has a card with a non-zero integer on it in his/her hand. The game starts from the K-th child, who tells all the others the integer on his card and jumps out of the circle. The integer on his card tells the next child to jump out. Let A denote the integer. If A is positive, the next child will be the A-th child to the left. If A is negative, the next child will be the (−A)-th child to the right. The game lasts until all children have jumped out of the circle. During the game, the p-th child jumping out will get F(p) candies where F(p) is the number of positive integers that perfectly divide p. Who gets the most candies? Input There are several test cases in the input. Each test case starts with two integers N $(0 &lt; N \leq 500,000)$ and K $(1 \leq K \leq N) on the first line. The next N lines contains the names of the children (consisting of at most 10 letters) and the integers (non-zero with magnitudes within $10^8$) on their cards in increasing order of the children’s numbers, a name and an integer separated by a single space in a line with no leading or trailing spaces. Output Output one line for each test case containing the name of the luckiest child and the number of candies he/she gets. If ties occur, always choose the child who jumps out of the circle first. Examples intput 123454 2Tom 2Jack 4Mary -1Sam 1 output 1Sam 3 题目大意 有N个人，每个人有一个数$a_i$。从第K个人开始出列，如果他的数$a_i$&gt;0，则他顺时针方向第$(a_i)$个人出列，循环，直到最后一个人出列。 $x$表示在第$x$轮出列,$f(x)$表示$x$的因数个数。求最大的$f(x)$。 思路 线段树维护区间值和，表示这个区间还剩多少人，每次更新就在对应区间-1。 设当前这轮$k$出列，用$k=(k+a_i$)%当前剩余人数，求得下一个$k$的值。代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) mamset(a,0,sizeof(a))typedef long long ll;const int N=5e5+5;typedef pair&lt;char[12],int &gt; pp;int tr[N&lt;&lt;2],book[N];pp people[N];int Init() //打表book[i]表示i的因数个数 &#123; for(int i=1;i&lt;=500000;i++) for(int j=i;j&lt;=500000;j+=i) book[j]++;&#125;void Built(int root,int l,int r)&#123; if(l==r) &#123; tr[root]=1; return;&#125; else&#123; int mid=l+r&gt;&gt;1; Built(root&lt;&lt;1,l,mid); Built(root&lt;&lt;1|1,mid+1,r); tr[root]=tr[root&lt;&lt;1]+tr[root&lt;&lt;1|1]; &#125;&#125;int Update(int root,int l,int r,int x) &#123; if(l==r) &#123; tr[root]--; return l; &#125; else&#123; tr[root]--; int mid=l+r&gt;&gt;1; if(x&lt;=tr[root&lt;&lt;1]) return Update(root&lt;&lt;1,l,mid,x); //判断出列的在左边还是右边 else return Update(root&lt;&lt;1|1,mid+1,r,x-tr[root&lt;&lt;1]); &#125;&#125;int main()&#123; ios::sync_with_stdio(false); Init(); int n,k,ans=0,tem; while(cin&gt;&gt;n&gt;&gt;k) &#123; ans=0;tem=k; Built(1,1,n); for(int i=1;i&lt;=n;i++) cin&gt;&gt;people[i].first&gt;&gt;people[i].second; for(int i=1;i&lt;=n;i++) if(ans&lt;book[i]) ans=book[i]; //找到最大的f(x) for(int i=1;i&lt;=n;i++) //依次出列 &#123; tem=Update(1,1,n,k); //第k个人出列 if(book[i]==ans) &#123; cout&lt;&lt;people[tem].first&lt;&lt;" "&lt;&lt;ans&lt;&lt;endl; break; &#125; if(people[tem].second&gt;0) //判断下一个出列的人的位置 k=(k-1+people[tem].second-1)%(n-i)+1; else k=((k-1+people[tem].second)%(n-i)+(n-i))%(n-i)+1; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Minimum Inversion Number(树状数组+离散化处理)]]></title>
     <url>%2FMinimum-Inversion-Number%2F</url>
-    <content type="text"><![CDATA[描述传送门：hdu-1394 &emsp;The inversion number of a given number sequence $a_1, a_2, …, a_n$ is the number of pairs $(a_i, a_j)$ that satisfy i &lt; j and $a_i &gt; a_j$. For a given sequence of numbers a1, a2, …, an, if we move the first m &gt;= 0 numbers to the end of the seqence, we will obtain another sequence. There are totally n such sequences as the following: a1, a2, …, an-1, an (where m = 0 - the initial seqence)a2, a3, …, an, a1 (where m = 1)a3, a4, …, an, a1, a2 (where m = 2)…an, a1, a2, …, an-1 (where m = n-1) You are asked to write a program to find the minimum inversion number out of the above sequences. Input The input consists of a number of test cases. Each case consists of two lines: the first line contains a positive integer n (n &lt;= 5000); the next line contains a permutation of the n integers from 0 to n-1. Output For each case, output the minimum inversion number on a single line. Examples intput 12101 3 6 9 0 8 5 7 4 2 output 116 大致题意 给你一个长$n$的数列，每次把第一个数放到末尾，求这$n$种排列方式中的最小逆序数。 思路 求出原始数列的逆序数。 O(n)遍历，每次求出新的数列的逆序数，每次变化得到的新的逆序数为$tem+(n-2*b[i]+1)$，b[i]为数列第i个值。 求逆序数的方法有：暴力，归并排序，树状数组+离散化,这次我用的是树状数组。详见求数列的逆序数 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define lowbit(x) (x&amp;(-x))#define INF 0xfffffffftypedef long long ll;const int N=5e5+5;int tr[N],b[N],n;typedef pair &lt;int,int&gt; pp;pp a[N];void Update(int x)&#123;while(x&lt;=n)&#123;tr[x]++;x+=lowbit(x);&#125;&#125;int Query(int x)&#123;int sum=0;while(x&gt;0)&#123;sum+=tr[x];x-=lowbit(x);&#125;return sum;&#125;int main()&#123; while(cin&gt;&gt;n) &#123; CRL(tr); for(int i=1;i&lt;=n;i++) //离散化开始 &#123; cin&gt;&gt;a[i].first; a[i].second=i; &#125; sort(a+1,a+n+1); for(int i=1;i&lt;=n;i++) b[a[i].second]=i; //离散化结束 int ans=0; for(int i=1;i&lt;=n;i++) &#123; Update(b[i]); ans+=(i-Query(b[i])); &#125; int tem=ans; for(int i=1;i&lt;n;i++) &#123; tem=tem+(n-2*b[i]+1); ans=min(ans,tem); &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0; &#125;]]></content>
+    <content type="text"><![CDATA[描述传送门：hdu-1394 &emsp;The inversion number of a given number sequence $a_1, a_2, …, a_n$ is the number of pairs $(a_i, a_j)$ that satisfy i &lt; j and $a_i &gt; a_j$. For a given sequence of numbers a1, a2, …, an, if we move the first m &gt;= 0 numbers to the end of the seqence, we will obtain another sequence. There are totally n such sequences as the following: $a_1, a_2, …, a_(n-1), a_n$ (where m = 0 - the initial seqence)$a_2, a_3, …, a_n, a_1$ (where m = 1)$a_3, a_4, …, a_n, a_1, a_2$ (where m = 2)…$a_n, a_1, a_2, …, a_(n-1) (where m = n-1) You are asked to write a program to find the minimum inversion number out of the above sequences. Input The input consists of a number of test cases. Each case consists of two lines: the first line contains a positive integer n (n &lt;= 5000); the next line contains a permutation of the n integers from 0 to n-1. Output For each case, output the minimum inversion number on a single line. Examples intput 12101 3 6 9 0 8 5 7 4 2 output 116 大致题意 给你一个长$n$的数列，每次把第一个数放到末尾，求这$n$种排列方式中的最小逆序数。 思路 求出原始数列的逆序数。 O(n)遍历，每次求出新的数列的逆序数，每次变化得到的新的逆序数为$tem+(n-2*b[i]+1)$，b[i]为数列第i个值。 求逆序数的方法有：暴力，归并排序，树状数组+离散化,这次我用的是树状数组。详见求数列的逆序数 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define lowbit(x) (x&amp;(-x))#define INF 0xfffffffftypedef long long ll;const int N=5e5+5;int tr[N],b[N],n;typedef pair &lt;int,int&gt; pp;pp a[N];void Update(int x)&#123;while(x&lt;=n)&#123;tr[x]++;x+=lowbit(x);&#125;&#125;int Query(int x)&#123;int sum=0;while(x&gt;0)&#123;sum+=tr[x];x-=lowbit(x);&#125;return sum;&#125;int main()&#123; while(cin&gt;&gt;n) &#123; CRL(tr); for(int i=1;i&lt;=n;i++) //离散化开始 &#123; cin&gt;&gt;a[i].first; a[i].second=i; &#125; sort(a+1,a+n+1); for(int i=1;i&lt;=n;i++) b[a[i].second]=i; //离散化结束 int ans=0; for(int i=1;i&lt;=n;i++) &#123; Update(b[i]); ans+=(i-Query(b[i])); &#125; int tem=ans; for(int i=1;i&lt;n;i++) &#123; tem=tem+(n-2*b[i]+1); ans=min(ans,tem); &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0; &#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -140,8 +151,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>图论</tag>
         <tag>并查集</tag>
+        <tag>图论</tag>
       </tags>
   </entry>
   <entry>
@@ -163,8 +174,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -210,8 +221,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -244,8 +255,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -256,8 +267,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -268,8 +279,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
