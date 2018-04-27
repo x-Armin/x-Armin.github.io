@@ -2106,7 +2106,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b9e27c;
+  background: #4aff78;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3404,13 +3404,6 @@ img:hover {
     margin: 8px 0 0;
   }
 }
-post {
-  margin-top: 60px;
-  margin-bottom: 60px;
-  padding: 25px;
-  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
-  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
-}
 @media screen and (min-width: 1200px) {
   body {
     background-image: url("/images/backGround1.jpg");
@@ -3418,15 +3411,9 @@ post {
     background-attachment: fixed;
     background-position: 50% 50%;
     background-size: cover;
-    background-attachment: fixed;
+    opacity: 0.8;
   }
   #footer a {
     color: #eee;
   }
-}
-.header-inner {
-  opacity: 0.8;
-}
-.main-inner {
-  opacity: 0.8;
 }
