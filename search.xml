@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[C Looooops]]></title>
+    <title><![CDATA[C Looooops(拓展欧几里德)]]></title>
     <url>%2FC-Looooops%2F</url>
     <content type="text"><![CDATA[描述传送门：poj-2115 A Compiler Mystery: We are given a C-language style for loop of typefor(variable = A; variable != B; variable += C) statement; Ie, a loop which starts by setting variable to value A and while variable is not equal to B, repeats statement followed by increasing the variable by C. We want to know how many times does the statement get executed for particular values of A, B and C, assuming that all arithmetics is calculated in a k-bit unsigned integer type (with values 0 &lt;= x &lt; $2^k$) modulo $2^k$. Input The input consists of several instances. Each instance is described by a single line with four integers A, B, C, k separated by a single space. The integer k (1 &lt;= k &lt;= 32) is the number of bits of the control variable of the loop and A, B, C (0 &lt;= A, B, C &lt; 2 k) are the parameters of the loop. The input is finished by a line containing four zeros. Output The output consists of several lines corresponding to the instances on the input. The i^(th) line contains either the number of executions of the statement in the i^(th) instance (a single integer number) or the word “FOREVER” if the loop does not terminate. Examples intput 123453 3 2 163 7 2 167 3 2 163 4 2 160 0 0 0 output 12340232766FOREVER 思路 $k=2^k$,即求$a+t \cdot c-k \cdot m=b$，求最小正数$t$，拓欧基本操作。 代码123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; ll exgcd(ll a,ll b,ll &amp;x,ll &amp;y)&#123; if(b==0) return x=1,y=0,a; ll tmp=exgcd(b,a%b,y,x); y-=a/b*x; return tmp;&#125;int main()&#123; ll a,b,c,k,x,y,d,t; while(~scanf("%lld%lld%lld%lld",&amp;a,&amp;b,&amp;c,&amp;k)&amp;&amp;(a||b||c||k)) &#123; k=(1LL)&lt;&lt;k; t=b-a; ll gcd=exgcd(c,k,x,y); if((b-a)%gcd) printf("FOREVER\n"); else&#123; x*=(b-a)/gcd; k /= gcd; x = (x%k + k) % k; printf("%lld\n",x); &#125; &#125; return 0;&#125;]]></content>
       <categories>
@@ -177,8 +177,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>图论</tag>
         <tag>并查集</tag>
+        <tag>图论</tag>
       </tags>
   </entry>
   <entry>

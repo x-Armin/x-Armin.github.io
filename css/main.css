@@ -2106,7 +2106,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d2c983;
+  background: #b9e27c;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3404,13 +3404,29 @@ img:hover {
     margin: 8px 0 0;
   }
 }
+post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
 @media screen and (min-width: 1200px) {
   body {
-    background: url("/images/backGround1.jpg");
-    background-repeat: repeat;
+    background-image: url("/images/backGround1.jpg");
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 50% 50%;
-    background-size: contain;
-    opacity: 0.85;
+    background-size: cover;
+    background-attachment: fixed;
   }
+  #footer a {
+    color: #eee;
+  }
+}
+.header-inner {
+  opacity: 0.8;
+}
+.main-inner {
+  opacity: 0.8;
 }
