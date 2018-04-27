@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C Looooops]]></title>
+    <url>%2FC-Looooops%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-2115 A Compiler Mystery: We are given a C-language style for loop of typefor(variable = A; variable != B; variable += C) statement; Ie, a loop which starts by setting variable to value A and while variable is not equal to B, repeats statement followed by increasing the variable by C. We want to know how many times does the statement get executed for particular values of A, B and C, assuming that all arithmetics is calculated in a k-bit unsigned integer type (with values 0 &lt;= x &lt; $2^k$) modulo $2^k$. Input The input consists of several instances. Each instance is described by a single line with four integers A, B, C, k separated by a single space. The integer k (1 &lt;= k &lt;= 32) is the number of bits of the control variable of the loop and A, B, C (0 &lt;= A, B, C &lt; 2 k) are the parameters of the loop. The input is finished by a line containing four zeros. Output The output consists of several lines corresponding to the instances on the input. The i^(th) line contains either the number of executions of the statement in the i^(th) instance (a single integer number) or the word “FOREVER” if the loop does not terminate. Examples intput 123453 3 2 163 7 2 167 3 2 163 4 2 160 0 0 0 output 12340232766FOREVER 思路 $k=2^k$,即求$a+t \cdot c-k \cdot m=b$，求最小正数$t$，拓欧基本操作。 代码123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; ll exgcd(ll a,ll b,ll &amp;x,ll &amp;y)&#123; if(b==0) return x=1,y=0,a; ll tmp=exgcd(b,a%b,y,x); y-=a/b*x; return tmp;&#125;int main()&#123; ll a,b,c,k,x,y,d,t; while(~scanf("%lld%lld%lld%lld",&amp;a,&amp;b,&amp;c,&amp;k)&amp;&amp;(a||b||c||k)) &#123; k=(1LL)&lt;&lt;k; t=b-a; ll gcd=exgcd(c,k,x,y); if((b-a)%gcd) printf("FOREVER\n"); else&#123; x*=(b-a)/gcd; k /= gcd; x = (x%k + k) % k; printf("%lld\n",x); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+        <tag>拓欧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[青蛙的约会(拓展欧几里德)]]></title>
+    <url>%2F%E9%9D%92%E8%9B%99%E7%9A%84%E7%BA%A6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-1061 &emsp;两只青蛙在网上相识了，它们聊得很开心，于是觉得很有必要见一面。它们很高兴地发现它们住在同一条纬度线上，于是它们约定各自朝西跳，直到碰面为止。可是它们出发之前忘记了一件很重要的事情，既没有问清楚对方的特征，也没有约定见面的具体位置。不过青蛙们都是很乐观的，它们觉得只要一直朝着某个方向跳下去，总能碰到对方的。但是除非这两只青蛙在同一时间跳到同一点上，不然是永远都不可能碰面的。为了帮助这两只乐观的青蛙，你被要求写一个程序来判断这两只青蛙是否能够碰面，会在什么时候碰面。我们把这两只青蛙分别叫做青蛙A和青蛙B，并且规定纬度线上东经0度处为原点，由东往西为正方向，单位长度1米，这样我们就得到了一条首尾相接的数轴。设青蛙A的出发点坐标是x，青蛙B的出发点坐标是y。青蛙A一次能跳m米，青蛙B一次能跳n米，两只青蛙跳一次所花费的时间相同。纬度线总长L米。现在要你求出它们跳了几次以后才会碰面。 Input 输入只包括一行5个整数x，y，m，n，L，其中x≠y &lt; 2000000000，0 &lt; m、n &lt; 2000000000，0 &lt; L &lt; 2100000000。 Output 输出碰面所需要的跳跃次数，如果永远不可能碰面则输出一行”Impossible”。 Examples intput 11 2 3 4 5 output 14 思路 显然我们要求满足$(x+t \cdot m)\%L=(y+t \cdot n)\% L$的最小正数$t$。 变换一下得$t\cdot (m-n)+k \cdot L= y-x$,再变一下得到最后的式子\frac {t \cdot gcd}{y-x} \cdot (m-n)+\frac {k \cdot gcd}{y-x} \cdot L=gcd其中$gcd=gcd(m-n,L)$。然后直接套拓欧模板。 拓展欧几里德详解 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; ll exgcd(ll a,ll b,ll &amp;x,ll &amp;y) //拓展欧几里德算法 &#123; if(b==0)&#123;x=1;y=0;return a;&#125; ll r=exgcd(b,a%b,x,y); ll c=x; x=y; y=c-a/b*y; return r;&#125;int main()&#123; ll x,y,m,n,L,ans,a,b; cin&gt;&gt;x&gt;&gt;y&gt;&gt;m&gt;&gt;n&gt;&gt;L; a=m-n;ll c=y-x;b=L; //处理一下 if(a&lt;0)&#123; a=-a;c=-c; &#125; ll gcd=exgcd(a,b,x,y); if(c%gcd) cout&lt;&lt;"Impossible"&lt;&lt;endl; else&#123; x=x*c/gcd; if(x&gt;0) x=x%(b/gcd); else x=x%(b/gcd)+b/gcd; cout&lt;&lt;x&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+        <tag>拓欧</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Who Gets the Most Candies?(线段树+约瑟夫环)]]></title>
     <url>%2FWho-Gets-the-Most-Candies%2F</url>
     <content type="text"><![CDATA[描述传送门：poj-2886 &emsp;N children are sitting in a circle to play a game. The children are numbered from 1 to N in clockwise order. Each of them has a card with a non-zero integer on it in his/her hand. The game starts from the K-th child, who tells all the others the integer on his card and jumps out of the circle. The integer on his card tells the next child to jump out. Let A denote the integer. If A is positive, the next child will be the A-th child to the left. If A is negative, the next child will be the (−A)-th child to the right. The game lasts until all children have jumped out of the circle. During the game, the p-th child jumping out will get F(p) candies where F(p) is the number of positive integers that perfectly divide p. Who gets the most candies? Input There are several test cases in the input. Each test case starts with two integers N $(0 &lt; N \leq 500,000)$ and K $(1 \leq K \leq N) on the first line. The next N lines contains the names of the children (consisting of at most 10 letters) and the integers (non-zero with magnitudes within $10^8$) on their cards in increasing order of the children’s numbers, a name and an integer separated by a single space in a line with no leading or trailing spaces. Output Output one line for each test case containing the name of the luckiest child and the number of candies he/she gets. If ties occur, always choose the child who jumps out of the circle first. Examples intput 123454 2Tom 2Jack 4Mary -1Sam 1 output 1Sam 3 题目大意 有N个人，每个人有一个数$a_i$。从第K个人开始出列，如果他的数$a_i$&gt;0，则他顺时针方向第$(a_i)$个人出列，循环，直到最后一个人出列。 $x$表示在第$x$轮出列,$f(x)$表示$x$的因数个数。求最大的$f(x)$。 思路 线段树维护区间值和，表示这个区间还剩多少人，每次更新就在对应区间-1。 设当前这轮$k$出列，用$k=(k+a_i$)%当前剩余人数，求得下一个$k$的值。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) mamset(a,0,sizeof(a))typedef long long ll;const int N=5e5+5;typedef pair&lt;char[12],int &gt; pp;int tr[N&lt;&lt;2],book[N];pp people[N];int Init() //打表book[i]表示i的因数个数 &#123; for(int i=1;i&lt;=500000;i++) for(int j=i;j&lt;=500000;j+=i) book[j]++;&#125;void Built(int root,int l,int r)&#123; if(l==r) &#123; tr[root]=1; return;&#125; else&#123; int mid=l+r&gt;&gt;1; Built(root&lt;&lt;1,l,mid); Built(root&lt;&lt;1|1,mid+1,r); tr[root]=tr[root&lt;&lt;1]+tr[root&lt;&lt;1|1]; &#125;&#125;int Update(int root,int l,int r,int x) &#123; if(l==r) &#123; tr[root]--; return l; &#125; else&#123; tr[root]--; int mid=l+r&gt;&gt;1; if(x&lt;=tr[root&lt;&lt;1]) return Update(root&lt;&lt;1,l,mid,x); //判断出列的在左边还是右边 else return Update(root&lt;&lt;1|1,mid+1,r,x-tr[root&lt;&lt;1]); &#125;&#125;int main()&#123; ios::sync_with_stdio(false); Init(); int n,k,ans=0,tem; while(cin&gt;&gt;n&gt;&gt;k) &#123; ans=0;tem=k; Built(1,1,n); for(int i=1;i&lt;=n;i++) cin&gt;&gt;people[i].first&gt;&gt;people[i].second; for(int i=1;i&lt;=n;i++) if(ans&lt;book[i]) ans=book[i]; //找到最大的f(x) for(int i=1;i&lt;=n;i++) //依次出列 &#123; tem=Update(1,1,n,k); //第k个人出列 if(book[i]==ans) &#123; cout&lt;&lt;people[tem].first&lt;&lt;" "&lt;&lt;ans&lt;&lt;endl; break; &#125; if(people[tem].second&gt;0) //判断下一个出列的人的位置 k=(k-1+people[tem].second-1)%(n-i)+1; else k=((k-1+people[tem].second)%(n-i)+(n-i))%(n-i)+1; &#125; &#125; return 0;&#125;]]></content>
@@ -76,6 +100,7 @@
       </categories>
       <tags>
         <tag>数论</tag>
+        <tag>拓欧</tag>
       </tags>
   </entry>
   <entry>
@@ -130,6 +155,7 @@
       <tags>
         <tag>数论</tag>
         <tag>排列组合</tag>
+        <tag>逆元</tag>
       </tags>
   </entry>
   <entry>
@@ -151,8 +177,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>并查集</tag>
         <tag>图论</tag>
+        <tag>并查集</tag>
       </tags>
   </entry>
   <entry>
@@ -188,6 +214,7 @@
       <tags>
         <tag>数论</tag>
         <tag>排列组合</tag>
+        <tag>逆元</tag>
       </tags>
   </entry>
   <entry>
@@ -314,6 +341,7 @@
       </categories>
       <tags>
         <tag>数论</tag>
+        <tag>容次原理</tag>
       </tags>
   </entry>
   <entry>
