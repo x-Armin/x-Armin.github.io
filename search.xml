@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Biorhythms(拓展欧几里德+中国剩余定理)]]></title>
     <url>%2FBiorhythms%2F</url>
-    <content type="text"><![CDATA[描述传送门：poj-1006 &emsp;Some people believe that there are three cycles in a person’s life that start the day he or she is born. These three cycles are the physical, emotional, and intellectual cycles, and they have periods of lengths 23, 28, and 33 days, respectively. There is one peak in each period of a cycle. At the peak of a cycle, a person performs at his or her best in the corresponding field (physical, emotional or mental). For example, if it is the mental curve, thought processes will be sharper and concentration will be easier. &emsp;Since the three cycles have different periods, the peaks of the three cycles generally occur at different times. We would like to determine when a triple peak occurs (the peaks of all three cycles occur in the same day) for any person. For each cycle, you will be given the number of days from the beginning of the current year at which one of its peaks (not necessarily the first) occurs. You will also be given a date expressed as the number of days from the beginning of the current year. You task is to determine the number of days from the given date to the next triple peak. The given date is not counted. For example, if the given date is 10 and the next triple peak occurs on day 12, the answer is 2, not 3. If a triple peak occurs on the given date, you should give the number of days to the next occurrence of a triple peak. Input You will be given a number of cases. The input for each case consists of one line of four integers p, e, i, and d. The values p, e, and i are the number of days from the beginning of the current year at which the physical, emotional, and intellectual cycles peak, respectively. The value d is the given date and may be smaller than any of p, e, or i. All values are non-negative and at most 365, and you may assume that a triple peak will occur within 21252 days of the given date. The end of input is indicated by a line in which $p = e = i = d = -1$. Output For each test case, print the case number followed by a message indicating the number of days to the next triple peak, in the form:Case 1: the next triple peak occurs in 1234 days.Use the plural form days even if the answer is 1. Examples intput 12345670 0 0 00 0 0 1005 20 34 3254 5 6 7283 102 23 320203 301 203 40-1 -1 -1 -1 output 123456Case 1: the next triple peak occurs in 21252 days.Case 2: the next triple peak occurs in 21152 days.Case 3: the next triple peak occurs in 19575 days.Case 4: the next triple peak occurs in 16994 days.Case 5: the next triple peak occurs in 8910 days.Case 6: the next triple peak occurs in 10789 days. 思路 转化一下即求解： S: \begin{cases} x \equiv a\ \ (mod\ 23)\\ x \equiv b\ \ (mod\ 38) \\ x \equiv c\ \ (mod\ 33) \\ \end{cases} 裸的中国剩余定理，处理一下x&lt;=0和x&lt;d的情况就行了。在这里wa了几发 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; int exgcd(int a,int b,int &amp;x,int &amp;y)&#123; if(b==0) return x=1,y=0,a; int tem=exgcd(b,a%b,y,x); y-=a/b*x; return tem;&#125;int China(int w[],int b[],int k,int d)&#123; int x,y,ns=0,m,n=1; for(int i=0;i&lt;k;i++) n*=w[i]; for(int i=0;i&lt;k;i++)&#123; m=n/w[i]; exgcd(w[i],m,x,y); ans=(ans+y*m*b[i])%n; &#125; if(ans&lt;=0||ans&lt;d) ans+=n; return ans;&#125;int main()&#123; ios::sync_with_stdio(false); int a[3],w[3]=&#123;23,28,33&#125;,d,ans,Case=0; while(cin&gt;&gt;a[0]&gt;&gt;a[1]&gt;&gt;a[2]&gt;&gt;d&amp;&amp;a[0]&gt;=0&amp;&amp;a[1]&gt;=0&amp;&amp;a[2]&gt;=0&amp;&amp;d&gt;=0) printf("Case %d: the next triple peak occurs in %d days.\n",++Case,China(w,a,3,d)-d); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[描述传送门：poj-1006 &emsp;Some people believe that there are three cycles in a person’s life that start the day he or she is born. These three cycles are the physical, emotional, and intellectual cycles, and they have periods of lengths 23, 28, and 33 days, respectively. There is one peak in each period of a cycle. At the peak of a cycle, a person performs at his or her best in the corresponding field (physical, emotional or mental). For example, if it is the mental curve, thought processes will be sharper and concentration will be easier. &emsp;Since the three cycles have different periods, the peaks of the three cycles generally occur at different times. We would like to determine when a triple peak occurs (the peaks of all three cycles occur in the same day) for any person. For each cycle, you will be given the number of days from the beginning of the current year at which one of its peaks (not necessarily the first) occurs. You will also be given a date expressed as the number of days from the beginning of the current year. You task is to determine the number of days from the given date to the next triple peak. The given date is not counted. For example, if the given date is 10 and the next triple peak occurs on day 12, the answer is 2, not 3. If a triple peak occurs on the given date, you should give the number of days to the next occurrence of a triple peak. Input You will be given a number of cases. The input for each case consists of one line of four integers p, e, i, and d. The values p, e, and i are the number of days from the beginning of the current year at which the physical, emotional, and intellectual cycles peak, respectively. The value d is the given date and may be smaller than any of p, e, or i. All values are non-negative and at most 365, and you may assume that a triple peak will occur within 21252 days of the given date. The end of input is indicated by a line in which $p = e = i = d = -1$. Output For each test case, print the case number followed by a message indicating the number of days to the next triple peak, in the form:Case 1: the next triple peak occurs in 1234 days.Use the plural form days even if the answer is 1. Examples intput 12345670 0 0 00 0 0 1005 20 34 3254 5 6 7283 102 23 320203 301 203 40-1 -1 -1 -1 output 123456Case 1: the next triple peak occurs in 21252 days.Case 2: the next triple peak occurs in 21152 days.Case 3: the next triple peak occurs in 19575 days.Case 4: the next triple peak occurs in 16994 days.Case 5: the next triple peak occurs in 8910 days.Case 6: the next triple peak occurs in 10789 days. 思路 转化一下即求解最小的$x$并满足： S: \begin{cases} x \equiv a\ \ (mod\ 23)\\ x \equiv b\ \ (mod\ 38) \\ x \equiv c\ \ (mod\ 33) \\ \end{cases} 裸的中国剩余定理，处理一下x&lt;=0和x&lt;d的情况就行了。在这里wa了几发 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; int exgcd(int a,int b,int &amp;x,int &amp;y)&#123; if(b==0) return x=1,y=0,a; int tem=exgcd(b,a%b,y,x); y-=a/b*x; return tem;&#125;int China(int w[],int b[],int k,int d)&#123; int x,y,ns=0,m,n=1; for(int i=0;i&lt;k;i++) n*=w[i]; for(int i=0;i&lt;k;i++)&#123; m=n/w[i]; exgcd(w[i],m,x,y); ans=(ans+y*m*b[i])%n; &#125; if(ans&lt;=0||ans&lt;d) ans+=n; return ans;&#125;int main()&#123; ios::sync_with_stdio(false); int a[3],w[3]=&#123;23,28,33&#125;,d,Case=0; while(cin&gt;&gt;a[0]&gt;&gt;a[1]&gt;&gt;a[2]&gt;&gt;d&amp;&amp;a[0]&gt;=0&amp;&amp;a[1]&gt;=0&amp;&amp;a[2]&gt;=0&amp;&amp;d&gt;=0) printf("Case %d: the next triple peak occurs in %d days.\n",++Case,China(w,a,3,d)-d); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -212,8 +212,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -260,8 +260,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -294,8 +294,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -306,8 +306,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -318,8 +318,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
