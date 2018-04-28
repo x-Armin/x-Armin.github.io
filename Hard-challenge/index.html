@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="描述传送门：hdu-6127  &amp;emsp;There are n points on the plane, and the ith points has a value $val_i$, and its coordinate is $(x_i,y_i)$. It is guaranteed that no two points have the same coordinate, and no t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-28T17:15:18.487Z">
+<meta property="og:updated_time" content="2018-04-28T17:19:20.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hard challenge(模拟)">
 <meta name="twitter:description" content="描述传送门：hdu-6127  &amp;emsp;There are n points on the plane, and the ith points has a value $val_i$, and its coordinate is $(x_i,y_i)$. It is guaranteed that no two points have the same coordinate, and no t">
@@ -433,7 +433,7 @@
 </blockquote>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
 <ul>
-<li>第一次做这种题完全没有什么思路，想到的算法还没敲都被自己YY TLE了，最后还是靠大佬点拨了一下。（果然还是太菜了）</li>
+<li>第一次做这种题完全没有什么思路，想到的算法还没敲都被自己YY TLE了，最后还是靠大佬点拨了一下按斜率排序。（果然还是太菜了）</li>
 <li>一条直线将点分成a,b两块，直线穿过的值之和为$a_1<em>(b_1+b_2+…+b_n)+a_2</em>(b_1+b_2+…+b_n)+…+a_n<em>(b_1+b_2+…+b_n$，化简可得<em>*直线穿过的值之和就是两块区域中点的和的乘积</em></em>。</li>
 <li>对于每个点，我们求这个点和原点连线的斜率，然后对所有的点按斜率排序。</li>
 <li>先选一条直线，将所有的点分为两部分，然后慢慢旋转180°。由于我们对斜率排序，所以我们选择x=0为初始直线。</li>
