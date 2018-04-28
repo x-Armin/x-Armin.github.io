@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hard challenge(模拟)]]></title>
+    <url>%2FHard-challenge%2F</url>
+    <content type="text"><![CDATA[描述传送门：hdu-6127 &emsp;There are n points on the plane, and the ith points has a value $val_i$, and its coordinate is $(x_i,y_i)$. It is guaranteed that no two points have the same coordinate, and no two points makes the line which passes them also passes the origin point. For every two points, there is a segment connecting them, and the segment has a value which equals the product of the values of the two points. Now HazelFan want to draw a line throgh the origin point but not through any given points, and he define the score is the sum of the values of all segments that the line crosses. Please tell him the maximum score. Input The first line contains a positive integer $T(1≤T≤5)$, denoting the number of test cases.For each test case:The first line contains a positive integer $n(1≤n≤5×10^4)$.The next n lines, the ith line contains three integers $x_i,yi,val_i(|x_i|,|y_i|≤10^9,1≤val_i≤10^4). Output For each test case:A single line contains a nonnegative integer, denoting the answer. Examples intput 12345678221 1 11 -1 131 1 11 -1 10-1 0 100 output 1211100 大致题意 有$n$个点，每个点都有一个值，两个点确定的线段的值为两个点的乘积。求一条过原点的直线，使它穿过的所有线段的值之和最大，输出这个最大值。 思路 第一次做这种题完全没有什么思路，想到的算法还没敲都被自己YY TLE了，最后还是靠大佬点拨了一下。（果然还是太菜了） 一条直线将点分成a,b两块，直线穿过的值之和为$a_1(b_1+b_2+…+b_n)+a_2(b_1+b_2+…+b_n)+…+a_n(b_1+b_2+…+b_n$，化简可得*直线穿过的值之和就是两块区域中点的和的乘积。 对于每个点，我们求这个点和原点连线的斜率，然后对所有的点按斜率排序。 先选一条直线，将所有的点分为两部分，然后慢慢旋转180°。由于我们对斜率排序，所以我们选择x=0为初始直线。 我们将x=0这条直线逆时针旋转，可以想象一下它在旋转的时候，会依次碰到排序后的点，（由于题目说了不会存在两点连线过原点的情况，所以不会同时碰到两个点。一开始没看到，想了好久）。每碰到一个点，就将它的值从原集合减去加到另一个集合中。找到所有分法的最大值。 ans要用long long。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; const int N=5e4+5;struct node&#123; int x,y,valum; double Angle;&#125;point[N];bool cmp(node x,node y)&#123;return x.Angle&lt;y.Angle;&#125;int main()&#123; int Case,n;ll sum1,sum2,ans; cin&gt;&gt;Case; while(Case--) &#123; sum1=0;sum2=0; cin&gt;&gt;n; for(int i=0;i&lt;n;i++)&#123; scanf("%d%d%d",&amp;point[i].x,&amp;point[i].y,&amp;point[i].valum); point[i].Angle=point[i].y*1.0/point[i].x; //算斜率 &#125; sort(point,point+n,cmp); for(int i=0;i&lt;n;i++) //初始时直线是x=0,所以x&gt;0是一个集合，x&lt;=0是个集合。 if(point[i].x&gt;0) sum1+=point[i].valum; else sum2+=point[i].valum; ans=sum1*sum2; for(int i=0;i&lt;n;i++)&#123; //旋转 if(point[i].x&gt;0) sum1-=point[i].valum,sum2+=point[i].valum; else sum1+=point[i].valum,sum2-=point[i].valum; ans=max(ans,sum1*sum2); //取最大 &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Biorhythms(拓展欧几里德+中国剩余定理)]]></title>
     <url>%2FBiorhythms%2F</url>
     <content type="text"><![CDATA[描述传送门：poj-1006 &emsp;Some people believe that there are three cycles in a person’s life that start the day he or she is born. These three cycles are the physical, emotional, and intellectual cycles, and they have periods of lengths 23, 28, and 33 days, respectively. There is one peak in each period of a cycle. At the peak of a cycle, a person performs at his or her best in the corresponding field (physical, emotional or mental). For example, if it is the mental curve, thought processes will be sharper and concentration will be easier. &emsp;Since the three cycles have different periods, the peaks of the three cycles generally occur at different times. We would like to determine when a triple peak occurs (the peaks of all three cycles occur in the same day) for any person. For each cycle, you will be given the number of days from the beginning of the current year at which one of its peaks (not necessarily the first) occurs. You will also be given a date expressed as the number of days from the beginning of the current year. You task is to determine the number of days from the given date to the next triple peak. The given date is not counted. For example, if the given date is 10 and the next triple peak occurs on day 12, the answer is 2, not 3. If a triple peak occurs on the given date, you should give the number of days to the next occurrence of a triple peak. Input You will be given a number of cases. The input for each case consists of one line of four integers p, e, i, and d. The values p, e, and i are the number of days from the beginning of the current year at which the physical, emotional, and intellectual cycles peak, respectively. The value d is the given date and may be smaller than any of p, e, or i. All values are non-negative and at most 365, and you may assume that a triple peak will occur within 21252 days of the given date. The end of input is indicated by a line in which $p = e = i = d = -1$. Output For each test case, print the case number followed by a message indicating the number of days to the next triple peak, in the form:Case 1: the next triple peak occurs in 1234 days.Use the plural form days even if the answer is 1. Examples intput 12345670 0 0 00 0 0 1005 20 34 3254 5 6 7283 102 23 320203 301 203 40-1 -1 -1 -1 output 123456Case 1: the next triple peak occurs in 21252 days.Case 2: the next triple peak occurs in 21152 days.Case 3: the next triple peak occurs in 19575 days.Case 4: the next triple peak occurs in 16994 days.Case 5: the next triple peak occurs in 8910 days.Case 6: the next triple peak occurs in 10789 days. 思路 转化一下即求解最小的$x$并满足： S: \begin{cases} x \equiv a\ \ (mod\ 23)\\ x \equiv b\ \ (mod\ 38) \\ x \equiv c\ \ (mod\ 33) \\ \end{cases} 裸的中国剩余定理，处理一下x&lt;=0和x&lt;d的情况就行了。在这里wa了几发 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;algorithm&gt; #include&lt;string.h&gt; #include&lt;string&gt; #include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; int exgcd(int a,int b,int &amp;x,int &amp;y)&#123; if(b==0) return x=1,y=0,a; int tem=exgcd(b,a%b,y,x); y-=a/b*x; return tem;&#125;int China(int w[],int b[],int k,int d)&#123; int x,y,ns=0,m,n=1; for(int i=0;i&lt;k;i++) n*=w[i]; for(int i=0;i&lt;k;i++)&#123; m=n/w[i]; exgcd(w[i],m,x,y); ans=(ans+y*m*b[i])%n; &#125; if(ans&lt;=0||ans&lt;d) ans+=n; return ans;&#125;int main()&#123; ios::sync_with_stdio(false); int a[3],w[3]=&#123;23,28,33&#125;,d,Case=0; while(cin&gt;&gt;a[0]&gt;&gt;a[1]&gt;&gt;a[2]&gt;&gt;d&amp;&amp;a[0]&gt;=0&amp;&amp;a[1]&gt;=0&amp;&amp;a[2]&gt;=0&amp;&amp;d&gt;=0) printf("Case %d: the next triple peak occurs in %d days.\n",++Case,China(w,a,3,d)-d); return 0;&#125;]]></content>
@@ -212,8 +223,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -260,8 +271,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -294,8 +305,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -306,8 +317,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -318,8 +329,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
