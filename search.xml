@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[最长回文子串(Manachar算法)]]></title>
+    <url>%2F%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[描述传送门：hdu-3068 给出一个只由小写英文字符a,b,c…y,z组成的字符串S,求S中最长回文子串的长度.回文就是正反读都是一样的字符串,如aba, abba等 Input 输入有多组case,不超过120组,每组输入为一行小写英文字符a,b,c…y,z组成的字符串S两组case之间由空行隔开(该空行不用处理)。字符串长度len &lt;= 110000 Output 每一行一个整数x,对应一组case,表示该组case的字符串中所包含的最长回文长度. Examples intput 123aaaaabab output 1243 思路 len最大是1100000，暴力肯定会T，直接套用Manachar算法。 Manachar算法时间复杂度为$O(N)$。 代码123456789101112131415161718192021222324252627282930313233343536#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xfffffffconst int N=110005;char s[N&lt;&lt;1];int p[N&lt;&lt;1];int Manachar()&#123; CRL(p); int n=strlen(s+1),mx=0,ans=0,id=0; for(int i=n;i&gt;=1;i--)&#123; //初始化插入特殊字符，统一了长度为奇偶两种情况。 s[i&lt;&lt;1]=s[i]; s[i&lt;&lt;1|1]='*'; &#125; s[1]='*'; n=n&lt;&lt;1|1; for(int i=0;i&lt;n;i++)&#123; if(mx&gt;i) p[i]=min(mx-i,p[2*id-i]); else p[i]=1; while(i-p[i]&gt;0&amp;&amp;i+p[i]&lt;=n&amp;&amp;s[i-p[i]]==s[i+p[i]]) p[i]++; if (p[i]+i&gt;mx) &#123;id=i; mx=p[i]+i;&#125; &#125; for(int i=1;i&lt;=n;i++) if(p[i]-1&gt;ans) ans=p[i]-1; return ans; &#125; int main()&#123; while(~scanf("%s",s+1)) cout&lt;&lt;Manachar()&lt;&lt;endl; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>Manachar算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hard challenge(模拟)]]></title>
     <url>%2FHard-challenge%2F</url>
     <content type="text"><![CDATA[描述传送门：hdu-6127 &emsp;There are n points on the plane, and the ith points has a value $val_i$, and its coordinate is $(x_i,y_i)$. It is guaranteed that no two points have the same coordinate, and no two points makes the line which passes them also passes the origin point. For every two points, there is a segment connecting them, and the segment has a value which equals the product of the values of the two points. Now HazelFan want to draw a line throgh the origin point but not through any given points, and he define the score is the sum of the values of all segments that the line crosses. Please tell him the maximum score. Input The first line contains a positive integer $T(1≤T≤5)$, denoting the number of test cases.For each test case:The first line contains a positive integer $n(1≤n≤5×10^4)$.The next n lines, the ith line contains three integers $x_i,yi,val_i(|x_i|,|y_i|≤10^9,1≤val_i≤10^4)$. Output For each test case:A single line contains a nonnegative integer, denoting the answer. Examples intput 12345678221 1 11 -1 131 1 11 -1 10-1 0 100 output 1211100 大致题意 有$n$个点，每个点都有一个值，两个点确定的线段的值为两个点的乘积。求一条过原点的直线，使它穿过的所有线段的值之和最大，输出这个最大值。 思路 第一次做这种题完全没有什么思路，想到的算法还没敲都被自己YY TLE了，最后还是靠大佬点拨了一下按斜率排序。（果然还是太菜了） 易得直线穿过的值之和就是两块区域中点的和的乘积。 对于每个点，我们求这个点和原点连线的斜率，然后对所有的点按斜率排序。 先选一条直线，将所有的点分为两部分，然后慢慢旋转180°。由于我们对斜率排序，所以我们选择x=0为初始直线。 我们将x=0这条直线逆时针旋转，可以想象一下它在旋转的时候，会依次碰到排序后的点，（由于题目说了不会存在两点连线过原点的情况，所以不会同时碰到两个点。一开始没看到，想了好久）。每碰到一个点，就将它的值从原集合减去加到另一个集合中。找到所有分法的最大值。 ans要用long long。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define INF 0xffffffftypedef unsigned long long LL;typedef long long ll; const double Pi = acos(-1);const double e = exp(1.0);const int mod =1e9+7; const int N=5e4+5;struct node&#123; int x,y,valum; double Angle;&#125;point[N];bool cmp(node x,node y)&#123;return x.Angle&lt;y.Angle;&#125;int main()&#123; int Case,n;ll sum1,sum2,ans; cin&gt;&gt;Case; while(Case--) &#123; sum1=0;sum2=0; cin&gt;&gt;n; for(int i=0;i&lt;n;i++)&#123; scanf("%d%d%d",&amp;point[i].x,&amp;point[i].y,&amp;point[i].valum); point[i].Angle=point[i].y*1.0/point[i].x; //算斜率 &#125; sort(point,point+n,cmp); for(int i=0;i&lt;n;i++) //初始时直线是x=0,所以x&gt;0是一个集合，x&lt;=0是个集合。 if(point[i].x&gt;0) sum1+=point[i].valum; else sum2+=point[i].valum; ans=sum1*sum2; for(int i=0;i&lt;n;i++)&#123; //旋转 if(point[i].x&gt;0) sum1-=point[i].valum,sum2+=point[i].valum; else sum1+=point[i].valum,sum2-=point[i].valum; ans=max(ans,sum1*sum2); //取最大 &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
@@ -200,8 +211,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>并查集</tag>
         <tag>图论</tag>
+        <tag>并查集</tag>
       </tags>
   </entry>
   <entry>

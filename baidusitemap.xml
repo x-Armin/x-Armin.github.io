@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://x-armin.com/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</loc>
+    <lastmod>2018-04-29T05:46:37.765Z</lastmod>
+    <data>
+        <display>
+        <title>最长回文子串(Manachar算法)</title>
+        <pubTime>2018-04-29T05:28:25.000Z</pubTime>
+        
+        <tag>Manachar算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/Hard-challenge/</loc>
     <lastmod>2018-04-28T17:30:04.837Z</lastmod>
     <data>
@@ -532,9 +552,9 @@
         <title>How Many Tables(并查集入门)</title>
         <pubTime>2018-03-10T01:29:15.000Z</pubTime>
         
-        <tag>并查集</tag>
-         
         <tag>图论</tag>
+         
+        <tag>并查集</tag>
          
          
            
