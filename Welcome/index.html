@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="欢迎来到Armin的博客，其他内容还在持续搭建（xjb摸索）中。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-23T06:10:43.679Z">
+<meta property="og:updated_time" content="2018-06-04T03:27:57.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="欢迎来到Armin的博客">
 <meta name="twitter:description" content="欢迎来到Armin的博客，其他内容还在持续搭建（xjb摸索）中。">
@@ -433,7 +433,20 @@
     1 & x & x^2 \\\
     1 & y & y^2 \\\
     1 & z & z^2 
-\end{vmatrix}</script>
+\end{vmatrix}</script><blockquote>
+<script type="math/tex; mode=display">
+\mu (d)=
+\begin{cases}
+  1 &\mbox{d=1} \\
+  (-1)^k &\mbox{$d= p_1*p_2*p_3*...*p_k,p_i$是互异素数}\\
+  0 &\mbox{其余情况}\\
+  \end{cases}</script><script type="math/tex; mode=display">
+dp[i][j]=Max
+\begin{cases}
+  dp[i-1][j] &\mbox{不拿第i个，状态跟i-1一样}\\
+  dp[i-1][j-cost[i]]+valum[i] &\mbox{i^2拿第i个，那么就把前cost[i]体积的物品拿走再放}
+  \end{cases}</script></blockquote>
+
       
     </div>
     

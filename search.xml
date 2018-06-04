@@ -164,7 +164,7 @@
 <h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span></span><br><span class="line"><span class="number">25</span> <span class="number">18</span> <span class="number">46</span> <span class="number">2</span> <span class="number">53</span> <span class="number">39</span> <span class="number">32</span> <span class="number">4</span> <span class="number">74</span> <span class="number">67</span> <span class="number">60</span> <span class="number">11</span></span><br><span class="line"><span class="number">74</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-</div><div class="tab-pane" id="1011-3"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> a[],<span class="keyword">int</span> times)</span>    <span class="comment">//二分查找</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x==a[mid]) <span class="keyword">return</span> times;   <span class="comment">//找到了，返回下标</span></span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> <span class="number">-1</span>;         <span class="comment">//没找到返回-1</span></span><br><span class="line">    <span class="keyword">return</span> x&lt;a[mid]? Search(x,l,mid,a,times+<span class="number">1</span>):Search(x,mid+<span class="number">1</span>,r,a,times+<span class="number">1</span>); <span class="comment">//比中间小在左边找，否则在右边找。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">1000</span>],x,n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;x;sort(a,a+n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;Search(x,<span class="number">0</span>,n<span class="number">-1</span>,a,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</div><div class="tab-pane" id="1011-3"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> a[])</span>    <span class="comment">//二分查找</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x==a[mid]) <span class="keyword">return</span> <span class="number">1</span>;   <span class="comment">//找到了，返回1</span></span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> <span class="number">-1</span>;         <span class="comment">//没找到返回-1</span></span><br><span class="line">    <span class="keyword">return</span> x&lt;a[mid]? Search(x,l,mid,a)+<span class="number">1</span>:Search(x,mid+<span class="number">1</span>,r,a)+<span class="number">1</span>; <span class="comment">//比中间小在左边找，否则在右边找。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">1000</span>],x,n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;x;sort(a,a+n);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;Search(x,<span class="number">0</span>,n<span class="number">-1</span>,a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </div></div></div>
 <hr>
 ]]></content>
@@ -2022,9 +2022,9 @@ x \equiv  c\ \ (mod\  33) \\
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -2219,9 +2219,9 @@ x \equiv  c\ \ (mod\  33) \\
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -2488,9 +2488,9 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -2543,9 +2543,9 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -2604,9 +2604,9 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
         
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 背包问题 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
         
@@ -2802,7 +2802,20 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
     1 & x & x^2 \\\
     1 & y & y^2 \\\
     1 & z & z^2 
-\end{vmatrix}</script>]]></content>
+\end{vmatrix}</script><blockquote>
+<script type="math/tex; mode=display">
+\mu (d)=
+\begin{cases}
+  1 &\mbox{d=1} \\
+  (-1)^k &\mbox{$d= p_1*p_2*p_3*...*p_k,p_i$是互异素数}\\
+  0 &\mbox{其余情况}\\
+  \end{cases}</script><script type="math/tex; mode=display">
+dp[i][j]=Max
+\begin{cases}
+  dp[i-1][j] &\mbox{不拿第i个，状态跟i-1一样}\\
+  dp[i-1][j-cost[i]]+valum[i] &\mbox{i^2拿第i个，那么就把前cost[i]体积的物品拿走再放}
+  \end{cases}</script></blockquote>
+]]></content>
       
         
     </entry>
