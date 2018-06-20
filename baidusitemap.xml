@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://x-armin.com/Color-the-ball/</loc>
+    <lastmod>2018-06-20T16:07:56.190Z</lastmod>
+    <data>
+        <display>
+        <title>Color the ball（差分入门）</title>
+        <pubTime>2018-06-20T06:22:44.000Z</pubTime>
+        
+        <tag>差分</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/swustoj-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%90%8E40/</loc>
-    <lastmod>2018-06-17T07:45:23.760Z</lastmod>
+    <lastmod>2018-06-17T10:52:12.202Z</lastmod>
     <data>
         <display>
         <title>swust oj 数据结构后40</title>
@@ -148,9 +168,9 @@
         <title>多重背包问题</title>
         <pubTime>2018-02-10T11:27:40.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -170,9 +190,9 @@
         <title>完全背包问题</title>
         <pubTime>2018-02-08T09:23:47.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -236,9 +256,9 @@
         <title>01背包问题</title>
         <pubTime>2018-02-06T05:38:19.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -614,9 +634,9 @@
         <title>FATE(二维费用背包问题)</title>
         <pubTime>2018-03-02T07:57:23.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -698,9 +718,9 @@
         <title>ACboy needs your help(分组背包)</title>
         <pubTime>2018-02-16T07:28:32.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
