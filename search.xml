@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[House Man（差分约束+链式向前星）]]></title>
+    <url>%2FHouse-Man%2F</url>
+    <content type="text"><![CDATA[描述传送门：hdu-3440 &emsp;In Fuzhou, there is a crazy super man. He can’t fly, but he could jump from housetop to housetop. Today he plans to use $N$ houses to hone his house hopping skills. He will start at the shortest house and make $N$-1 jumps, with each jump taking him to a taller house than the one he is jumping from. When finished, he will have been on every house exactly once, traversing them in increasing order of height, and ending up on the tallest house. The man can travel for at most a certain horizontal distance $D$ in a single jump. To make this as much fun as possible, the crazy man want to maximize the distance between the positions of the shortest house and the tallest house.The crazy super man have an ability—move houses. So he is going to move the houses subject to the following constraints: All houses are to be moved along a one-dimensional path. Houses must be moved at integer locations along the path, with no two houses at the same location. Houses must be arranged so their moved ordering from left to right is the same as their ordering in the input. They must NOT be sorted by height, or reordered in any way. They must be kept in their stated order. The super man can only jump so far, so every house must be moved close enough to the next taller house. Specifically, they must be no further than $D$ apart on the ground (the difference in their heights doesn’t matter). Given $N$ houses, in a specified order, each with a distinct integer height, help the super man figure out the maximum possible distance they can put between the shortest house and the tallest house, and be able to use the houses for training. Input In the first line there is an integer T, indicates the number of test cases.$(T\ &lt;=\ 500)$Each test case begins with a line containing two integers $N\ (1\ ≤ N\ ≤\ 1000)$ and $D\ (1\ ≤\ D\ ≤1000000)$. The next line contains $N$ integer, giving the heights of the $N$ houses, in the order that they should be moved. Within a test case, all heights will be unique. Output For each test case , output “Case %d: “first where d is the case number counted from one, then output a single integer representing the maximum distance between the shortest and tallest house, subject to the constraints above, or -1 if it is impossible to lay out the houses. Do not print any blank lines between answers. Examples intput 123456734 4 20 30 10 40 5 6 20 34 54 10 15 4 2 10 20 16 13 output 123Case 1: 3Case 2: 3Case 3: -1 思路 高度相近的两个楼的距离不得超过$D$，也就是$|Dis_i-Dis_{i+1}|&lt;=D$，减的时候保证大减小就能去掉绝对值，这是第一个约束方程。 坐标相近的两个楼的距离应该&gt;=1.即$Dis_{i+1}-Dis_i&gt;=1$，转化一下就是$Dis_i-Dis_{i+1}&lt;=-1$，这是第二个约束方程， 最大的坑点！！！！Dis的初始值一定要足够大，0xfffffff都过不了，最后取的0x3f3f3f3f。 haishitaicaile. 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define CRL2(a,x) memset(a,x,sizeof(a))#define INF 0x3f3f3f3fconst int N=1e3+5;struct node&#123;int To,S,Next;&#125;;vector &lt;node&gt; Edge;pair&lt;int,int&gt; Node[N];int Begin[N],Vis[N],Inque[N],Dis[N],n;void add(int a,int b,int w)&#123; node tem; tem.To=b; tem.S=w; tem.Next=Begin[a]; Begin[a]=Edge.size(); Edge.push_back(tem);&#125;bool spfa(int s)&#123; for(int i=0;i&lt;=n;i++) Dis[i]=INF; Dis[s]=0; CRL(Vis);Vis[s]=1; CRL(Inque);Inque[s]=1; queue&lt;int&gt; Q;Q.push(s); while(!Q.empty())&#123; int T=Q.front();Q.pop();Inque[T]=0; for(int i=Begin[T];i!=-1;i=Edge[i].Next)&#123; if(Dis[Edge[i].To]&gt;Dis[T]+Edge[i].S)&#123; Dis[Edge[i].To]=Dis[T]+Edge[i].S; Q.push(Edge[i].To); Inque[Edge[i].To]=1; if(++Vis[Edge[i].To]&gt;n)return true ; &#125; &#125; &#125; return false;&#125;int main()&#123; int T,D; cin&gt;&gt;T; for (int Case=1; Case&lt;=T;Case++)&#123; Edge.clear();CRL2(Begin,-1); scanf("%d%d",&amp;n,&amp;D); for(int i=1;i&lt;=n;i++)&#123; cin&gt;&gt;Node[i].first; Node[i].second=i; &#125; sort(Node+1,Node+1+n); //对高度排序 for(int i=1;i&lt;n;i++)&#123; add(i+1,i,-1); //第二个约束方程 if(Node[i].second&lt;Node[i+1].second) //第一个约束方程 add(Node[i].second,Node[i+1].second,D) ; else add(Node[i+1].second,Node[i].second,D) ; &#125; printf("Case %d: ",Case); if(spfa(min(Node[1].second,Node[n].second))) printf("-1\n"); //负环无解 else printf("%d\n",Dis[max(Node[1].second,Node[n].second)]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Layout（差分约束+链式向前星）]]></title>
     <url>%2FLayout%2F</url>
     <content type="text"><![CDATA[描述传送门：poj-3169 &emsp;Like everyone else, cows like to stand close to their friends when queuing for feed. FJ has $N (2\ &lt;=\ N &lt;=\ 1,000)$ cows numbered 1..N standing along a straight line waiting for feed. The cows are standing in the same order as they are numbered, and since they can be rather pushy, it is possible that two or more cows can line up at exactly the same location (that is, if we think of each cow as being located at some coordinate on a number line, then it is possible for two or more cows to share the same coordinate). Some cows like each other and want to be within a certain distance of each other in line. Some really dislike each other and want to be separated by at least a certain distance. A list of $ML\ (1\ &lt;= ML\ &lt;=\ 10,000)$ constraints describes which cows like each other and the maximum distance by which they may be separated; a subsequent list of MD constraints $(1\ &lt; MD\ &lt;=\ 10,000)$ tells which cows dislike each other and the minimum distance by which they must be separated. Your job is to compute, if possible, the maximum possible distance between cow 1 and cow $N$ that satisfies the distance constraints. Input Line 1: Three space-separated integers: N, ML, and MD. Lines 2..ML+1: Each line contains three space-separated positive integers: A, B, and D, with $1\ &lt;=\ A\ &lt;\ B\ &lt;= N$. Cows A and B must be at most $D (1\ &lt;=\ D &lt;=\ 1,000,000)$ apart. Lines ML+2..ML+MD+1: Each line contains three space-separated positive integers: A, B, and D, with $1\ &lt;=\ A\ &lt;\ B\ &lt;= N$. Cows A and B must be at least $D (1\ &lt;=\ D\ &lt;=\ 1,000,000)$ apart. Output Line 1: A single integer. If no line-up is possible, output -1. If cows 1 and $N$ can be arbitrarily far apart, output -2. Otherwise output the greatest possible distance between cows 1 and $N$. Examples intput 12344 2 11 3 102 4 202 3 3 output 127 思路 差分约束模板题，a喜欢b,就连一条长为c的边，a不喜欢b就连一条长为-c的边。 用SPFA跑一个最短路。很容易想到，有负环即无解，没有对n点更新即随便放（即没有约束条件），其他情况输出最短路就行了。 链式向前星存图。 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465//#include&lt;bits/stdc++.h&gt;#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;stdio.h&gt;#include&lt;string.h&gt;#define CRL(a,x) memset(a,x,sizeof(a))#define INF 0xfffffffusing namespace std;const int N=1e3+5;struct node&#123;int To,S,Next;&#125;;vector&lt;node&gt; Edge;int Begin[N],Vis[N],Dis[N],Inque[N],n;void add(int x,int y,int z)&#123; node tem; tem.To=y; tem.S=z; tem.Next=Begin[x]; Begin[x]=Edge.size(); Edge.push_back(tem);&#125;void Spfa(int s)&#123; queue &lt;int&gt; Q; Inque[s]=1;Dis[s]=0; Q.push(s); while(!Q.empty())&#123; int T=Q.front();Q.pop();Inque[T]=0; for(int i=Begin[T];i!=-1;i=Edge[i].Next)&#123; if(Dis[Edge[i].To]&gt;Dis[T]+Edge[i].S)&#123; Dis[Edge[i].To]=Dis[T]+Edge[i].S; if(!Inque[Edge[i].To])&#123; Inque[Edge[i].To]=1; Q.push(Edge[i].To); if(++Vis[Edge[i].To]&gt;n)&#123; puts("-1"); return ; &#125; &#125; &#125; &#125; &#125; if(Dis[n]!=INF) printf("%d\n",Dis[n]); else puts("-2");&#125;int main()&#123; int ML,MD,a,b,d; while(~scanf("%d%d%d",&amp;n,&amp;ML,&amp;MD))&#123; Edge.clear();CRL(Begin,-1);CRL(Vis,0);CRL(Inque,0); for(int i=0;i&lt;=n;i++) Dis[i]=INF; while(ML--)&#123; scanf("%d%d%d",&amp;a,&amp;b,&amp;d); add(a,b,d); &#125; while(MD--)&#123; scanf("%d%d%d",&amp;a,&amp;b,&amp;d); add(b,a,-d); &#125; Spfa(1); &#125; return 0;&#125;]]></content>
@@ -312,8 +323,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -360,8 +371,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -394,8 +405,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -406,8 +417,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -418,8 +429,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
