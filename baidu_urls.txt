@@ -1,3 +1,4 @@
+http://x-armin.com/Prime-Path（素数筛-spfa最短路）/
 http://x-armin.com/Code-排列组合/
 http://x-armin.com/Mayor-s-posters-线段树区间更新/
 http://x-armin.com/House-Man/
