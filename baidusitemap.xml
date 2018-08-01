@@ -5,15 +5,105 @@
     
   <url>
     <loc>http://x-armin.com/Prime-Path%EF%BC%88%E7%B4%A0%E6%95%B0%E7%AD%9B-spfa%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%89/</loc>
-    <lastmod>2018-08-01T02:21:25.663Z</lastmod>
+    <lastmod>2018-08-01T10:18:28.428Z</lastmod>
     <data>
         <display>
         <title>Prime Path（素数筛+spfa最短路/bfs）</title>
         <pubTime>2018-07-31T18:04:42.000Z</pubTime>
         
+        <tag>图论</tag>
+         
         <tag>最短路</tag>
          
         <tag>素数筛，bfs</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/Is-the-Information-Reliable/</loc>
+    <lastmod>2018-08-01T10:18:16.521Z</lastmod>
+    <data>
+        <display>
+        <title>Is the Information Reliable?（差分约束+链式向前星）</title>
+        <pubTime>2018-06-24T18:11:13.000Z</pubTime>
+        
+        <tag>图论</tag>
+         
+        <tag>差分约束</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/%E5%BA%8F%E5%88%97/</loc>
+    <lastmod>2018-08-01T10:17:03.796Z</lastmod>
+    <data>
+        <display>
+        <title>序列（差分约束+链式向前星）</title>
+        <pubTime>2018-06-24T02:55:58.000Z</pubTime>
+        
+        <tag>图论</tag>
+         
+        <tag>差分约束</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/Layout/</loc>
+    <lastmod>2018-08-01T10:15:31.394Z</lastmod>
+    <data>
+        <display>
+        <title>Layout（差分约束+链式向前星）</title>
+        <pubTime>2018-06-25T17:53:05.000Z</pubTime>
+        
+        <tag>图论</tag>
+         
+        <tag>差分约束</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/House-Man/</loc>
+    <lastmod>2018-08-01T10:15:04.773Z</lastmod>
+    <data>
+        <display>
+        <title>House Man（差分约束+链式向前星）</title>
+        <pubTime>2018-06-29T08:57:38.000Z</pubTime>
+        
+        <tag>图论</tag>
+         
+        <tag>差分约束</tag>
          
          
            
@@ -130,86 +220,6 @@
         <pubTime>2018-07-29T13:58:03.000Z</pubTime>
         
         <tag>线段树</tag>
-         
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/House-Man/</loc>
-    <lastmod>2018-07-02T13:39:36.782Z</lastmod>
-    <data>
-        <display>
-        <title>House Man（差分约束+链式向前星）</title>
-        <pubTime>2018-06-29T08:57:38.000Z</pubTime>
-        
-        <tag>差分约束</tag>
-         
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/Layout/</loc>
-    <lastmod>2018-06-25T18:09:21.434Z</lastmod>
-    <data>
-        <display>
-        <title>Layout（差分约束+链式向前星）</title>
-        <pubTime>2018-06-25T17:53:05.000Z</pubTime>
-        
-        <tag>差分约束</tag>
-         
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/Is-the-Information-Reliable/</loc>
-    <lastmod>2018-06-24T18:53:41.206Z</lastmod>
-    <data>
-        <display>
-        <title>Is the Information Reliable?（差分约束+链式向前星）</title>
-        <pubTime>2018-06-24T18:11:13.000Z</pubTime>
-        
-        <tag>差分约束</tag>
-         
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/%E5%BA%8F%E5%88%97/</loc>
-    <lastmod>2018-06-24T03:21:19.928Z</lastmod>
-    <data>
-        <display>
-        <title>序列（差分约束+链式向前星）</title>
-        <pubTime>2018-06-24T02:55:58.000Z</pubTime>
-        
-        <tag>差分约束</tag>
          
          
            
@@ -408,9 +418,9 @@
         <title>多重背包问题</title>
         <pubTime>2018-02-10T11:27:40.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -430,9 +440,9 @@
         <title>完全背包问题</title>
         <pubTime>2018-02-08T09:23:47.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -496,9 +506,9 @@
         <title>01背包问题</title>
         <pubTime>2018-02-06T05:38:19.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -826,9 +836,9 @@
         <title>FATE(二维费用背包问题)</title>
         <pubTime>2018-03-02T07:57:23.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -890,9 +900,9 @@
         <title>ACboy needs your help(分组背包)</title>
         <pubTime>2018-02-16T07:28:32.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            

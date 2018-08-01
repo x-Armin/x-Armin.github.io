@@ -8,6 +8,7 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>图论</tag>
         <tag>最短路</tag>
         <tag>素数筛，bfs</tag>
       </tags>
@@ -43,6 +44,7 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>图论</tag>
         <tag>差分约束</tag>
       </tags>
   </entry>
@@ -54,6 +56,7 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>图论</tag>
         <tag>差分约束</tag>
       </tags>
   </entry>
@@ -65,6 +68,7 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>图论</tag>
         <tag>差分约束</tag>
       </tags>
   </entry>
@@ -76,6 +80,7 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>图论</tag>
         <tag>差分约束</tag>
       </tags>
   </entry>
@@ -359,8 +364,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -409,8 +414,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -443,8 +448,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -455,8 +460,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -467,8 +472,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
