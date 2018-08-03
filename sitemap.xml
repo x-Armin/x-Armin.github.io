@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://x-armin.com/Max-Area/</loc>
+    
+    <lastmod>2018-08-03T10:44:10.202Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://x-armin.com/lib/reading_progress/package.json</loc>
+    
+    <lastmod>2018-08-02T03:50:43.448Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://x-armin.com/lib/reading_progress/README.html</loc>
+    
+    <lastmod>2018-08-02T03:50:43.445Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://x-armin.com/Prime-Path%EF%BC%88%E7%B4%A0%E6%95%B0%E7%AD%9B-spfa%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%89/</loc>
     
     <lastmod>2018-08-01T10:18:28.428Z</lastmod>
