@@ -1,3 +1,6 @@
+http://x-armin.com/三原色图/
+http://x-armin.com/调查问卷/
+http://x-armin.com/巧克力/
 http://x-armin.com/Max-Area/
 http://x-armin.com/Prime-Path（素数筛-spfa最短路）/
 http://x-armin.com/Code-排列组合/
