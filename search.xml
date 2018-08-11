@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[生成酷炫注释（根据图片生成）]]></title>
+    <url>%2F%E7%94%9F%E6%88%90%E9%85%B7%E7%82%AB%E6%B3%A8%E9%87%8A%EF%BC%88%E6%A0%B9%E6%8D%AE%E5%9B%BE%E7%89%87%E7%94%9F%E6%88%90%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[预览 一般算法的网络赛结束后都可以查看别人的代码，然后就看到了各种酷炫*炸天的注释，博主实在是羡慕，于是就动手写了一个。原理特别简单，就是用opencv读取图片，转成灰度图，只含有一个通道，然后把0-255对应到可打印字符上，然后一个像素一个像素处理。由于是但像素采集，所以最后生成的文字多少就取决你的图片像素，太大了的话做注释效果不太好，也可以每四个像素取一个平均值，生成一个字符，这样横竖就缩小了一倍，也可以根据自己的需求自行调整。黑白，清晰的图片效果更好。 代码12345678910111213141516171819202122232425262728293031323334353637#include &lt;opencv/cv.h&gt;#include &lt;opencv/highgui.h&gt;#include &lt;string.h&gt;#include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;using namespace cv;char Book[] = " $@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1&#123;&#125;[]?-_+~&lt;&gt;i!lI;:,\"^`'.";char Chang(int gray) &#123; if(gray&gt;240) return ' '; int unit = 255.0 / strlen(Book); return Book[int(gray / unit)]; //return int(gray / unit)? '0':'1'; //return rand()%2? '$':'%';&#125;int main()&#123; char name[] = "timg.jpg"; char name2[] = "timg.txt"; IplImage *a = cvLoadImage(name,0); ofstream Txtout(name2); for (int i = 0; i &lt; a-&gt;height; i++) &#123; for (int j = 0; j &lt; a-&gt;width; j++) &#123; CvScalar s = cvGet2D(a, i, j); Txtout &lt;&lt; Chang(s.val[0]); printf_s("%c",Chang(s.val[0])); &#125; Txtout &lt;&lt; endl; cout &lt;&lt; endl; &#125; Txtout.close(); return 0;&#125;]]></content>
+      <categories>
+        <category>娱乐</category>
+      </categories>
+      <tags>
+        <tag>娱乐</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Distance Queries（带权LCA）]]></title>
+    <url>%2FDistance-Queries%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-1986 &emsp;Farmer John’s cows refused to run in his marathon since he chose a path much too long for their leisurely lifestyle. He therefore wants to find a path of a more reasonable length. The input to this problem consists of the same input as in “Navigation Nightmare” ,followed by a line containing a single integer K, followed by K “distance queries”. Each distance query is a line of input containing two integers, giving the numbers of two farms between which FJ is interested in computing distance (measured in the length of the roads along the path between the two farms). Please answer FJ’s distance queries as quickly as possible! Input Lines 1..1+M: Same format as “Navigation Nightmare” Lines 2+M: A single integer, K. 1 &lt;= K &lt;= 10,000 Lines 3+M..2+M+K: Each line corresponds to a distance query and contains the indices of two farms. Output Lines 1..K: For each distance query, output on a single line an integer giving the appropriate distance. Examples intput 12345678910117 61 6 13 E6 3 9 E3 5 7 S4 1 3 N2 4 20 W4 7 2 S31 61 42 6 output 12313336 大致题意 给出m条边和k个询问，按顺序求出每次询问的两个点的最短距离。 这道题输入巨坑！它给边的规则描述在另一道题上，就是题目里的 “Navigation Nightmare“。然后我建单向边从root跑wa了无数遍。 思路 最短路$O(N^2 \log N))$是会T的。 LCA模板题，维护一个$Dis$数组，$Dis[i]$表示i节点到根节点的距离，查询的时候，u和v的最短距离就是$Dis[u]+Dis[v]-2*Dis[LCA(u,v)]$ 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869#include &lt;iostream&gt;#include &lt;string.h&gt;#include &lt;vector&gt;#include &lt;stdio.h&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))#define Tp(a,b) make_pair(a,b)const int N = 4e4 + 5;int Fa[N], Dis[N], Begin[N],ans[10005]; vector &lt; pair&lt;int,int&gt; &gt; Qus[N]; bool Vis[N];struct node &#123; int To, S, Next; &#125;;vector&lt;node&gt; Edge;void Init() &#123; Edge.clear(); rep(i, 0, N) &#123; Fa[i] = i; Qus[i].clear(); &#125; CRL(Dis, 0); CRL(Begin, -1); CRL(Vis, false);&#125;void add(int a, int b, int s) &#123; Edge.push_back(node&#123; b,s,Begin[a]&#125;); Begin[a] = Edge.size() - 1;&#125;int Find(int x) &#123; return x == Fa[x] ? x : Fa[x] = Find(Fa[x]); &#125;void Tarjan(int u,int fa) &#123; for (int i = Begin[u]; ~i; i = Edge[i].Next) &#123; int v = Edge[i].To; if(v==fa) continue; //双向边，不往回走 Dis[v] = Edge[i].S + Dis[u]; Tarjan(v,u); Fa[v] = u; &#125; Vis[u] = true; rep(i, 0, Qus[u].size()) if (Vis[Qus[u][i].first]) ans[Qus[u][i].second] = Dis[u] + Dis[Qus[u][i].first] - Dis[Find(Qus[u][i].first)]*2;&#125;int main()&#123; int n, m, a, b, s; char x; while(~scanf("%d%d",&amp;n,&amp;m))&#123; Init(); rep(i, 0, m) &#123; scanf("%d%d%d %c",&amp;a,&amp;b,&amp;s,&amp;x); Fa[b] = a; add(a, b, s); add(b, a, s); &#125; scanf("%d",&amp;m); rep(i, 0, m) &#123; scanf("%d%d",&amp;a,&amp;b); Qus[a].push_back(Tp(b,i)); //pair.second记录询问顺序 Qus[b].push_back(Tp(a,i)); &#125; int root = Find(a); rep(i, 0, n + 1) Fa[i] = i; Tarjan(root,0); rep(i,0,m) printf("%d\n",ans[i]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>LCA</tag>
+        <tag>Tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Nearest Common Ancestors（Tarjan离线+LCA模板题）]]></title>
+    <url>%2FNearest-Common-Ancestors%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-1330 &emsp;A rooted tree is a well-known data structure in computer science and engineering. An example is shown below: In the figure, each node is labeled with an integer from {1, 2,…,16}. Node 8 is the root of the tree. Node x is an ancestor of node y if node x is in the path between the root and node y. For example, node 4 is an ancestor of node 16. Node 10 is also an ancestor of node 16. As a matter of fact, nodes 8, 4, 10, and 16 are the ancestors of node 16. Remember that a node is an ancestor of itself. Nodes 8, 4, 6, and 7 are the ancestors of node 7. A node x is called a common ancestor of two different nodes y and z if node x is an ancestor of node y and an ancestor of node z. Thus, nodes 8 and 4 are the common ancestors of nodes 16 and 7. A node x is called the nearest common ancestor of nodes y and z if x is a common ancestor of y and z and nearest to y and z among their common ancestors. Hence, the nearest common ancestor of nodes 16 and 7 is node 4. Node 4 is nearer to nodes 16 and 7 than node 8 is. For other examples, the nearest common ancestor of nodes 2 and 3 is node 10, the nearest common ancestor of nodes 6 and 13 is node 8, and the nearest common ancestor of nodes 4 and 12 is node 4. In the last example, if y is an ancestor of z, then the nearest common ancestor of y and z is y. Write a program that finds the nearest common ancestor of two distinct nodes in a tree. Input The input consists of T test cases. The number of test cases T is given in the first line of the input file. Each test case starts with a line containing an integer N , the number of nodes in a tree, $2&lt;=N&lt;=10,000$. The nodes are labeled with integers $1, 2,…, N$. Each of the next $N -1$ lines contains a pair of integers that represent an edge —the first integer is the parent node of the second integer. Note that a tree with N nodes has exactly $N - 1$ edges. The last line of each test case contains two distinct integers whose nearest common ancestor is to be computed. Output Print exactly one line for each test case. The line should contain the integer that is the nearest common ancestor. Examples intput 1234567891011121314151617181920212223242161 148 510 165 94 68 44 101 136 1510 116 710 216 38 116 1216 752 33 43 11 53 5 output 1243 题意 第二段是对LCA的解释，然后每组数据给定有N个节点，N-1条边，最后给出一组u,v，求u,V的最近公共祖先。 伪代码1234567891011Tarjan(u)&#123;//Union和find为并查集合并函数和查找函数 for each(u,v)&#123; //访问所有u子节点v Tarjan(v); //继续往下遍历 Union(u,v); //合并v到u上 标记v被访问过; &#125; for each(u,e)&#123; //访问所有和u有询问关系的e 如果e被访问过; u,e的最近公共祖先为find(e); &#125;&#125; 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859/*Problem: 1330 Memory: 1668K Time: 250MS Language: G++ Result: Accepted*/#include&lt;iostream&gt;#include&lt;vector&gt;#include&lt;string.h&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))const int N=1e4+5;int Fa[N],u,v;vector&lt;int&gt; Map[N];bool Vis[N];int Find(int x)&#123;return Fa[x]==x? x:Fa[x]=Find(Fa[x]);&#125;void Union(int a,int b)&#123;int fa=Find(a),fb=Find(b);Fa[fa]=fb;&#125;void Init()&#123; rep(i,0,N) &#123;Fa[i]=i;Map[i].clear();&#125; CRL(Vis,false);&#125;bool Tarjan(int root)&#123; rep(i,0,Map[root].size())&#123; if(Tarjan(Map[root][i]))return true; Union(Map[root][i],root); Vis[Map[root][i]]=true; &#125; if(root==u&amp;&amp;Vis[v])&#123; cout&lt;&lt; Find(v)&lt;&lt;endl; return true; &#125; else if(root==v&amp;&amp;Vis[u])&#123; cout&lt;&lt; Find(u)&lt;&lt;endl; return true; &#125; return false;&#125;int main()&#123; std::ios::sync_with_stdio(false); int n,m,_,a,b,root; cin&gt;&gt;_; while(_--)&#123; Init(); cin&gt;&gt;n; rep(i,0,n-1)&#123; cin&gt;&gt;a&gt;&gt;b; Fa[b]=a; Map[a].push_back(b); &#125; root=Find(a); //找根 cin&gt;&gt;u&gt;&gt;v; rep(i,0,N) Fa[i]=i; Tarjan(root); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>图论</tag>
+        <tag>LCA</tag>
+        <tag>Tarjan</tag>
+        <tag>离线</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[迷宫城堡(Tarjan入门)]]></title>
     <url>%2F%E8%BF%B7%E5%AE%AB%E5%9F%8E%E5%A0%A1%2F</url>
     <content type="text"><![CDATA[描述传送门：hdu-1269 &emsp;为了训练小希的方向感，Gardon建立了一座大城堡，里面有N个房间(N&lt;=10000)和M条通道(M&lt;=100000)，每个通道都是单向的，就是说若称某通道连通了A房间和B房间，只说明可以通过这个通道由A房间到达B房间，但并不说明通过它可以由B房间到达A房间。Gardon需要请你写个程序确认一下是否任意两个房间都是相互连通的，即：对于任意的i和j，至少存在一条路径可以从房间i到房间j，也存在一条路径可以从房间j到房间i。 Input 输入包含多组数据，输入的第一行有两个数：N和M，接下来的M行每行有两个数a和b，表示了一条通道可以从A房间来到B房间。文件最后以两个0结束。 Output 对于输入的每组数据，如果任意两个房间都是相互连接的，输出”Yes”，否则输出”No”。 Examples intput 1234567893 31 22 33 13 31 22 33 20 0 output 12YesNo 思路 Tarjan的模板题，求有向图的强连通分量。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include&lt;bits/stdc++.h&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))const int N=1e5+5;int DFN[N],Low[N],Clock,Begin[N],ans;bool InStack[N];struct node&#123;int To,Next;&#125;; //链式向前星存图vector&lt;node&gt; Edge;stack &lt;int&gt; S;void Init()&#123; CRL(DFN,0);CRL(Low,0); CRL(Begin,-1);CRL(InStack,false); while(!S.empty())S.pop(); Edge.clear(); ans=Clock=0;&#125;void Tarjan(int u)&#123; S.push(u);InStack[u]=true; //入栈 DFN[u]=Low[u]=++Clock; //维护DFS序 for(int i=Begin[u];i!=-1;i=Edge[i].Next)&#123; //遍历边 if(!DFN[Edge[i].To])&#123; Tarjan(Edge[i].To); Low[u]=min(Low[u],Low[Edge[i].To]); &#125; else if(InStack[Edge[i].To]) Low[u]=min(Low[u],DFN[Edge[i].To]); &#125; if(DFN[u]==Low[u])&#123; //弹出关键点之前的点，构成强连通分支 ans++;int tem; do&#123; tem=S.top(); S.pop(); InStack[tem]=false; &#125;while(tem!=u); &#125;&#125;int main()&#123; std::ios::sync_with_stdio(false); //关闭流同步，加速读写 int n,m,a,b; while(cin&gt;&gt;n&gt;&gt;m&amp;&amp;(n||m))&#123; Init(); rep(i,0,m)&#123; cin&gt;&gt;a&gt;&gt;b; Edge.push_back(node &#123;b,Begin[a]&#125;); Begin[a]=Edge.size()-1; &#125; rep(i,1,n+1) if(!DFN[i]) Tarjan(i); //Tarjan puts(ans==1? "Yes":"No"); //联通分支数是否为1 &#125; return 0;&#125;]]></content>
@@ -102,8 +140,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>差分约束</tag>
         <tag>图论</tag>
+        <tag>差分约束</tag>
         <tag>最短路</tag>
         <tag>spfa</tag>
       </tags>
@@ -116,8 +154,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>差分约束</tag>
         <tag>图论</tag>
+        <tag>差分约束</tag>
         <tag>最短路</tag>
         <tag>spfa</tag>
       </tags>
@@ -130,8 +168,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>差分约束</tag>
         <tag>图论</tag>
+        <tag>差分约束</tag>
         <tag>最短路</tag>
         <tag>spfa</tag>
       </tags>
@@ -144,8 +182,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>差分约束</tag>
         <tag>图论</tag>
+        <tag>差分约束</tag>
         <tag>最短路</tag>
         <tag>spfa</tag>
       </tags>
@@ -430,8 +468,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -480,8 +518,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -514,8 +552,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -526,8 +564,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -538,8 +576,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>背包问题</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>

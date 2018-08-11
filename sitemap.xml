@@ -2,16 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://x-armin.com/%E8%BF%B7%E5%AE%AB%E5%9F%8E%E5%A0%A1/</loc>
+    <loc>http://x-armin.com/%E7%94%9F%E6%88%90%E9%85%B7%E7%82%AB%E6%B3%A8%E9%87%8A%EF%BC%88%E6%A0%B9%E6%8D%AE%E5%9B%BE%E7%89%87%E7%94%9F%E6%88%90%EF%BC%89/</loc>
     
-    <lastmod>2018-08-07T14:18:34.017Z</lastmod>
+    <lastmod>2018-08-11T08:23:12.810Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://x-armin.com/Distance-Queries/</loc>
+    
+    <lastmod>2018-08-11T06:50:07.104Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://x-armin.com/Nearest-Common-Ancestors/</loc>
+    
+    <lastmod>2018-08-09T09:32:28.985Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://x-armin.com/%E4%B8%89%E5%8E%9F%E8%89%B2%E5%9B%BE/</loc>
     
-    <lastmod>2018-08-06T17:14:44.461Z</lastmod>
+    <lastmod>2018-08-09T09:06:10.783Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://x-armin.com/%E8%BF%B7%E5%AE%AB%E5%9F%8E%E5%A0%A1/</loc>
+    
+    <lastmod>2018-08-07T14:18:34.017Z</lastmod>
     
   </url>
   
