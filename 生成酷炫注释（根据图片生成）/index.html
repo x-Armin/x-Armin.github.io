@@ -97,7 +97,7 @@
 <meta property="og:description" content="预览">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/005ZgyPegy1fu5u3ctqbgj31z42z6gyi.jpg">
-<meta property="og:updated_time" content="2018-08-11T08:23:12.810Z">
+<meta property="og:updated_time" content="2018-08-11T09:03:51.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="生成酷炫注释（根据图片生成）">
 <meta name="twitter:description" content="预览">
@@ -414,7 +414,7 @@
         <script src="\assets\js\APlayer.min.js"> </script><h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://wx4.sinaimg.cn/mw690/005ZgyPegy1fu5u3ctqbgj31z42z6gyi.jpg" alt="血小板"></p>
 <a id="more"></a>
 <blockquote>
-<p>一般算法的网络赛结束后都可以查看别人的代码，然后就看到了各种酷炫*炸天的注释，博主实在是羡慕，于是就动手写了一个。原理特别简单，就是用opencv读取图片，转成灰度图，只含有一个通道，然后把0-255对应到可打印字符上，然后一个像素一个像素处理。由于是但像素采集，所以最后生成的文字多少就取决你的图片像素，太大了的话做注释效果不太好，也可以每四个像素取一个平均值，生成一个字符，这样横竖就缩小了一倍，也可以根据自己的需求自行调整。黑白，清晰的图片效果更好。</p>
+<p>一般算法的网络赛结束后都可以查看别人的代码，然后就看到了各种酷炫*炸天的注释，博主实在是羡慕，于是就动手写了一个。原理特别简单，就是用opencv读取图片，转成灰度图，只含有一个通道，然后把0-255对应到可打印字符上，然后一个像素一个像素处理。由于是单像素采集，所以最后生成的文字多少就取决你的图片像素，太大了的话做注释效果不太好，也可以每四个像素取一个平均值，生成一个字符，这样横竖就缩小了一倍，也可以根据自己的需求自行调整。黑白，清晰的图片效果更好。</p>
 </blockquote>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv/cv.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv/highgui.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> Book[] = <span class="string">" $@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1&#123;&#125;[]?-_+~&lt;&gt;i!lI;:,\"^`'."</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">Chang</span><span class="params">(<span class="keyword">int</span> gray)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(gray&gt;<span class="number">240</span>) <span class="keyword">return</span> <span class="string">' '</span>;</span><br><span class="line">    <span class="keyword">int</span> unit = <span class="number">255.0</span> / <span class="built_in">strlen</span>(Book);</span><br><span class="line">    <span class="keyword">return</span> Book[<span class="keyword">int</span>(gray / unit)];</span><br><span class="line">    <span class="comment">//return int(gray / unit)? '0':'1';</span></span><br><span class="line">    <span class="comment">//return rand()%2? '$':'%';</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[] = <span class="string">"timg.jpg"</span>;</span><br><span class="line">    <span class="keyword">char</span> name2[] = <span class="string">"timg.txt"</span>;</span><br><span class="line">    IplImage *a = cvLoadImage(name,<span class="number">0</span>);</span><br><span class="line">    <span class="function">ofstream <span class="title">Txtout</span><span class="params">(name2)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a-&gt;height; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a-&gt;width; j++) &#123;</span><br><span class="line">            CvScalar s = cvGet2D(a, i, j);</span><br><span class="line">            Txtout &lt;&lt; Chang(s.val[<span class="number">0</span>]);</span><br><span class="line">            printf_s(<span class="string">"%c"</span>,Chang(s.val[<span class="number">0</span>]));</span><br><span class="line">        &#125;</span><br><span class="line">        Txtout &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Txtout.close();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -451,7 +451,7 @@
   <p><span>本文标题:</span><a href="/生成酷炫注释（根据图片生成）/">生成酷炫注释（根据图片生成）</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年08月11日 - 14:08</p>
-  <p><span>最后更新:</span>2018年08月11日 - 16:08</p>
+  <p><span>最后更新:</span>2018年08月11日 - 17:08</p>
   <p><span>原始链接:</span><a href="/生成酷炫注释（根据图片生成）/" title="生成酷炫注释（根据图片生成）">http://x-armin.com/生成酷炫注释（根据图片生成）/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/生成酷炫注释（根据图片生成）/"  aria-label="复制成功！"></i></span>
   </p>
@@ -539,6 +539,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/Bridging-signals/" rel="prev" title="Bridging signals(最长上升子序列)">
+                Bridging signals(最长上升子序列) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -623,7 +627,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -645,7 +649,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1440,5 +1444,7 @@
 
   
 
+  <script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
 </body>
 </html>

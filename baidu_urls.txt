@@ -1,3 +1,5 @@
+http://x-armin.com/To-the-Max/
+http://x-armin.com/Bridging-signals/
 http://x-armin.com/生成酷炫注释（根据图片生成）/
 http://x-armin.com/Distance-Queries/
 http://x-armin.com/Nearest-Common-Ancestors/

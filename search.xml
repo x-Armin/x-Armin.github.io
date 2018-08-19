@@ -3,12 +3,116 @@
   
     
     <entry>
+      <title><![CDATA[To the Max（最大子矩阵）]]></title>
+      <url>/To-the-Max/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1081" target="_blank" rel="noopener">hdu-1081</a></p>
+<blockquote>
+<p>&emsp;Given a two-dimensional array of positive and negative integers, a sub-rectangle is any contiguous sub-array of size 1 x 1 or greater located within the whole array. The sum of a rectangle is the sum of all the elements in that rectangle. In this problem the sub-rectangle with the largest sum is referred to as the maximal sub-rectangle.</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>As an example, the maximal sub-rectangle of the array:</p>
+<p>&emsp;0 -2 -7 0<br>&emsp;9 &nbsp;2 -6 2<br>&nbsp;-4 &nbsp;1 -4 1<br>&nbsp;-1 &nbsp;8 0 -2</p>
+<p>is in the lower left corner:</p>
+<p>&emsp;9 2<br>&nbsp;-4 1<br>&nbsp;-1 8</p>
+<p>and has a sum of 15.</p>
+</blockquote>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>&emsp;The input consists of an N x N array of integers. The input begins with a single positive integer N on a line by itself, indicating the size of the square two-dimensional array. This is followed by N 2 integers separated by whitespace (spaces and newlines). These are the N 2 integers of the array, presented in row-major order. That is, all numbers in the first row, left to right, then all numbers in the second row, left to right, etc. N may be as large as 100. The numbers in the array will be in the range [-127,127].</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>Output the sum of the maximal sub-rectangle.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">0</span> <span class="number">-2</span> <span class="number">-7</span> <span class="number">0</span> </span><br><span class="line"><span class="number">9</span>  <span class="number">2</span> <span class="number">-6</span> <span class="number">2</span></span><br><span class="line"><span class="number">-4</span> <span class="number">1</span> <span class="number">-4</span> <span class="number">1</span> </span><br><span class="line"><span class="number">-1</span> <span class="number">8</span> <span class="number">0</span> <span class="number">-2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>求最大子矩阵，可借用最大子段和的思想来做，如下图，要求宽为$(i-j)$这么宽的最大区间和，就可以把i到j行按列加到一起，然后就转换成了求一维数组最大子段和，每一个元素就是红色区域。</li>
+<li>对于矩阵$a[n][n]$，构造一个dp数组，使$dp[i][j]$为$dp[0][0]$到$dp[i][j]$的和。那么下图矩阵a的红色区域就可以表示为: <strong>$dp[i][k]-dp[i][k-1]-dp[j-1][k]+dp[j-1][k-1]$</strong>，这样就实现了$O(1)$查找区间和，而dp数组只需$O(N^2)$就能求出。</li>
+</ul>
+<p><img src="http://wx1.sinaimg.cn/mw690/005ZgyPegy1fufdmn4g3aj30m00gmdfz.jpg" alt=""></p>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,n) for(int i=a;i&lt;n;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,a,n) for(int i=n-1;i&gt;=a;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">105</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">AC</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    rep(i,<span class="number">1</span>,n+<span class="number">1</span>)            <span class="comment">//求dp数组</span></span><br><span class="line">        rep(j,<span class="number">1</span>,n+<span class="number">1</span>)</span><br><span class="line">            dp[i][j]+=dp[i<span class="number">-1</span>][j]+dp[i][j<span class="number">-1</span>]-dp[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> Max=dp[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    rep(i,<span class="number">1</span>,n+<span class="number">1</span>)            <span class="comment">//i,j,k即为上图的i,j,k</span></span><br><span class="line">        rep(j,<span class="number">1</span>,i+<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">            rep(k,<span class="number">1</span>,n+<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> tem=dp[i][k]-dp[i][k<span class="number">-1</span>]-dp[j<span class="number">-1</span>][k]+dp[j<span class="number">-1</span>][k<span class="number">-1</span>];</span><br><span class="line">                sum= sum&gt;<span class="number">0</span>? sum+tem:tem;</span><br><span class="line">                <span class="keyword">if</span>(sum&gt;Max) Max=sum;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> Max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">int</span> a[N][N],n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        rep(i,<span class="number">1</span>,n+<span class="number">1</span>)</span><br><span class="line">        rep(j,<span class="number">1</span>,n+<span class="number">1</span>)</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;dp[i][j];</span><br><span class="line"></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;AC(n)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> dp </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Bridging signals(最长上升子序列)]]></title>
+      <url>/Bridging-signals/</url>
+      <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1950" target="_blank" rel="noopener">hdu-1950</a></p>
+<blockquote>
+<p>&emsp;’Oh no, they’ve done it again’, cries the chief designer at the Waferland chip factory. Once more the routing designers have screwed up completely, making the signals on the chip connecting the ports of two functional blocks cross each other all over the place. At this late stage of the process, it is too<br>expensive to redo the routing. Instead, the engineers have to bridge the signals, using the third dimension, so that no two signals cross. However, bridging is a complicated operation, and thus it is desirable to bridge as few signals as possible. The call for a computer program that finds the maximum number of signals which may be connected on the silicon surface without rossing each other, is imminent. Bearing in mind that there may be housands of signal ports at the boundary of a functional block, the problem asks quite a lot of the programmer. Are you up to the task?</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p><img src="http://acm.hdu.edu.cn/data/images/1950-1.jpg" alt=""><br>Figure 1. To the left: The two blocks’ ports and their signal mapping (4,2,6,3,1,5). To the right: At most three signals may be routed on the silicon surface without crossing each other. The dashed signals must be bridged. </p>
+<p>A typical situation is schematically depicted in figure 1. The ports of the two functional blocks are numbered from 1 to p, from top to bottom. The signal mapping is described by a permutation of the numbers 1 to p in the form of a list of p unique numbers in the range 1 to p, in which the i:th number pecifies which port on the right side should be connected to the i:th port on the left side.<br>Two signals cross if and only if the straight lines connecting the two ports of each pair do.</p>
+</blockquote>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><blockquote>
+<p>On the first line of the input, there is a single positive integer n, telling the number of test scenarios to follow. Each test scenario begins with a line containing a single positive integer p&lt;40000, the number of ports on the two functional blocks. Then follow p lines, describing the signal mapping: On the i:th line is the port number of the block on the right side which should be connected to the i:th port of the block on the left side.</p>
+</blockquote>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
+<p>For each test scenario, output one line containing the maximum number of signals which may be routed on the silicon surface without crossing each other.</p>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><ul>
+<li><p>intput</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">2</span> <span class="number">6</span> <span class="number">3</span> <span class="number">1</span> <span class="number">5</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> <span class="number">1</span></span><br><span class="line"><span class="number">8</span></span><br><span class="line"><span class="number">8</span> <span class="number">7</span> <span class="number">6</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">5</span> <span class="number">8</span> <span class="number">9</span> <span class="number">2</span> <span class="number">3</span> <span class="number">1</span> <span class="number">7</span> <span class="number">4</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>output</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
+<ul>
+<li>求最长上升子序列。</li>
+<li>dp，时间复杂度$O(N \log N )$,</li>
+</ul>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Problem : 1950 ( Bridging signals )     Judge Status : Accepted</span></span><br><span class="line"><span class="comment">//RunId : 25858810    Language : G++    Author : xArmin</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,n) for(int i=a;i&lt;n;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,a,n) for(int i=n-1;i&gt;=a;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a) memset(a,0,sizeof(a))</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXX=<span class="number">100000</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF=INT_MAX;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXX],dp[MAXX]; <span class="comment">// a数组为数据，dp[i]表示长度为i+1的LIS结尾元素的最小值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T,n,Len;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">        rep(i,<span class="number">0</span>,n)&#123;<span class="built_in">cin</span>&gt;&gt;a[i];dp[i]=<span class="number">0x3f3f3f</span>;&#125;</span><br><span class="line">        dp[<span class="number">0</span>]=a[<span class="number">0</span>];Len=<span class="number">0</span>;</span><br><span class="line">        rep(i,<span class="number">0</span>,n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]&gt;dp[Len]) dp[++Len]=a[i];</span><br><span class="line">            <span class="keyword">else</span> dp[lower_bound(dp,dp+n,a[i])-dp]=a[i]; <span class="comment">//lower_bound:返回第一个比查找的数大的数的下标</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;Len+<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 题解 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> DP </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[生成酷炫注释（根据图片生成）]]></title>
       <url>/%E7%94%9F%E6%88%90%E9%85%B7%E7%82%AB%E6%B3%A8%E9%87%8A%EF%BC%88%E6%A0%B9%E6%8D%AE%E5%9B%BE%E7%89%87%E7%94%9F%E6%88%90%EF%BC%89/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://wx4.sinaimg.cn/mw690/005ZgyPegy1fu5u3ctqbgj31z42z6gyi.jpg" alt="血小板"></p>
 <a id="more"></a>
 <blockquote>
-<p>一般算法的网络赛结束后都可以查看别人的代码，然后就看到了各种酷炫*炸天的注释，博主实在是羡慕，于是就动手写了一个。原理特别简单，就是用opencv读取图片，转成灰度图，只含有一个通道，然后把0-255对应到可打印字符上，然后一个像素一个像素处理。由于是但像素采集，所以最后生成的文字多少就取决你的图片像素，太大了的话做注释效果不太好，也可以每四个像素取一个平均值，生成一个字符，这样横竖就缩小了一倍，也可以根据自己的需求自行调整。黑白，清晰的图片效果更好。</p>
+<p>一般算法的网络赛结束后都可以查看别人的代码，然后就看到了各种酷炫*炸天的注释，博主实在是羡慕，于是就动手写了一个。原理特别简单，就是用opencv读取图片，转成灰度图，只含有一个通道，然后把0-255对应到可打印字符上，然后一个像素一个像素处理。由于是单像素采集，所以最后生成的文字多少就取决你的图片像素，太大了的话做注释效果不太好，也可以每四个像素取一个平均值，生成一个字符，这样横竖就缩小了一倍，也可以根据自己的需求自行调整。黑白，清晰的图片效果更好。</p>
 </blockquote>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv/cv.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv/highgui.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> Book[] = <span class="string">" $@B%8&amp;WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1&#123;&#125;[]?-_+~&lt;&gt;i!lI;:,\"^`'."</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">Chang</span><span class="params">(<span class="keyword">int</span> gray)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(gray&gt;<span class="number">240</span>) <span class="keyword">return</span> <span class="string">' '</span>;</span><br><span class="line">    <span class="keyword">int</span> unit = <span class="number">255.0</span> / <span class="built_in">strlen</span>(Book);</span><br><span class="line">    <span class="keyword">return</span> Book[<span class="keyword">int</span>(gray / unit)];</span><br><span class="line">    <span class="comment">//return int(gray / unit)? '0':'1';</span></span><br><span class="line">    <span class="comment">//return rand()%2? '$':'%';</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[] = <span class="string">"timg.jpg"</span>;</span><br><span class="line">    <span class="keyword">char</span> name2[] = <span class="string">"timg.txt"</span>;</span><br><span class="line">    IplImage *a = cvLoadImage(name,<span class="number">0</span>);</span><br><span class="line">    <span class="function">ofstream <span class="title">Txtout</span><span class="params">(name2)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a-&gt;height; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a-&gt;width; j++) &#123;</span><br><span class="line">            CvScalar s = cvGet2D(a, i, j);</span><br><span class="line">            Txtout &lt;&lt; Chang(s.val[<span class="number">0</span>]);</span><br><span class="line">            printf_s(<span class="string">"%c"</span>,Chang(s.val[<span class="number">0</span>]));</span><br><span class="line">        &#125;</span><br><span class="line">        Txtout &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Txtout.close();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -83,11 +187,11 @@
         
         <tags>
             
+            <tag> 图论 </tag>
+            
             <tag> LCA </tag>
             
             <tag> Tarjan </tag>
-            
-            <tag> 图论 </tag>
             
         </tags>
         
@@ -136,11 +240,11 @@
         
         <tags>
             
+            <tag> 图论 </tag>
+            
             <tag> LCA </tag>
             
             <tag> Tarjan </tag>
-            
-            <tag> 图论 </tag>
             
             <tag> 离线 </tag>
             
@@ -187,9 +291,9 @@
         
         <tags>
             
-            <tag> Tarjan </tag>
-            
             <tag> 图论 </tag>
+            
+            <tag> Tarjan </tag>
             
         </tags>
         
