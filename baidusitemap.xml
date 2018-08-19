@@ -4,21 +4,25 @@
 
     
   <url>
-    <loc>http://x-armin.com/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-08-19T16:54:44.655Z</lastmod>
+    <loc>http://x-armin.com/House-Man/</loc>
+    <lastmod>2018-08-19T17:05:38.602Z</lastmod>
     <data>
         <display>
-        <title>01背包问题</title>
-        <pubTime>2018-02-06T05:38:19.000Z</pubTime>
+        <title>House Man（差分约束+链式向前星）</title>
+        <pubTime>2018-06-29T08:57:38.000Z</pubTime>
         
-        <tag>动态规划</tag>
+        <tag>图论</tag>
          
-        <tag>背包问题</tag>
+        <tag>差分约束</tag>
+         
+        <tag>最短路</tag>
+         
+        <tag>SPFA</tag>
          
          
            
              
-              <breadCrumb title="学习笔记" url="http://x-armin.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
           
         </display>
     </data>
@@ -27,7 +31,7 @@
     
   <url>
     <loc>http://x-armin.com/Prime-Path%EF%BC%88%E7%B4%A0%E6%95%B0%E7%AD%9B-spfa%E6%9C%80%E7%9F%AD%E8%B7%AF%EF%BC%89/</loc>
-    <lastmod>2018-08-19T16:54:14.767Z</lastmod>
+    <lastmod>2018-08-19T17:05:21.839Z</lastmod>
     <data>
         <display>
         <title>Prime Path（素数筛+spfa最短路/bfs）</title>
@@ -37,7 +41,7 @@
          
         <tag>最短路</tag>
          
-        <tag>spfa</tag>
+        <tag>SPFA</tag>
          
         <tag>素数筛，bfs</tag>
          
@@ -53,7 +57,7 @@
     
   <url>
     <loc>http://x-armin.com/%E5%BA%8F%E5%88%97/</loc>
-    <lastmod>2018-08-19T16:50:41.867Z</lastmod>
+    <lastmod>2018-08-19T17:05:10.246Z</lastmod>
     <data>
         <display>
         <title>序列（差分约束+链式向前星）</title>
@@ -65,7 +69,7 @@
          
         <tag>最短路</tag>
          
-        <tag>spfa</tag>
+        <tag>SPFA</tag>
          
          
            
@@ -79,7 +83,7 @@
     
   <url>
     <loc>http://x-armin.com/%E7%95%85%E9%80%9A%E5%B7%A5%E7%A8%8B%E7%BB%AD/</loc>
-    <lastmod>2018-08-19T16:50:05.207Z</lastmod>
+    <lastmod>2018-08-19T17:05:01.932Z</lastmod>
     <data>
         <display>
         <title>畅通工程续（SPFA+链式前向星）</title>
@@ -87,12 +91,34 @@
         
         <tag>最短路</tag>
          
-        <tag>spfa</tag>
+        <tag>SPFA</tag>
          
          
            
              
               <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-08-19T16:54:44.655Z</lastmod>
+    <data>
+        <display>
+        <title>01背包问题</title>
+        <pubTime>2018-02-06T05:38:19.000Z</pubTime>
+        
+        <tag>动态规划</tag>
+         
+        <tag>背包问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://x-armin.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>
@@ -308,32 +334,6 @@
         <display>
         <title>Layout（差分约束+链式向前星）</title>
         <pubTime>2018-06-25T17:53:05.000Z</pubTime>
-        
-        <tag>图论</tag>
-         
-        <tag>差分约束</tag>
-         
-        <tag>最短路</tag>
-         
-        <tag>spfa</tag>
-         
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/House-Man/</loc>
-    <lastmod>2018-08-06T09:56:02.265Z</lastmod>
-    <data>
-        <display>
-        <title>House Man（差分约束+链式向前星）</title>
-        <pubTime>2018-06-29T08:57:38.000Z</pubTime>
         
         <tag>图论</tag>
          
