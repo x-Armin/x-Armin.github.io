@@ -91,7 +91,7 @@
 <meta name="description" content="梦里不知身是客,一晌贪欢">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Armin&#39;s Blog">
-<meta property="og:url" content="http://x-armin.com/tags/SPFA/index.html">
+<meta property="og:url" content="http://x-armin.com/tags/spfa/index.html">
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="梦里不知身是客,一晌贪欢">
 <meta property="og:locale" content="zh-Hans">
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://x-armin.com/tags/SPFA/"/>
+  <link rel="canonical" href="http://x-armin.com/tags/spfa/"/>
 
 
 
 
 
-  <title>标签: SPFA | Armin's Blog</title>
+  <title>标签: spfa | Armin's Blog</title>
   
 
 
@@ -300,9 +300,149 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>SPFA<small>标签</small>
+        <h1>spfa<small>标签</small>
         </h1>
       </div>
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/Prime-Path（素数筛-spfa最短路）/" itemprop="url">
+              
+                <span itemprop="name">Prime Path（素数筛+spfa最短路/bfs）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-08-01T02:04:42+08:00"
+              content="2018-08-01" >
+          08-01
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/House-Man/" itemprop="url">
+              
+                <span itemprop="name">House Man（差分约束+链式向前星）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-06-29T16:57:38+08:00"
+              content="2018-06-29" >
+          06-29
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/Layout/" itemprop="url">
+              
+                <span itemprop="name">Layout（差分约束+链式向前星）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-06-26T01:53:05+08:00"
+              content="2018-06-26" >
+          06-26
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/Is-the-Information-Reliable/" itemprop="url">
+              
+                <span itemprop="name">Is the Information Reliable?（差分约束+链式向前星）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-06-25T02:11:13+08:00"
+              content="2018-06-25" >
+          06-25
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/序列/" itemprop="url">
+              
+                <span itemprop="name">序列（差分约束+链式向前星）</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-06-24T10:55:58+08:00"
+              content="2018-06-24" >
+          06-24
+        </time>
+      </div>
+
+    </header>
+  </article>
+
 
       
         
@@ -410,7 +550,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1102,83 +1242,6 @@
           } else {
             var newcounter = new Counter();
             /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-  
-
-  
-
-  <script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/src/custom.js"></script>
-</body>
-</html>
-    /* Set ACL */
             var acl = new AV.ACL();
             acl.setPublicReadAccess(true);
             acl.setPublicWriteAccess(true);
