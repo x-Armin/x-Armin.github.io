@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://x-armin.com/swustACM2018%E5%9B%BD%E5%BA%86%E6%8B%9B%E6%96%B0%E6%AD%A3%E5%BC%8F%E8%B5%9B%E9%A2%98%E8%A7%A3/</loc>
+    <lastmod>2018-10-05T16:27:23.011Z</lastmod>
+    <data>
+        <display>
+        <title>swustACM2018国庆招新正式赛题解</title>
+        <pubTime>2018-10-05T02:31:16.000Z</pubTime>
+        
+        <tag>比赛题解</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/Transport-Ship/</loc>
+    <lastmod>2018-09-16T18:04:00.411Z</lastmod>
+    <data>
+        <display>
+        <title>Transport Ship(多重背包)</title>
+        <pubTime>2018-09-16T16:55:27.000Z</pubTime>
+        
+        <tag>背包问题</tag>
+         
+        <tag>dp</tag>
+         
+        <tag>二进制</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/A-Simple-Math-Problem/</loc>
     <lastmod>2018-08-22T18:37:34.717Z</lastmod>
     <data>
@@ -279,11 +323,11 @@
         <title>Distance Queries（带权LCA）</title>
         <pubTime>2018-08-11T06:31:48.000Z</pubTime>
         
+        <tag>图论</tag>
+         
         <tag>LCA</tag>
          
         <tag>Tarjan</tag>
-         
-        <tag>图论</tag>
          
          
            
@@ -303,11 +347,11 @@
         <title>Nearest Common Ancestors（Tarjan离线+LCA模板题）</title>
         <pubTime>2018-08-09T09:02:53.000Z</pubTime>
         
+        <tag>图论</tag>
+         
         <tag>LCA</tag>
          
         <tag>Tarjan</tag>
-         
-        <tag>图论</tag>
          
         <tag>离线</tag>
          
@@ -351,9 +395,9 @@
         <title>迷宫城堡(Tarjan入门)</title>
         <pubTime>2018-08-07T13:56:53.000Z</pubTime>
         
-        <tag>Tarjan</tag>
-         
         <tag>图论</tag>
+         
+        <tag>Tarjan</tag>
          
          
            
