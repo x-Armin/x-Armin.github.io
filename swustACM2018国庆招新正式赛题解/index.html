@@ -97,7 +97,7 @@
 <meta property="og:description" content="这次题其实不难，比较偏思维。按照出题人的预期，题目难度分布是这样的：     难度 培训来了的都能A 签到题 中等题 防AK     题号 A  D E  I B  J  F C  H     结果，看看榜…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005ZgyPegy1fvxs86bn1qj30rz02vwec.jpg">
-<meta property="og:updated_time" content="2018-10-06T03:27:10.835Z">
+<meta property="og:updated_time" content="2018-10-06T03:41:31.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swustACM2018国庆招新正式赛题解">
 <meta name="twitter:description" content="这次题其实不难，比较偏思维。按照出题人的预期，题目难度分布是这样的：     难度 培训来了的都能A 签到题 中等题 防AK     题号 A  D E  I B  J  F C  H     结果，看看榜…">
@@ -528,8 +528,10 @@
 <ul>
 <li>最大值被分到了前面一个组，那么无论怎么分，后面的那个组的最大值 $x$ 一定 $x&lt;=a[n]$ ,那么很明显当 $x==a[n]$ 时，有最优解，此时只有把a[n]单独分成一组。</li>
 <li>最大值被分到了后面一个组一样的，当 $x==a[1]$ 时，有最优解;<br>然后答案就是<font size="5">$$ans = Max-min(a[1],a[n])$$</font>
+
 </li>
 </ul>
+<p>这本来是一道中等题，没想到起到了防AK的作用（18无人AC）。</p>
 </blockquote></div>
 </div><div class="tab-pane" id="f-2"><p> <a href="http://scpc.openjudge.cn/2018newchong/F/" target="_blank" rel="noopener">题目链接</a></p>
 <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><blockquote>

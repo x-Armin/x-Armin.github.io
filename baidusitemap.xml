@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://x-armin.com/swustACM2018%E5%9B%BD%E5%BA%86%E6%8B%9B%E6%96%B0%E6%AD%A3%E5%BC%8F%E8%B5%9B%E9%A2%98%E8%A7%A3/</loc>
+    <lastmod>2018-10-06T03:41:31.629Z</lastmod>
+    <data>
+        <display>
+        <title>swustACM2018国庆招新正式赛题解</title>
+        <pubTime>2018-10-05T02:31:16.000Z</pubTime>
+        
+        <tag>比赛题解</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/A-Simple-Math-Problem/</loc>
     <lastmod>2018-10-06T03:35:23.793Z</lastmod>
     <data>
@@ -35,29 +55,9 @@
         
         <tag>背包问题</tag>
          
-        <tag>二进制</tag>
-         
         <tag>dp</tag>
          
-         
-           
-             
-              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/swustACM2018%E5%9B%BD%E5%BA%86%E6%8B%9B%E6%96%B0%E6%AD%A3%E5%BC%8F%E8%B5%9B%E9%A2%98%E8%A7%A3/</loc>
-    <lastmod>2018-10-06T03:27:10.835Z</lastmod>
-    <data>
-        <display>
-        <title>swustACM2018国庆招新正式赛题解</title>
-        <pubTime>2018-10-05T02:31:16.000Z</pubTime>
-        
-        <tag>比赛题解</tag>
+        <tag>二进制</tag>
          
          
            
@@ -241,9 +241,9 @@
         <title>01背包问题</title>
         <pubTime>2018-02-06T05:38:19.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -491,9 +491,9 @@
         <title>完全背包问题</title>
         <pubTime>2018-02-08T09:23:47.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -513,9 +513,9 @@
         <title>多重背包问题</title>
         <pubTime>2018-02-10T11:27:40.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -1184,9 +1184,9 @@
         <title>FATE(二维费用背包问题)</title>
         <pubTime>2018-03-02T07:57:23.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
@@ -1248,9 +1248,9 @@
         <title>ACboy needs your help(分组背包)</title>
         <pubTime>2018-02-16T07:28:32.000Z</pubTime>
         
-        <tag>动态规划</tag>
-         
         <tag>背包问题</tag>
+         
+        <tag>动态规划</tag>
          
          
            
