@@ -58,7 +58,7 @@
 <h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12</span></span><br><span class="line">tanwanlanyue</span><br><span class="line"><span class="number">15</span></span><br><span class="line">wantanlanyueyue</span><br></pre></td></tr></table></figure>
 
 <h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
-</div><div class="tab-pane" id="b-3"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,n) for(int i=a;i&lt;n;i++)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,a,n) for(int i=n-1;i&gt;=a;i--)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRL(a,x) memset(a,x,sizeof(a))</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e4</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">char</span> S[N],T[]=<span class="string">"tanwanlanyue"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    getchar();gets(S);</span><br><span class="line">    <span class="keyword">int</span> Ti=<span class="number">0</span>,Si=<span class="number">0</span>,LenS=<span class="built_in">strlen</span>(S),LenT=<span class="built_in">strlen</span>(T);<span class="comment">//Si是当前的S所要判断的位置，Ti是当前的T所要判断的位置。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(Si&lt;LenS&amp;&amp;Ti&lt;LenT)&#123;</span><br><span class="line">        <span class="keyword">if</span>(T[Ti]==S[Si]) Ti++;  <span class="comment">//如果相等，匹配T的下一个位置</span></span><br><span class="line">        Si++;                   <span class="comment">//匹配S的下一个位置</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="built_in">puts</span>(Ti==LenT?<span class="string">"YES"</span>:<span class="string">"NO"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div><div class="tab-pane" id="b-3"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e4</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">char</span> S[N],T[]=<span class="string">"tanwanlanyue"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    getchar();gets(S);</span><br><span class="line">    <span class="keyword">int</span> Ti=<span class="number">0</span>,Si=<span class="number">0</span>,LenS=<span class="built_in">strlen</span>(S),LenT=<span class="built_in">strlen</span>(T);<span class="comment">//Si是当前的S所要判断的位置，Ti是当前的T所要判断的位置。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(Si&lt;LenS&amp;&amp;Ti&lt;LenT)&#123;</span><br><span class="line">        <span class="keyword">if</span>(T[Ti]==S[Si]) Ti++;  <span class="comment">//如果相等，匹配T的下一个位置</span></span><br><span class="line">        Si++;                   <span class="comment">//匹配S的下一个位置</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="built_in">puts</span>(Ti==LenT?<span class="string">"YES"</span>:<span class="string">"NO"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div></div></div>
 <hr>
 <h1 id="C-左学姐的骨牌"><a href="#C-左学姐的骨牌" class="headerlink" title="C.左学姐的骨牌"></a>C.左学姐的骨牌</h1><div class="tabs" id="c"><ul class="nav-tabs"><li class="tab active"><a href="#c-1">思路</a></li><li class="tab"><a href="#c-2">题目描述</a></li><li class="tab"><a href="#c-3">代码</a></li></ul><div class="tab-content"><div class="tab-pane active" id="c-1"><div class="note default"><p>思维题。</p>
@@ -247,7 +247,7 @@
 <p>The first line contains an integer $T(1 \le T \le 20)$, which is the number of test cases.</p>
 <p>For each test case:</p>
 <p>The first line contains two integers: $N(1 \le N \le 20)$, $Q(1 \le Q \le 10000)$, representing the number of kinds of ships and the number of queries.</p>
-<p>For the next $N$ lines, each line contains two integers: $V<a href="1 \le V[i] \le 20">i</a>$,$C<a href="1 \le C[i] \le 20">i</a>$, representing the weight the $i^{th}$ kind of ship can carry, and the number of the $i^{th}$ kind of ship is $2^{C[i]} - 1$.</p>
+<p>For the next $N$ lines, each line contains two integers: $V[i](1 \le V[i] \le 20)$ , $C[i](1 \le C[i] \le 20)$, representing the weight the $i^{th}$ kind of ship can carry, and the number of the $i^{th}$ kind of ship is $2^{C[i]} - 1$.</p>
 <p>For the next $Q$ lines, each line contains a single integer: $S(1 \le S \le 10000)$, representing the queried  weight.</p>
 </blockquote>
 <h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><blockquote>
@@ -281,16 +281,16 @@
             
             <tag> 背包问题 </tag>
             
-            <tag> dp </tag>
-            
             <tag> 二进制 </tag>
+            
+            <tag> dp </tag>
             
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[A Simple Math Problem]]></title>
+      <title><![CDATA[A Simple Math Problem(矩阵快速幂)]]></title>
       <url>/A-Simple-Math-Problem/</url>
       <content type="html"><![CDATA[<script src="\assets\js\APlayer.min.js"> </script><h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p>传送门：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1757" target="_blank" rel="noopener">hdu-1757</a></p>
 <blockquote>
@@ -4149,9 +4149,9 @@ x \equiv  c\ \ (mod\  33) \\
         
         <tags>
             
-            <tag> 背包问题 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 背包问题 </tag>
             
         </tags>
         
@@ -4350,9 +4350,9 @@ x \equiv  c\ \ (mod\  33) \\
         
         <tags>
             
-            <tag> 背包问题 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 背包问题 </tag>
             
         </tags>
         
@@ -4626,9 +4626,9 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
         
         <tags>
             
-            <tag> 背包问题 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 背包问题 </tag>
             
         </tags>
         
@@ -4680,9 +4680,9 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
         
         <tags>
             
-            <tag> 背包问题 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 背包问题 </tag>
             
         </tags>
         
@@ -4741,9 +4741,9 @@ dp[i-1][j-cost[i]]+valum[i] &\mbox{拿第i个，那么就把前cost[i]体积的�
         
         <tags>
             
-            <tag> 背包问题 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 背包问题 </tag>
             
         </tags>
         
