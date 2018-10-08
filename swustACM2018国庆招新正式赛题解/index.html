@@ -97,7 +97,7 @@
 <meta property="og:description" content="这次题其实不难，比较偏思维。按照出题人的预期，题目难度分布是这样的：     难度 培训来了的都能A 签到题 中等题 防AK     题号 A  D E  I B  J  F C  H     结果，看看榜…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005ZgyPegy1fvxs86bn1qj30rz02vwec.jpg">
-<meta property="og:updated_time" content="2018-10-06T03:41:31.629Z">
+<meta property="og:updated_time" content="2018-10-08T14:45:33.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swustACM2018国庆招新正式赛题解">
 <meta name="twitter:description" content="这次题其实不难，比较偏思维。按照出题人的预期，题目难度分布是这样的：     难度 培训来了的都能A 签到题 中等题 防AK     题号 A  D E  I B  J  F C  H     结果，看看榜…">
@@ -571,7 +571,7 @@
 </div><div class="tab-pane" id="g-3"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,(<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">sqrt</span>(n));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div></div></div>
 <hr>
-<h1 id="H-简单的射箭练习"><a href="#H-简单的射箭练习" class="headerlink" title="H.简单的射箭练习"></a>H.简单的射箭练习</h1><div class="tabs" id="h"><ul class="nav-tabs"><li class="tab active"><a href="#h-1">思路</a></li><li class="tab"><a href="#h-2">题目描述</a></li><li class="tab"><a href="#h-3">代码</a></li></ul><div class="tab-content"><div class="tab-pane active" id="h-1"><div class="note default"><p>emmmm,出题人友链第一个，去找他吧</p></div>
+<h1 id="H-简单的射箭练习"><a href="#H-简单的射箭练习" class="headerlink" title="H.简单的射箭练习"></a>H.简单的射箭练习</h1><div class="tabs" id="h"><ul class="nav-tabs"><li class="tab active"><a href="#h-1">思路</a></li><li class="tab"><a href="#h-2">题目描述</a></li><li class="tab"><a href="#h-3">代码</a></li></ul><div class="tab-content"><div class="tab-pane active" id="h-1"><div class="note default"><p>以下是出题人自己写的题解：<br>假设左学姐射中靶心概率为A，死库水学长射中靶心概率为B，显然答案是<br>$A+A(1-A)(1-B)+A(1-A)^2(1-B)^2+A(1-A)^3(1-B)^3+…+A(1-A)^{n-1}(1-B)^{n-1}$<br>显然是个等比数列前n项和：$ \frac {A(1-(1-A)^(n+1)(1-B)^(n+1))}{1-(1-A)(1-B)}$<br>，n显然无穷大，那么 $(1-A)^{n+1}(1-B)^{n+1}$ 显然是无限接近于0，因为保留12位小数，这个东西显然可以忽略，所以答案就是$ \frac{A}{1-(1-A)*(1-B)}$<br>当然你也可以暴力，当等比项$(1-A)^{n+1}(1-B)^{n+1}$小于$10^{-18}$左右的时候，就可以输出了。但是这种做法被我卡掉了。<br>众所周知，double只能保证14位小数精度，显然精度不够，我们需要使用long double,因为dev奇怪的原因c语言无法输出long double ,所以需要用c++输出，考虑到你们不会，我把怎么使用放在了提示里。</p></div>
 </div><div class="tab-pane" id="h-2"><p> <a href="http://scpc.openjudge.cn/2018newchong/H/" target="_blank" rel="noopener">题目链接</a></p>
 <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><blockquote>
 <p>弓箭手zxj与sksxz在进行一场比赛。他们轮流射击，zxj先手。</p>
@@ -659,7 +659,7 @@
   <p><span>本文标题:</span><a href="/swustACM2018国庆招新正式赛题解/">swustACM2018国庆招新正式赛题解</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年10月05日 - 10:10</p>
-  <p><span>最后更新:</span>2018年10月06日 - 11:10</p>
+  <p><span>最后更新:</span>2018年10月08日 - 22:10</p>
   <p><span>原始链接:</span><a href="/swustACM2018国庆招新正式赛题解/" title="swustACM2018国庆招新正式赛题解">http://x-armin.com/swustACM2018国庆招新正式赛题解/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/swustACM2018国庆招新正式赛题解/"  aria-label="复制成功！"></i></span>
   </p>
