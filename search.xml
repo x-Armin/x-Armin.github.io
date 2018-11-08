@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hie with the Pie（Floyd+状压dp）]]></title>
+    <url>%2FHie-with-the-Pie%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-3311 &emsp;The Pizazz Pizzeria prides itself in delivering pizzas to its customers as fast as possible. Unfortunately, due to cutbacks, they can afford to hire only one driver to do the deliveries. He will wait for 1 or more (up to 10) orders to be processed before he starts any deliveries. Needless to say, he would like to take the shortest route in delivering these goodies and returning to the pizzeria, even if it means passing the same location(s) or the pizzeria more than once on the way. He has commissioned you to write a program to help him. Input Input will consist of multiple test cases. The first line will contain a single integer n indicating the number of orders to deliver, where 1 ≤ n ≤ 10. After this will be n + 1 lines each containing n + 1 integers indicating the times to travel between the pizzeria (numbered 0) and the n locations (numbers 1 to n). The jth value on the ith line indicates the time to go directly from location i to location j without visiting any other locations along the way. Note that there may be quicker ways to go from i to j via other locations, due to different speed limits, traffic lights, etc. Also, the time values may not be symmetric, i.e., the time to go directly from location i to j may not be the same as the time to go directly from location j to i. An input value of n = 0 will terminate input. Output For each test case, you should output a single number indicating the minimum time to deliver all of the pizzas and return to the pizzeria. Examples intput 12345630 1 10 101 0 1 210 1 0 1010 2 10 00 output 18 题目大意 给你一个有$n+1$，$(1&lt;=n&lt;=10)$个点的有向完全图，用矩阵的形式给出任意两个不同点之间的距离。（其中从$i$到$j$的距离不一定等于从$j$到$i$的距离）现在要你求出从$0$号点出发，走过$1$到$n$号点至少一次，然后再回到$0$号点所花的最小时间。 思路 先用floyd $O(n^3)$预处理出任意两个点之间的最短距离。 用一个11位的二进制数表示状态，1表示要经过这个点，0表示不经过。 $dp[state][j]$: 在$state$状态下$0$点到达$j$点的最短路。如果state状态里面经过了i，并且没有经过j，那么就能通过dp[state][i]更新dp[state|(1&lt;&lt;j)][j]。 这道题的状态和状态转移方程和zoj-3471很像：dp[state|(1]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>状压dp</tag>
+        <tag>dp</tag>
+        <tag>状压</tag>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Mondriaan's Dream（dfs+状压dp）]]></title>
+    <url>%2FMondriaan-s-Dream%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-2411 &emsp;Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw on, for all of his paper was filled with squares and rectangles), he dreamt of filling a large rectangle with small rectangles of width 2 and height 1 in varying ways.&emsp;Expert as he was in this material, he saw at a glance that he’ll need a computer to calculate the number of ways to fill the large rectangle whose dimensions were integer values, as well. Help him, so that his dream won’t turn into a nightmare! InputThe input contains several test cases. Each test case is made up of two integer numbers: the height h and the width w of the large rectangle. Input is terminated by $h=w=0$. Otherwise, $1&lt;=h,w&lt;=11$. Output For each test case, output the number of different ways the given rectangle can be filled with small rectangles of size 2 times 1. Assume the given large rectangle is oriented, i.e. count symmetrical tilings multiple times. Examples intput 1234567891 21 31 42 22 32 42 114 110 0 output 1234567810123514451205 思路 dp[i][j]：i行在j状态的方案数 对于每一行，dfs所有能放的情况。 状态转移方程(i:行 state:i行的状态 nex:i+1行的状态)：dp[i+1][nex]+=dp[i][state] 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546/*Problem: 2411 User: ArminMemory: 1140K Time: 16MSLanguage: G++ Result: Accepted*/#include&lt;stdio.h&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))typedef long long ll;const int N=13;int n,m; ll dp[N][1&lt;&lt;N];void dfs(int i,int j,int state,int nex)&#123; //i:当前行 j:当前列 state:i行的状态 nex:i+1行的状态 if(j==n)&#123; //如果到达边界，直接加 dp[i+1][nex]+=dp[i][state]; return; &#125; if(1&lt;&lt;j&amp;state) //如果j位置放了东西 dfs(i,j+1,state,nex); if(!(1&lt;&lt;j&amp;state)) //如果j位置是空，竖着放一个 dfs(i,j+1,state,1&lt;&lt;j|nex);//由于竖着放了一个，所以下一行的j位置就被占用了。 if(j+1&lt;n&amp;&amp;!(1&lt;&lt;j&amp;state)&amp;&amp;!((1&lt;&lt;j+1&amp;state))) //如果j位置和j+1位置都为空，横放一个 dfs(i,j+2,state,nex);&#125;int main()&#123; while(scanf("%d%d",&amp;n,&amp;m)&amp;&amp;(n||m))&#123; CRL(dp,0); dp[0][0]=1; if(n&gt;m) swap(n,m); rep(i,0,m) rep(j,0,1&lt;&lt;n) if(dp[i][j])//剪枝：dp[i][j]不为0才能更新否则更新没意义 dfs(i,0,j,0); printf("%lld\n",dp[m][0]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>状压dp</tag>
+        <tag>dp</tag>
+        <tag>状压</tag>
+        <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[炮兵阵地（状压dp）]]></title>
+    <url>%2F%E7%82%AE%E5%85%B5%E9%98%B5%E5%9C%B0%2F</url>
+    <content type="text"><![CDATA[描述传送门：poj-1185 &emsp;司令部的将军们打算在NM的网格地图上部署他们的炮兵部队。一个NM的地图由N行M列组成，地图的每一格可能是山地（用”H” 表示），也可能是平原（用”P”表示），如下图。在每一格平原地形上最多可以布置一支炮兵部队（山地上不能够部署炮兵部队）；一支炮兵部队在地图上的攻击范围如图中黑色区域所示： &emsp;如果在地图中的灰色所标识的平原上部署一支炮兵部队，则图中的黑色的网格表示它能够攻击到的区域：沿横向左右各两格，沿纵向上下各两格。图上其它白色网格均攻击不到。从图上可见炮兵的攻击范围不受地形的影响。现在，将军们规划如何部署炮兵部队，在防止误伤的前提下（保证任何两支炮兵部队之间不能互相攻击，即任何一支炮兵部队都不在其他支炮兵部队的攻击范围内），在整个地图区域内最多能够摆放多少我军的炮兵部队。 Input 第一行包含两个由空格分割开的正整数，分别表示N和M；接下来的N行，每一行含有连续的M个字符(‘P’或者’H’)，中间没有空格。按顺序表示地图中每一行的数据。N &lt;= 100；M &lt;= 10。 Output 仅一行，包含一个整数K，表示最多能摆放的炮兵部队的数量。 Examples intput 1234565 4PHPPPPHHPPPPPHPPPHHP output 16 思路 对于每行都用一个二进制数来表示这一行的地图，1表示山地，0表示平原。 用一个$N$位二进制数表示每行放炮兵的状态，1表示放，0表示不放。!(i&lt;&lt;1&amp;i)&amp;&amp;!(i&lt;&lt;2&amp;i) 表示没有两个1相邻，也没有两个1之间只有一个0，那么这个状态合法。 $j$状态能放到$i$行的条件是: j&amp;Map[i]==0，即没有山地和炮兵重合。同样的，$i$行，$i-1$行，$i-2$行都不能有炮兵重合，重合了就能互相攻击到。 $dp[i][j][k]$: $i$行为状态$j$,$i-1$行为状态$k$时最大ans,状态转移方程就是：dp[i][j][k]=max(dp[i-1][k][l]+Soldier[j] ,dp[i][j][k]) 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960/*User: ArminMemory: 3332K Time: 250MSLanguage: G++ Result: Accepted*/#include&lt;stdio.h&gt;#include&lt;math.h&gt;#include&lt;vector&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))const int N=1e2+5;int dp[N][N][N],n,m,Map[N],Soldier[N]; //dp[i][j][k]:i行为状态j,i-1行为状态k时最大ansvector&lt;int&gt; ok;char x;int Count(int x)&#123;int sum=0;while(x)&#123;sum++;x-=x&amp;-x;&#125;return sum;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n+1)&#123; //预处理每行状态，每行用一个二进制数表示 getchar(); rep(j,0,m) Map[i]= Map[i]&lt;&lt;1|getchar()=='H'; &#125; rep(i,0,1&lt;&lt;m) //预处理出所有合法的状态，放在vector中 if(!(i&lt;&lt;1&amp;i)&amp;&amp;!(i&lt;&lt;2&amp;i))&#123; Soldier[ok.size()]=Count(i); ok.push_back(i); &#125; rep(i,0,ok.size()) //预处理第一排，枚举所有合法状态 if(!(Map[1]&amp;ok[i])) //可以放到这排 dp[1][i][0]=Soldier[i]; rep(i,2,n+1) rep(j,0,ok.size())&#123; if(Map[i]&amp;ok[j]) continue; //和i行有冲突，跳过 rep(k,0,ok.size())&#123; if(Map[i-1]&amp;ok[k]||ok[j]&amp;ok[k]) continue; //合法状态和i-1行有冲突或者i行状态和i-1行冲突，跳过 rep(l,0,ok.size())&#123; if(Map[i-2]&amp;ok[l]||ok[l]&amp;ok[k]||ok[l]&amp;ok[j]) continue;//合法状态和i-2行有冲突或 i-2行和i行有冲突 或 i-2行和i-1行有冲突，跳过 dp[i][j][k]=max(dp[i-1][k][l]+Soldier[j] ,dp[i][j][k]); //状态转移 &#125; &#125; &#125; int ans=0; for(int i=0; i&lt;ok.size(); i++) for(int j=0; j&lt;ok.size(); j++) //枚举dp[row-1][i][j] ans=max(ans,dp[n][i][j]); printf("%d\n",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>状压dp</tag>
+        <tag>dp</tag>
+        <tag>状压</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Most Powerful（状压dp入门）]]></title>
     <url>%2FMost-Powerful%2F</url>
     <content type="text"><![CDATA[描述传送门：ZOJ-3471 &emsp;Recently, researchers on Mars have discovered N powerful atoms. All of them are different. These atoms have some properties. When two of these atoms collide, one of them disappears and a lot of power is produced. Researchers know the way every two atoms perform when collided and the power every two atoms can produce. You are to write a program to make it most powerful, which means that the sum of power produced during all the collides is maximal. Input There are multiple cases. The first line of each case has an integer $N (2 &lt;= N &lt;= 10)$, which means there are N atoms: $A_1, A_2, … , A_N$. Then $N$ lines follow. There are $N$ integers in each line. The $j^{th}$ integer on the $i^{th}$ line is the power produced when $A_i$ and $A_j$ collide with $A_j$ gone. All integers are positive and not larger than 10000. The last case is followed by a 0 in one line. There will be no more than 500 cases including no more than 50 large cases that $N$ is 10. Output Output the maximal power these $N$ atoms can produce in a line for each case. Examples intput 1234567820 41 030 20 112 0 11 10 00 output 12422 思路 状态dp入门题，用0来表示未泯灭，1表示已经泯灭，这样就能用一个n位的整数来记录所有的状态。 对于状态i，假设第j位和第k位都是0，那么我们就可以通过dp[i]推出 dp[i&amp;1&lt;&lt;k]的状态。 状态转移方程： dp[i|1]]></content>
@@ -252,8 +296,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>SPFA</tag>
       </tags>
   </entry>
@@ -266,8 +310,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>spfa</tag>
       </tags>
   </entry>
@@ -280,8 +324,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>spfa</tag>
       </tags>
   </entry>
@@ -294,8 +338,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>SPFA</tag>
       </tags>
   </entry>
