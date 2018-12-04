@@ -18,7 +18,7 @@
   <entry>
     <title><![CDATA[Mondriaan's Dream（dfs+状压dp）]]></title>
     <url>%2FMondriaan-s-Dream%2F</url>
-    <content type="text"><![CDATA[描述传送门：poj-2411 &emsp;Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw on, for all of his paper was filled with squares and rectangles), he dreamt of filling a large rectangle with small rectangles of width 2 and height 1 in varying ways.&emsp;Expert as he was in this material, he saw at a glance that he’ll need a computer to calculate the number of ways to fill the large rectangle whose dimensions were integer values, as well. Help him, so that his dream won’t turn into a nightmare! InputThe input contains several test cases. Each test case is made up of two integer numbers: the height h and the width w of the large rectangle. Input is terminated by $h=w=0$. Otherwise, $1&lt;=h,w&lt;=11$. Output For each test case, output the number of different ways the given rectangle can be filled with small rectangles of size 2 times 1. Assume the given large rectangle is oriented, i.e. count symmetrical tilings multiple times. Examples intput 1234567891 21 31 42 22 32 42 114 110 0 output 1234567810123514451205 思路 dp[i][j]：i行在j状态的方案数 对于每一行，dfs所有能放的情况。 状态转移方程(i:行 state:i行的状态 nex:i+1行的状态)：dp[i+1][nex]+=dp[i][state] 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546/*Problem: 2411 User: ArminMemory: 1140K Time: 16MSLanguage: G++ Result: Accepted*/#include&lt;stdio.h&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))typedef long long ll;const int N=13;int n,m; ll dp[N][1&lt;&lt;N];void dfs(int i,int j,int state,int nex)&#123; //i:当前行 j:当前列 state:i行的状态 nex:i+1行的状态 if(j==n)&#123; //如果到达边界，直接加 dp[i+1][nex]+=dp[i][state]; return; &#125; if(1&lt;&lt;j&amp;state) //如果j位置放了东西 dfs(i,j+1,state,nex); if(!(1&lt;&lt;j&amp;state)) //如果j位置是空，竖着放一个 dfs(i,j+1,state,1&lt;&lt;j|nex);//由于竖着放了一个，所以下一行的j位置就被占用了。 if(j+1&lt;n&amp;&amp;!(1&lt;&lt;j&amp;state)&amp;&amp;!((1&lt;&lt;j+1&amp;state))) //如果j位置和j+1位置都为空，横放一个 dfs(i,j+2,state,nex);&#125;int main()&#123; while(scanf("%d%d",&amp;n,&amp;m)&amp;&amp;(n||m))&#123; CRL(dp,0); dp[0][0]=1; if(n&gt;m) swap(n,m); rep(i,0,m) rep(j,0,1&lt;&lt;n) if(dp[i][j])//剪枝：dp[i][j]不为0才能更新否则更新没意义 dfs(i,0,j,0); printf("%lld\n",dp[m][0]); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[描述传送门：poj-2411 &emsp;Squares and rectangles fascinated the famous Dutch painter Piet Mondriaan. One night, after producing the drawings in his ‘toilet series’ (where he had to use his toilet paper to draw on, for all of his paper was filled with squares and rectangles), he dreamt of filling a large rectangle with small rectangles of width 2 and height 1 in varying ways.&emsp;Expert as he was in this material, he saw at a glance that he’ll need a computer to calculate the number of ways to fill the large rectangle whose dimensions were integer values, as well. Help him, so that his dream won’t turn into a nightmare! Input The input contains several test cases. Each test case is made up of two integer numbers: the height h and the width w of the large rectangle. Input is terminated by $h=w=0$. Otherwise, $1&lt;=h,w&lt;=11$. Output For each test case, output the number of different ways the given rectangle can be filled with small rectangles of size 2 times 1. Assume the given large rectangle is oriented, i.e. count symmetrical tilings multiple times. Examples intput 1234567891 21 31 42 22 32 42 114 110 0 output 1234567810123514451205 思路 dp[i][j]：i行在j状态的方案数 对于每一行，dfs所有能放的情况。 状态转移方程(i:行 state:i行的状态 nex:i+1行的状态)：dp[i+1][nex]+=dp[i][state] 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546/*Problem: 2411 User: ArminMemory: 1140K Time: 16MSLanguage: G++ Result: Accepted*/#include&lt;stdio.h&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;using namespace std;#define rep(i,a,n) for(int i=a;i&lt;n;i++)#define repd(i,a,n) for(int i=n-1;i&gt;=a;i--)#define CRL(a,x) memset(a,x,sizeof(a))typedef long long ll;const int N=13;int n,m; ll dp[N][1&lt;&lt;N];void dfs(int i,int j,int state,int nex)&#123; //i:当前行 j:当前列 state:i行的状态 nex:i+1行的状态 if(j==n)&#123; //如果到达边界，直接加 dp[i+1][nex]+=dp[i][state]; return; &#125; if(1&lt;&lt;j&amp;state) //如果j位置放了东西 dfs(i,j+1,state,nex); if(!(1&lt;&lt;j&amp;state)) //如果j位置是空，竖着放一个 dfs(i,j+1,state,1&lt;&lt;j|nex);//由于竖着放了一个，所以下一行的j位置就被占用了。 if(j+1&lt;n&amp;&amp;!(1&lt;&lt;j&amp;state)&amp;&amp;!((1&lt;&lt;j+1&amp;state))) //如果j位置和j+1位置都为空，横放一个 dfs(i,j+2,state,nex);&#125;int main()&#123; while(scanf("%d%d",&amp;n,&amp;m)&amp;&amp;(n||m))&#123; CRL(dp,0); dp[0][0]=1; if(n&gt;m) swap(n,m); rep(i,0,m) rep(j,0,1&lt;&lt;n) if(dp[i][j])//剪枝：dp[i][j]不为0才能更新否则更新没意义 dfs(i,0,j,0); printf("%lld\n",dp[m][0]); &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -296,8 +296,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>SPFA</tag>
       </tags>
   </entry>
@@ -310,8 +310,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>spfa</tag>
       </tags>
   </entry>
@@ -324,8 +324,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>spfa</tag>
       </tags>
   </entry>
@@ -338,8 +338,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>差分约束</tag>
         <tag>最短路</tag>
+        <tag>差分约束</tag>
         <tag>SPFA</tag>
       </tags>
   </entry>
