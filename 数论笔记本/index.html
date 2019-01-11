@@ -96,10 +96,13 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="数论是个好东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T06:28:09.845Z">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/005ZgyPegy1fz1k0l2itjj305s03iweb.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/005ZgyPegy1fz1k71y6daj305s03idft.jpg">
+<meta property="og:updated_time" content="2019-01-10T08:33:13.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论笔记本">
 <meta name="twitter:description" content="数论是个好东西。">
+<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/005ZgyPegy1fz1k0l2itjj305s03iweb.jpg">
 
 
 
@@ -561,7 +564,24 @@ x  \equiv  a_n (mod\ m_n)
 <h2 id="公式-2"><a href="#公式-2" class="headerlink" title="公式"></a>公式</h2><script type="math/tex; mode=display">
 x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$的乘积。<br>$t_i=M_i^{-1}$为$M_i$模$m_i$的数论倒数($t_i$为$M_i$模$m_i$意义下的乘法逆元)。</p>
 <hr>
+<h1 id="Yong表"><a href="#Yong表" class="headerlink" title="Yong表"></a>Yong表</h1><blockquote>
+<p><img src="http://wx1.sinaimg.cn/mw690/005ZgyPegy1fz1k0l2itjj305s03iweb.jpg" alt="一个 (1, 4, 5)分拆表示的杨表"><br>杨表（英语：Young tableau），又称杨氏矩阵。是用于组合表示理论和舒伯特演算的工具。</p>
+</blockquote>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<ul>
+<li>杨表是由有限的方格组成。对于一个正整数，给定一个整数分拆λ（10=1+4+5），则对应一个杨表πλ （注意这是一个递降的过程，也就是说下面一行的方格数要大于等于上一行的方格数）。可以说杨表与整数分拆$λ$一一对应。</li>
+<li>勾长：对于杨表中的一个方格v，其勾长 <strong>$hook(v)$</strong> 等于同行右边的方格数加上同列上面的方格数，再加上1（也就是他自己）。</li>
+</ul>
+</blockquote>
+<h2 id="在表示理论的应用"><a href="#在表示理论的应用" class="headerlink" title="在表示理论的应用"></a>在表示理论的应用</h2><blockquote>
+<p>给定一个杨表$π_λ$ ，一个有n个方格。那么把1到n这n个数字填到这个杨表中，使得每行从左到右都是递增的，每列从下到上也是递增的。用 $dim_{π\ λ}$ 表示这样的方法个数，如图，这个这种填写数字中的一种。我们有下面的勾长公式。<br><img src="http://wx2.sinaimg.cn/mw690/005ZgyPegy1fz1k71y6daj305s03idft.jpg" alt=""></p>
+</blockquote>
+<h2 id="勾长公式"><a href="#勾长公式" class="headerlink" title="勾长公式"></a>勾长公式</h2><blockquote>
+<p>用 $dim_λ$表示这样的方法个数，勾长公式就是方法个数等于$n!$除以所有方格的勾长的乘积。</p>
+<p><center><font size="6"><script type="math/tex">dim_ {\pi_{\lambda}}=\frac{n!}{\prod_{x\in Y(\lambda)} hook(x)}</script></font></center></p>
+<hr>
 <p>未完待续。。。</p>
+</blockquote>
 
       
     </div>
@@ -596,7 +616,7 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
   <p><span>本文标题:</span><a href="/数论笔记本/">数论笔记本</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2018年02月12日 - 10:02</p>
-  <p><span>最后更新:</span>2018年08月21日 - 14:08</p>
+  <p><span>最后更新:</span>2019年01月10日 - 16:01</p>
   <p><span>原始链接:</span><a href="/数论笔记本/" title="数论笔记本">http://x-armin.com/数论笔记本/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/数论笔记本/"  aria-label="复制成功！"></i></span>
   </p>
@@ -772,7 +792,7 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -794,7 +814,7 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -891,7 +911,7 @@ x = (\sum_{i=1}^n a_i t_i M_i)modM</script><p>$M_i$为除$m_i$外其他所有$m$
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">3.1.</span> <span class="nav-text">求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#费马小定理求逆元。"><span class="nav-number">3.1.1.</span> <span class="nav-text">费马小定理求逆元。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里德算法求逆元"><span class="nav-number">3.1.2.</span> <span class="nav-text">扩展欧几里德算法求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理求逆元"><span class="nav-number">3.1.3.</span> <span class="nav-text">欧拉定理求逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速幂"><span class="nav-number">4.</span> <span class="nav-text">快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推导过程"><span class="nav-number">4.1.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵快速幂"><span class="nav-number">5.</span> <span class="nav-text">矩阵快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-3"><span class="nav-number">5.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斯特林公式"><span class="nav-number">6.</span> <span class="nav-text">斯特林公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">6.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">6.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容斥原理"><span class="nav-number">7.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">7.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lucas定理"><span class="nav-number">8.</span> <span class="nav-text">Lucas定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式-1"><span class="nav-number">8.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-2"><span class="nav-number">8.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断一个组合数是奇数还是偶数"><span class="nav-number">9.</span> <span class="nav-text">判断一个组合数是奇数还是偶数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">10.</span> <span class="nav-text">中国剩余定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件"><span class="nav-number">10.1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式-2"><span class="nav-number">10.2.</span> <span class="nav-text">公式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#欧几里德算法-gcd"><span class="nav-number">1.</span> <span class="nav-text">欧几里德算法(gcd)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定理"><span class="nav-number">1.1.</span> <span class="nav-text">定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">1.2.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.</span> <span class="nav-text">充分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.2.</span> <span class="nav-text">必要性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展欧几里德算法"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">2.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#乘法逆元"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求法"><span class="nav-number">3.1.</span> <span class="nav-text">求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#费马小定理求逆元。"><span class="nav-number">3.1.1.</span> <span class="nav-text">费马小定理求逆元。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里德算法求逆元"><span class="nav-number">3.1.2.</span> <span class="nav-text">扩展欧几里德算法求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欧拉定理求逆元"><span class="nav-number">3.1.3.</span> <span class="nav-text">欧拉定理求逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速幂"><span class="nav-number">4.</span> <span class="nav-text">快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推导过程"><span class="nav-number">4.1.</span> <span class="nav-text">推导过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-2"><span class="nav-number">4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#矩阵快速幂"><span class="nav-number">5.</span> <span class="nav-text">矩阵快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-3"><span class="nav-number">5.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斯特林公式"><span class="nav-number">6.</span> <span class="nav-text">斯特林公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">6.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-1"><span class="nav-number">6.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#容斥原理"><span class="nav-number">7.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">7.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lucas定理"><span class="nav-number">8.</span> <span class="nav-text">Lucas定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式-1"><span class="nav-number">8.1.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-2"><span class="nav-number">8.2.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断一个组合数是奇数还是偶数"><span class="nav-number">9.</span> <span class="nav-text">判断一个组合数是奇数还是偶数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中国剩余定理"><span class="nav-number">10.</span> <span class="nav-text">中国剩余定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件"><span class="nav-number">10.1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式-2"><span class="nav-number">10.2.</span> <span class="nav-text">公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Yong表"><span class="nav-number">11.</span> <span class="nav-text">Yong表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">11.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在表示理论的应用"><span class="nav-number">11.2.</span> <span class="nav-text">在表示理论的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#勾长公式"><span class="nav-number">11.3.</span> <span class="nav-text">勾长公式</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -4,6 +4,90 @@
 
     
   <url>
+    <loc>http://x-armin.com/%E8%89%BA/</loc>
+    <lastmod>2019-01-11T03:12:24.458Z</lastmod>
+    <data>
+        <display>
+        <title>艺(贪心)</title>
+        <pubTime>2019-01-10T17:30:05.000Z</pubTime>
+        
+        <tag>贪心</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/%E9%BB%91%E9%BB%91%E7%99%BD%E7%99%BD/</loc>
+    <lastmod>2019-01-11T03:11:09.906Z</lastmod>
+    <data>
+        <display>
+        <title>黑黑白白(树上博弈)</title>
+        <pubTime>2019-01-10T17:30:16.000Z</pubTime>
+        
+        <tag>dfs</tag>
+         
+        <tag>博弈</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E8%9B%99%E3%81%8C%E5%B8%B0%E3%81%A3%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99/</loc>
+    <lastmod>2019-01-11T03:09:17.007Z</lastmod>
+    <data>
+        <display>
+        <title>あなたの蛙が帰っています（Catalan数）</title>
+        <pubTime>2019-01-10T17:29:44.000Z</pubTime>
+        
+        <tag>数论</tag>
+         
+        <tag>Catalan数</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0%E6%9C%AC/</loc>
+    <lastmod>2019-01-10T08:33:13.319Z</lastmod>
+    <data>
+        <display>
+        <title>数论笔记本</title>
+        <pubTime>2018-02-12T02:33:08.000Z</pubTime>
+        
+        <tag>数论</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习笔记" url="http://x-armin.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/%E8%A5%BF%E5%8D%97%E6%B0%91%E6%97%8F%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%A0%A1%E8%B5%9B%EF%BC%88%E7%BD%91%E7%BB%9C%E8%B5%9B%EF%BC%89%E9%A2%98%E8%A7%A3/</loc>
     <lastmod>2019-01-01T14:31:29.130Z</lastmod>
     <data>
@@ -365,26 +449,6 @@
            
              
               <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0%E6%9C%AC/</loc>
-    <lastmod>2018-08-21T06:28:09.845Z</lastmod>
-    <data>
-        <display>
-        <title>数论笔记本</title>
-        <pubTime>2018-02-12T02:33:08.000Z</pubTime>
-        
-        <tag>数论</tag>
-         
-         
-           
-             
-              <breadCrumb title="学习笔记" url="http://x-armin.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>
@@ -1316,9 +1380,9 @@
         <title>How Many Tables(并查集入门)</title>
         <pubTime>2018-03-10T01:29:15.000Z</pubTime>
         
-        <tag>并查集</tag>
-         
         <tag>图论</tag>
+         
+        <tag>并查集</tag>
          
          
            
