@@ -665,7 +665,7 @@
   <entry>
     <title><![CDATA[Is It A Tree? (并查集入门)]]></title>
     <url>%2FIs-It-A-Tree-%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%85%A5%E9%97%A8%2F</url>
-    <content type="text"><![CDATA[描述传送门：poj-1308 &emsp;A tree is a well-known data structure that is either empty (null, void, nothing) or is a set of one or more nodes connected by directed edges between nodes satisfying the following properties.&emsp;There is exactly one node, called the root, to which no directed edges point.Every node except the root has exactly one edge pointing to it.&emsp;There is a unique sequence of directed edges from the root to each node.&emsp;For example, consider the illustrations below, in which nodes are represented by circles and edges are represented by lines with arrowheads. The first two of these are trees, but the last is not. &emsp;In this problem you will be given several descriptions of collections of nodes connected by directed edges. For each of these you are to determine if the collection satisfies the definition of a tree or not. Input &emsp;The input will consist of a sequence of descriptions (test cases) followed by a pair of negative integers. Each test case will consist of a sequence of edge descriptions followed by a pair of zeroes Each edge description will consist of a pair of integers; the first integer identifies the node from which the edge begins, and the second integer identifies the node to which the edge is directed. Node numbers will always be greater than zero. Output &emsp;For each test case display the line “Case k is a tree.” or the line “Case k is not a tree.”, where k corresponds to the test case number (they are sequentially numbered starting with 1). Examples intput 1234567896 8 5 3 5 2 6 45 6 0 08 1 7 3 6 2 8 9 7 57 4 7 8 7 6 0 03 8 6 8 6 45 3 5 6 5 2 0 0-1 -1 output 123Case 1 is a tree.Case 2 is a tree.Case 3 is not a tree. 思路 初始化每个点单独为一个集合，每次读入A,B就合并A,B所在的集合，每个集合都有一个代表元素，集合中的元素都指向代表元素并且只有代表元素指向自己，如果读入A,B的时候发现A,B的代表数组一样的话就说明有多个节点指向A或B,不是树。 由于节点不一定是从1开始的，如上图的第一个。所以我们用一个mark数组来标记一组数据中“提到”的节点，最后遍历一遍看连通分支数是否等于1。 有一组神坑数据：0 0-1 -1 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273//#include&lt;bits/stdc++.h&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffftypedef unsigned long long LL;typedef long long ll;const double Pi = acos(-1);const double e = 2.718281828459;const int mod =1e9+7;int point[100005],mark[100005];int Find(int x) //找代表元素&#123; int tem=x; while(point[tem]!=tem) tem=point[tem]; int tem2=x; while(point[tem2]!=tem) //压缩路径 &#123; x=point[tem2]; point[tem2]=tem; tem2=x; &#125; return tem;&#125;int main()&#123; int a,b,Flag=0,sum,Case=0; while(cin&gt;&gt;a&gt;&gt;b&amp;&amp;a!=-1&amp;&amp;b!=-1) &#123; Case++; if(a==0&amp;&amp;b==0) &#123; printf("Case %d is a tree.\n",Case); //当数据只有0 0 时 continue; &#125; Flag=0; sum=0; for(int i=0; i&lt;100005; i++) point[i]=i; CRL(mark); do &#123; mark[a]=mark[b]=1; //标记提到过 if(Find(a)==Find(b)) //如果之前就连通，则不是数 Flag=1; else point[Find(a)]=point[Find(b)]; //合并 &#125; while(scanf("%d%d",&amp;a,&amp;b)&amp;&amp;a&amp;&amp;b); for(int i=1; i&lt;100005; i++) if(mark[i]&amp;&amp;point[i]==i) //找连通分支数 sum++; if(Flag||sum&gt;1) printf("Case %d is not a tree.\n",Case); else printf("Case %d is a tree.\n",Case); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[描述传送门：poj-1308 &emsp;A tree is a well-known data structure that is either empty (null, void, nothing) or is a set of one or more nodes connected by directed edges between nodes satisfying the following properties.&emsp;There is exactly one node, called the root, to which no directed edges point.Every node except the root has exactly one edge pointing to it.&emsp;There is a unique sequence of directed edges from the root to each node.&emsp;For example, consider the illustrations below, in which nodes are represented by circles and edges are represented by lines with arrowheads. The first two of these are trees, but the last is not. &emsp;In this problem you will be given several descriptions of collections of nodes connected by directed edges. For each of these you are to determine if the collection satisfies the definition of a tree or not. Input &emsp;The input will consist of a sequence of descriptions (test cases) followed by a pair of negative integers. Each test case will consist of a sequence of edge descriptions followed by a pair of zeroes Each edge description will consist of a pair of integers; the first integer identifies the node from which the edge begins, and the second integer identifies the node to which the edge is directed. Node numbers will always be greater than zero. Output &emsp;For each test case display the line “Case k is a tree.” or the line “Case k is not a tree.”, where k corresponds to the test case number (they are sequentially numbered starting with 1). Examples intput 1234567896 8 5 3 5 2 6 45 6 0 08 1 7 3 6 2 8 9 7 57 4 7 8 7 6 0 03 8 6 8 6 45 3 5 6 5 2 0 0-1 -1 output 123Case 1 is a tree.Case 2 is a tree.Case 3 is not a tree. 思路 初始化每个点单独为一个集合，每次读入A,B就合并A,B所在的集合，每个集合都有一个代表元素，集合中的元素都指向代表元素并且只有代表元素指向自己，如果读入A,B的时候发现A,B的代表数组一样的话就说明有多个节点指向A或B,不是树。 由于节点不一定是从1开始的，如上图的第一个。所以我们用一个mark数组来标记一组数据中“提到”的节点，最后遍历一遍看连通分支数是否等于1。 有一组神坑数据：0 0-1 -1 代码123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffftypedef unsigned long long LL;typedef long long ll;const double Pi = acos(-1);const double e = 2.718281828459;const int mod =1e9+7;int F[1005];int f(int x) &#123; return F[x]==x? x:F[x]=f(F[x]);&#125;void Union(int a,int b) &#123; a=f(a); b=f(b); if(a!=b) F[a]=b;&#125;int main() &#123; int test,n,way,a,b,ans=0; cin&gt;&gt;test; while(test--) &#123; ans=0; cin&gt;&gt;n&gt;&gt;way; for(int i=0; i&lt;=n; i++) F[i]=i; for(int i=0; i&lt;way; i++) &#123; cin&gt;&gt;a&gt;&gt;b; Union(a,b); &#125; for(int i=1; i&lt;=n; i++) //查找有几个代表元素 if(F[i]==i) ans++; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -676,7 +676,7 @@
   <entry>
     <title><![CDATA[How Many Tables(并查集入门)]]></title>
     <url>%2FHow-Many-Tables-%E5%B9%B6%E6%9F%A5%E9%9B%86%E5%85%A5%E9%97%A8%2F</url>
-    <content type="text"><![CDATA[描述传送门：HDU-1213 &emsp;Today is Ignatius’ birthday. He invites a lot of friends. Now it’s dinner time. Ignatius wants to know how many tables he needs at least. You have to notice that not all the friends know each other, and all the friends do not want to stay with strangers.&emsp;One important rule for this problem is that if I tell you A knows B, and B knows C, that means A, B, C know each other, so they can stay in one table.&emsp;For example: If I tell you A knows B, B knows C, and D knows E, so A, B, C can stay in one table, and D, E have to stay in the other one. So Ignatius needs 2 tables at least. Input &emsp;The input starts with an integer T(1&lt;=T&lt;=25) which indicate the number of test cases. Then T test cases follow. Each test case starts with two integers N and M(1&lt;=N,M&lt;=1000). N indicates the number of friends, the friends are marked from 1 to N. Then M lines follow. Each line consists of two integers A and B(A!=B), that means friend A and friend B know each other. There will be a blank line between two cases. Output For each test case, just output how many tables Ignatius needs at least. Do NOT print any blanks. Examples intput 1234567825 31 22 34 55 12 5 output 1224 思路 并查集入门题。初始化每人单独为一个集合，每次读入A,B就合并A,B所在的集合，每个集合都有一个代表元素，集合中的元素都指向代表元素并且只有代表元素指向自己，最后遍历一遍求出答案。 同样的方法也可以求无向图里的连通分支数。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960//#include&lt;bits/stdc++.h&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;string.h&gt;#include&lt;string&gt;#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;#include&lt;math.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffftypedef unsigned long long LL;typedef long long ll;const double Pi = acos(-1);const double e = 2.718281828459;const int mod =1e9+7;int Friend[1005];int Find(int x)&#123; int tem=x; while(Friend[tem]!=tem) //查找x元素所在集合的代表元素 tem=Friend[tem]; int t=x; while(Friend[t]!=tem) //压缩路径 &#123; x=Friend[t]; Friend[t]=tem; t=x; &#125; return tem;&#125;int main()&#123; int test,n,way,a,b,ans=0; cin&gt;&gt;test; while(test--) &#123; ans=0; cin&gt;&gt;n&gt;&gt;way; for(int i=0; i&lt;=n; i++) Friend[i]=i; for(int i=0; i&lt;way; i++) &#123; cin&gt;&gt;a&gt;&gt;b; a=Find(a),b=Find(b); if(a!=b) //合并两个集合 Friend[a]=Friend[b]; &#125; for(int i=1; i&lt;=n; i++) //查找有几个代表元素 if(Friend[i]==i) ans++; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[描述传送门：HDU-1213 &emsp;Today is Ignatius’ birthday. He invites a lot of friends. Now it’s dinner time. Ignatius wants to know how many tables he needs at least. You have to notice that not all the friends know each other, and all the friends do not want to stay with strangers.&emsp;One important rule for this problem is that if I tell you A knows B, and B knows C, that means A, B, C know each other, so they can stay in one table.&emsp;For example: If I tell you A knows B, B knows C, and D knows E, so A, B, C can stay in one table, and D, E have to stay in the other one. So Ignatius needs 2 tables at least. Input &emsp;The input starts with an integer T(1&lt;=T&lt;=25) which indicate the number of test cases. Then T test cases follow. Each test case starts with two integers N and M(1&lt;=N,M&lt;=1000). N indicates the number of friends, the friends are marked from 1 to N. Then M lines follow. Each line consists of two integers A and B(A!=B), that means friend A and friend B know each other. There will be a blank line between two cases. Output For each test case, just output how many tables Ignatius needs at least. Do NOT print any blanks. Examples intput 1234567825 31 22 34 55 12 5 output 1224 思路 并查集入门题。初始化每人单独为一个集合，每次读入A,B就合并A,B所在的集合，每个集合都有一个代表元素，集合中的元素都指向代表元素并且只有代表元素指向自己，最后遍历一遍求出答案。 同样的方法也可以求无向图里的连通分支数。 代码123456789101112131415161718192021222324252627282930313233343536373839404142//#include&lt;bits/stdc++.h&gt;using namespace std;#define CRL(a) memset(a,0,sizeof(a))#define MAX 0xffffffftypedef unsigned long long LL;typedef long long ll;const double Pi = acos(-1);const double e = 2.718281828459;const int mod =1e9+7;int F[1005];int f(int x) &#123; return F[x]==x? x:F[x]=f(F[x]);&#125;void Union(int a,int b)&#123; //合并 a=f(a); b=f(b); if(a!=b) F[a]=b;&#125;int main() &#123; int test,n,way,a,b,ans=0; cin&gt;&gt;test; while(test--) &#123; ans=0; cin&gt;&gt;n&gt;&gt;way; for(int i=0; i&lt;=n; i++) F[i]=i; for(int i=0; i&lt;way; i++) &#123; cin&gt;&gt;a&gt;&gt;b; Union(a,b); &#125; for(int i=1; i&lt;=n; i++) //查找有几个代表元素 if(F[i]==i) ans++; cout&lt;&lt;ans&lt;&lt;endl; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -704,8 +704,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -754,8 +754,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -788,8 +788,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -800,8 +800,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
@@ -812,8 +812,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>背包问题</tag>
         <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
   <entry>
