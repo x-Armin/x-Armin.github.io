@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://x-armin.com/%E5%9C%A8Ubuntu%E4%B8%8A%E4%BD%BF%E7%94%A8SSR/</loc>
+    <lastmod>2019-05-18T16:22:56.626Z</lastmod>
+    <data>
+        <display>
+        <title>在Ubuntu18.04上使用SSR</title>
+        <pubTime>2019-04-05T15:38:25.000Z</pubTime>
+        
+        <tag>Ubuntu</tag>
+         
+         
+           
+             
+              <breadCrumb title="Ubuntu" url="http://x-armin.com/categories/Ubuntu/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/%E6%95%B0%E8%AE%BA%E7%AC%94%E8%AE%B0%E6%9C%AC/</loc>
     <lastmod>2019-05-02T14:10:23.822Z</lastmod>
     <data>
@@ -45,26 +65,6 @@
            
              
               <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://x-armin.com/%E5%9C%A8Ubuntu%E4%B8%8A%E4%BD%BF%E7%94%A8SSR/</loc>
-    <lastmod>2019-05-02T14:07:55.247Z</lastmod>
-    <data>
-        <display>
-        <title>在Ubuntu18.04上使用SSR</title>
-        <pubTime>2019-04-05T15:38:25.000Z</pubTime>
-        
-        <tag>Ubuntu</tag>
-         
-         
-           
-             
-              <breadCrumb title="Ubuntu" url="http://x-armin.com/categories/Ubuntu/"/>
           
         </display>
     </data>
@@ -377,9 +377,9 @@
         
         <tag>图论</tag>
          
-        <tag>最短路</tag>
-         
         <tag>差分约束</tag>
+         
+        <tag>最短路</tag>
          
         <tag>SPFA</tag>
          
@@ -403,9 +403,9 @@
         
         <tag>图论</tag>
          
-        <tag>最短路</tag>
-         
         <tag>差分约束</tag>
+         
+        <tag>最短路</tag>
          
         <tag>SPFA</tag>
          
@@ -429,9 +429,9 @@
         
         <tag>图论</tag>
          
-        <tag>最短路</tag>
-         
         <tag>差分约束</tag>
+         
+        <tag>最短路</tag>
          
         <tag>spfa</tag>
          
@@ -455,9 +455,9 @@
         
         <tag>图论</tag>
          
-        <tag>最短路</tag>
-         
         <tag>差分约束</tag>
+         
+        <tag>最短路</tag>
          
         <tag>spfa</tag>
          
@@ -1216,9 +1216,9 @@
         <title>C Looooops(拓展欧几里德)</title>
         <pubTime>2018-04-26T13:21:40.000Z</pubTime>
         
-        <tag>数论</tag>
-         
         <tag>拓欧</tag>
+         
+        <tag>数论</tag>
          
          
            
@@ -1238,9 +1238,9 @@
         <title>青蛙的约会(拓展欧几里德)</title>
         <pubTime>2018-04-26T09:31:37.000Z</pubTime>
         
-        <tag>数论</tag>
-         
         <tag>拓欧</tag>
+         
+        <tag>数论</tag>
          
          
            
@@ -1282,9 +1282,9 @@
         <title>One Person Game(拓展欧几里德算法)</title>
         <pubTime>2018-04-09T10:47:50.000Z</pubTime>
         
-        <tag>数论</tag>
-         
         <tag>拓欧</tag>
+         
+        <tag>数论</tag>
          
          
            

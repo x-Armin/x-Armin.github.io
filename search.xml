@@ -51,7 +51,7 @@
   <entry>
     <title><![CDATA[在Ubuntu18.04上使用SSR]]></title>
     <url>%2F%E5%9C%A8Ubuntu%E4%B8%8A%E4%BD%BF%E7%94%A8SSR%2F</url>
-    <content type="text"><![CDATA[大家用Ubuntu应该都是 为了科学！ ，所以怎么能少了科学上网呢？先放效果图： 之前用的是没有图形界面的SSR，结果重装之后不知为什么用不起了，就换了一种有图形界面的。 下载SSR 在这里下载最新的electron-ssr.deb版，我下的是0.2.6版。 然后进入到包含electron-ssr的文件夹，输入sudo dpkg -i electron-ssr-0.2.6.deb进行安装。 正常情况下应该是装好了的，但是有的电脑可能会有以下报错：可能是安装的其他软件包不兼容导致了安装包出错时，可以执行sudo apt-get -f install来修复损坏的软件包，尝试卸载出错的包，重新安装正确版本的。然后再次输入sudo dpkg -i electron-ssr-0.2.6.deb就可以安装了。 然后就可以看到那个熟悉的小飞机了，填好就行。 配置浏览器 我用的是chrome，正常情况下是打不开谷歌商城下载插件的，所以先下载谷歌访问助手。下载下来是个.crx的文件，把.crx改成.zip，然后解压。chrome地址栏输入chrome://extensions/，在右上角打开开发者模式，然后左上角点加载已解压的扩展程序，选择刚才解压的文件夹，这时候谷歌访问助手就安装上了(这种安装会有一些错误，不知道怎么解决，但是能用)。如果你没有SSR账号的的话，其实只要安装这个插件就可以访问谷歌了，但是也只能谷歌。打开谷歌商城，搜索Proxy SwitchyOmega，然后安装，配置就行了。（这里给个我的配置文件，导入就行：提取码: bfdc 。）最后选择auto switch]]></content>
+    <content type="text"><![CDATA[大家用Ubuntu应该都是 为了科学！ ，所以怎么能少了科学上网呢？先放效果图： 之前用的是没有图形界面的SSR，结果重装之后不知为什么用不起了，就换了一种有图形界面的。 下载SSR 在这里下载最新的electron-ssr.deb版，我下的是0.2.6版。 以上链接已失效，给一个之前保存的electron-ssr.deb 然后进入到包含electron-ssr的文件夹，输入sudo dpkg -i electron-ssr-0.2.6.deb进行安装。 正常情况下应该是装好了的，但是有的电脑可能会有以下报错：可能是安装的其他软件包不兼容导致了安装包出错时，可以执行sudo apt-get -f install来修复损坏的软件包，尝试卸载出错的包，重新安装正确版本的。然后再次输入sudo dpkg -i electron-ssr-0.2.6.deb就可以安装了。 然后就可以看到那个熟悉的小飞机了，填好就行。 配置浏览器 我用的是chrome，正常情况下是打不开谷歌商城下载插件的，所以先下载谷歌访问助手。下载下来是个.crx的文件，把.crx改成.zip，然后解压。chrome地址栏输入chrome://extensions/，在右上角打开开发者模式，然后左上角点加载已解压的扩展程序，选择刚才解压的文件夹，这时候谷歌访问助手就安装上了(这种安装会有一些错误，不知道怎么解决，但是能用)。如果你没有SSR账号的的话，其实只要安装这个插件就可以访问谷歌了，但是也只能谷歌。打开谷歌商城，搜索Proxy SwitchyOmega，然后安装，配置就行了。（这里给个我的配置文件，导入就行：提取码: bfdc 。）最后选择auto switch]]></content>
       <categories>
         <category>Ubuntu</category>
       </categories>
@@ -399,8 +399,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最短路</tag>
         <tag>差分约束</tag>
+        <tag>最短路</tag>
         <tag>SPFA</tag>
       </tags>
   </entry>
@@ -413,8 +413,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最短路</tag>
         <tag>差分约束</tag>
+        <tag>最短路</tag>
         <tag>spfa</tag>
       </tags>
   </entry>
@@ -427,8 +427,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最短路</tag>
         <tag>差分约束</tag>
+        <tag>最短路</tag>
         <tag>spfa</tag>
       </tags>
   </entry>
@@ -441,8 +441,8 @@
       </categories>
       <tags>
         <tag>图论</tag>
-        <tag>最短路</tag>
         <tag>差分约束</tag>
+        <tag>最短路</tag>
         <tag>SPFA</tag>
       </tags>
   </entry>
@@ -533,8 +533,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数论</tag>
         <tag>拓欧</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -545,8 +545,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数论</tag>
         <tag>拓欧</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -624,8 +624,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数论</tag>
         <tag>拓欧</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
