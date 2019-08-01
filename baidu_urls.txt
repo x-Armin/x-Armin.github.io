@@ -1,3 +1,5 @@
+http://x-armin.com/F-x/
+http://x-armin.com/不要62/
 http://x-armin.com/数论笔记本/
 http://x-armin.com/Hie-with-the-Pie/
 http://x-armin.com/求数列的逆序数/
@@ -66,6 +68,7 @@ http://x-armin.com/Cow-Contest-floyd/
 http://x-armin.com/多重背包问题/
 http://x-armin.com/完全背包问题/
 http://x-armin.com/01背包问题/
+http://x-armin.com/将博客搬至CSDN/
 http://x-armin.com/小牛vs小客-巴什博弈变形/
 http://x-armin.com/不凡的夫夫-斯特灵公式/
 http://x-armin.com/2-5-11-13的倍数-容斥原理/
