@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Armin&#39;s Blog">
 <meta property="og:description" content="描述传送门：hdu-4734  &amp;emsp;For a decimal number $x$ with $n$ digits $ (A_n A_{n-1}A_{n-2} … A_2 A_1) $, we define its weight as $F(x) = A_n * 2^{n-1} + A_{n-1} * 2^{n-2} + … + A_2 * 2 + A_1 * 1$. Now you a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-01T02:43:03.861Z">
+<meta property="og:updated_time" content="2019-08-10T07:10:47.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="F(x)">
 <meta name="twitter:description" content="描述传送门：hdu-4734  &amp;emsp;For a decimal number $x$ with $n$ digits $ (A_n A_{n-1}A_{n-2} … A_2 A_1) $, we define its weight as $F(x) = A_n * 2^{n-1} + A_{n-1} * 2^{n-2} + … + A_2 * 2 + A_1 * 1$. Now you a">
@@ -436,7 +436,7 @@
 </blockquote>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><blockquote>
 <ul>
-<li>由于每一位数乘的就是$2^(pos)$很容易想到用dp[pos][sum]来表示: 枚举pos的时候，当前未计算完的F(x)为sum时有多少个符合条件的数，边界就是check一下sum是否大于F(a)。</li>
+<li>由于每一位数乘的就是$2^{pos}$很容易想到用dp[pos][sum]来表示: 枚举pos的时候，当前未计算完的F(x)为sum时有多少个符合条件的数，边界就是check一下sum是否大于F(a)。</li>
 <li>但是这样会TLE，因为这样做dp数组的值就和输入值有关系（check的是sum&gt;F(a)就和输入的a有关），所以组测试数据都要重新给dp数组重新赋初值，就会TLE，所以需要换个思路。</li>
 <li>用dp[pos][sum]表示，枚举到pos位时还差F(a) sum时有多少个符合条件的数，这样就dp就和输入无关了，就可以只初始化一次。</li>
 </ul>
@@ -476,7 +476,7 @@
   <p><span>本文标题:</span><a href="/F-x/">F(x)</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Armin 的个人博客">Armin</a></p>
   <p><span>发布时间:</span>2019年07月20日 - 19:07</p>
-  <p><span>最后更新:</span>2019年08月01日 - 10:08</p>
+  <p><span>最后更新:</span>2019年08月10日 - 15:08</p>
   <p><span>原始链接:</span><a href="/F-x/" title="F(x)">http://x-armin.com/F-x/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://x-armin.com/F-x/"  aria-label="复制成功！"></i></span>
   </p>
@@ -568,6 +568,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/Drainage-Ditches/" rel="prev" title="【HDU-1532】 Drainage Ditches（dinic最大流入门题）">
+                【HDU-1532】 Drainage Ditches（dinic最大流入门题） <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -652,7 +656,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -674,7 +678,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -4,8 +4,120 @@
 
     
   <url>
+    <loc>http://x-armin.com/Drainage-Ditches/</loc>
+    <lastmod>2019-08-11T07:30:23.456Z</lastmod>
+    <data>
+        <display>
+        <title>【HDU-1532】 Drainage Ditches（dinic最大流入门题）</title>
+        <pubTime>2019-08-10T07:12:37.000Z</pubTime>
+        
+        <tag>网络流</tag>
+         
+        <tag>最大流</tag>
+         
+        <tag>板子</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/Dining/</loc>
+    <lastmod>2019-08-11T07:29:39.433Z</lastmod>
+    <data>
+        <display>
+        <title>【poj-3281】 Dining（拆点建图+最大流）</title>
+        <pubTime>2019-08-10T09:05:44.000Z</pubTime>
+        
+        <tag>网络流</tag>
+         
+        <tag>最大流</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/Going-Home/</loc>
+    <lastmod>2019-08-11T07:29:34.088Z</lastmod>
+    <data>
+        <display>
+        <title>【poj-2195】 Going Home（二分图带权匹配+最小费用最大流）</title>
+        <pubTime>2019-08-10T17:45:15.000Z</pubTime>
+        
+        <tag>网络流</tag>
+         
+        <tag>最小费用最大流</tag>
+         
+        <tag>二分图</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/ACM-Computer-Factory/</loc>
+    <lastmod>2019-08-11T07:27:57.320Z</lastmod>
+    <data>
+        <display>
+        <title>【poj-343】 ACM Computer Factory （最大流记录路径）</title>
+        <pubTime>2019-08-10T18:12:05.000Z</pubTime>
+        
+        <tag>网络流</tag>
+         
+        <tag>最大流</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://x-armin.com/Cable-TV-Network/</loc>
+    <lastmod>2019-08-11T07:27:38.127Z</lastmod>
+    <data>
+        <display>
+        <title>【poj-1966】 Cable TV Network（最小割+dinic）</title>
+        <pubTime>2019-08-11T07:05:35.000Z</pubTime>
+        
+        <tag>网络流，最小割</tag>
+         
+         
+           
+             
+              <breadCrumb title="题解" url="http://x-armin.com/categories/%E9%A2%98%E8%A7%A3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://x-armin.com/F-x/</loc>
-    <lastmod>2019-08-01T02:43:03.861Z</lastmod>
+    <lastmod>2019-08-10T07:10:47.413Z</lastmod>
     <data>
         <display>
         <title>F(x)</title>
